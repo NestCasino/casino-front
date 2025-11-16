@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+/* Removed tw-animate-css import that was causing syntax error */
+
+@theme inline {
+  --font-sans: 'Inter', 'Geist', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Geist Mono', monospace;
+  
+  /* Casino color palette - using standard format */
+  --color-bg-base: #0f0420;
+  --color-bg-elevated: #1a0b33;
+  --color-surface: #2d1b4e;
+  --color-surface-hover: #3d2b5e;
+  
+  --color-primary: #8b5cf6;
+  --color-secondary: #fbbf24;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #9ca3af;
+  --color-text-disabled: #6b7280;
+  
+  /* Tailwind semantic tokens */
+  --color-background: #0f0420;
+  --color-foreground: #f9fafb;
+  --color-card: #1a0b33;
+  --color-card-foreground: #f9fafb;
+  --color-popover: #1a0b33;
+  --color-popover-foreground: #f9fafb;
+  --color-muted: #2d1b4e;
+  --color-muted-foreground: #9ca3af;
+  --color-accent: #8b5cf6;
+  --color-accent-foreground: #f9fafb;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f9fafb;
+  --color-border: #2d1b4e;
+  --color-input: #2d1b4e;
+  --color-ring: #8b5cf6;
+  
+  --radius: 0.75rem;
+}
+
+/* Using native CSS instead of @apply to avoid concatenation issues */
+body {
+  background-color: #0f0420;
+  color: #f9fafb;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0420;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d1b4e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3d2b5e;
+}
+
+@layer utilities {
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  }
+  
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+  
+  .shadow-card {
+    box-shadow: 0 4px 16px rgba(15, 4, 32, 0.8);
+  }
+  
+  .shadow-elevated {
+    box-shadow: 0 8px 32px rgba(15, 4, 32, 0.9);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}

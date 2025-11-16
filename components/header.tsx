@@ -1,0 +1,71 @@
+'use client'
+
+import Link from 'next/link'
+import { Search, User, Bell, Settings, Menu, Wallet, Bitcoin, ChevronDown, PanelLeftClose, PanelLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useSidebar } from '@/lib/sidebar-context'
+
+export function Header() {
+  const { isCollapsed, toggleSidebar } = useSidebar()
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 h-[70px] bg-[rgb(var(--bg-base))]/95 backdrop-blur-md border-b border-[rgb(var(--surface))]">
+      <div className="h-full px-4 flex items-center justify-between gap-4">
+        {/* Left Section */}
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={toggleSidebar}
+            className="hidden lg:flex p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer"
+            title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {isCollapsed ? (
+              <PanelLeft className="h-6 w-6 text-[rgb(var(--text-secondary))]" />
+            ) : (
+              <PanelLeftClose className="h-6 w-6 text-[rgb(var(--text-secondary))]" />
+            )}
+          </button>
+          <Button variant="ghost" size="icon" className="lg:hidden">
+            <Menu className="h-6 w-6" />
+          </Button>
+          <Link href="/" className="flex items-center">
+            <span className="text-2xl font-bold italic bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              Nest
+            </span>
+          </Link>
+        </div>
+
+        <div className="flex items-center justify-center flex-1">
+          <button className="flex items-center gap-2 bg-[rgb(var(--bg-elevated))] px-5 py-2.5 rounded-xl hover:bg-[rgb(var(--surface))] transition-colors cursor-pointer">
+            <Bitcoin className="h-5 w-5 text-[rgb(var(--secondary))]" />
+            <span className="text-base font-semibold">USD 0.00</span>
+            <ChevronDown className="h-4 w-4 text-[rgb(var(--text-muted))]" />
+          </button>
+        </div>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-3">
+          {/* Wallet Button */}
+          <Button className="hidden sm:flex bg-[rgb(var(--info))] hover:bg-[rgb(var(--info))]/90 text-white font-semibold">
+            <Wallet className="h-4 w-4 mr-2" />
+            Wallet
+          </Button>
+
+          {/* Icon Cluster */}
+          <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer">
+            <Search className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
+          </button>
+          <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors relative cursor-pointer">
+            <Bell className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
+            <span className="absolute top-1 right-1 h-2 w-2 bg-[rgb(var(--error))] rounded-full"></span>
+          </button>
+          <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer">
+            <User className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
+          </button>
+          <button className="hidden sm:block p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer">
+            <Settings className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
+          </button>
+        </div>
+      </div>
+    </header>
+  )
+}
