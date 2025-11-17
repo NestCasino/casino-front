@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SidebarProvider } from '@/lib/sidebar-context'
 import { SearchProvider } from '@/lib/search-context'
+import { WalletProvider } from '@/lib/wallet-context'
+import { WalletModal } from '@/components/wallet-modal'
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 const inter = Inter({ 
@@ -44,7 +47,11 @@ export default function RootLayout({
       <body className={inter.variable}>
         <SidebarProvider>
           <SearchProvider>
-            {children}
+            <WalletProvider>
+              {children}
+              <WalletModal />
+              <Toaster />
+            </WalletProvider>
           </SearchProvider>
         </SidebarProvider>
         <Analytics />

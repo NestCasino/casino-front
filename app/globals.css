@@ -56,6 +56,28 @@ body {
   border-color: var(--color-border);
 }
 
+/* Global cursor styles for interactive elements */
+button,
+a,
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+select,
+label[for],
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+a[aria-disabled="true"],
+[role="button"][aria-disabled="true"],
+[disabled] {
+  cursor: not-allowed;
+}
+
 /* Hide all scrollbars */
 * {
   -ms-overflow-style: none;
@@ -98,5 +120,17 @@ body {
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 }

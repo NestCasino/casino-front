@@ -128,18 +128,18 @@ function Header() {
                                 className: "h-6 w-6 text-[rgb(var(--text-secondary))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 27,
+                                lineNumber: 29,
                                 columnNumber: 15
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$panel$2d$left$2d$close$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__PanelLeftClose$3e$__["PanelLeftClose"], {
                                 className: "h-6 w-6 text-[rgb(var(--text-secondary))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 29,
+                                lineNumber: 31,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 21,
+                            lineNumber: 23,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -150,12 +150,12 @@ function Header() {
                                 className: "h-6 w-6"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 33,
+                                lineNumber: 35,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 32,
+                            lineNumber: 34,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -166,12 +166,12 @@ function Header() {
                                 children: "Nest"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 36,
+                                lineNumber: 38,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 35,
+                            lineNumber: 37,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -185,20 +185,20 @@ function Header() {
                                             className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/header.tsx",
-                                            lineNumber: 52,
+                                            lineNumber: 54,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "Casino"
                                         }, void 0, false, {
                                             fileName: "[project]/components/header.tsx",
-                                            lineNumber: 53,
+                                            lineNumber: 55,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/header.tsx",
-                                    lineNumber: 43,
+                                    lineNumber: 45,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -209,32 +209,32 @@ function Header() {
                                             className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/header.tsx",
-                                            lineNumber: 64,
+                                            lineNumber: 66,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "Sports"
                                         }, void 0, false, {
                                             fileName: "[project]/components/header.tsx",
-                                            lineNumber: 65,
+                                            lineNumber: 67,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/header.tsx",
-                                    lineNumber: 55,
+                                    lineNumber: 57,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 42,
+                            lineNumber: 44,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/header.tsx",
-                    lineNumber: 20,
+                    lineNumber: 22,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -246,7 +246,7 @@ function Header() {
                                 className: "h-5 w-5 text-[rgb(var(--secondary))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 72,
+                                lineNumber: 74,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -254,25 +254,25 @@ function Header() {
                                 children: "USD 0.00"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 73,
+                                lineNumber: 75,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
                                 className: "h-4 w-4 text-[rgb(var(--text-muted))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 74,
+                                lineNumber: 76,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/header.tsx",
-                        lineNumber: 71,
+                        lineNumber: 73,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/header.tsx",
-                    lineNumber: 70,
+                    lineNumber: 72,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -285,14 +285,14 @@ function Header() {
                                     className: "h-4 w-4 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/components/header.tsx",
-                                    lineNumber: 82,
+                                    lineNumber: 84,
                                     columnNumber: 13
                                 }, this),
                                 "Wallet"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 81,
+                            lineNumber: 83,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -302,12 +302,12 @@ function Header() {
                                 className: "h-5 w-5 text-[rgb(var(--text-secondary))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 91,
+                                lineNumber: 93,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 87,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -317,20 +317,20 @@ function Header() {
                                     className: "h-5 w-5 text-[rgb(var(--text-secondary))]"
                                 }, void 0, false, {
                                     fileName: "[project]/components/header.tsx",
-                                    lineNumber: 94,
+                                    lineNumber: 96,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "absolute top-1 right-1 h-2 w-2 bg-[rgb(var(--error))] rounded-full"
                                 }, void 0, false, {
                                     fileName: "[project]/components/header.tsx",
-                                    lineNumber: 95,
+                                    lineNumber: 97,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 93,
+                            lineNumber: 95,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -339,12 +339,12 @@ function Header() {
                                 className: "h-5 w-5 text-[rgb(var(--text-secondary))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 98,
+                                lineNumber: 100,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 97,
+                            lineNumber: 99,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -353,29 +353,29 @@ function Header() {
                                 className: "h-5 w-5 text-[rgb(var(--text-secondary))]"
                             }, void 0, false, {
                                 fileName: "[project]/components/header.tsx",
-                                lineNumber: 101,
+                                lineNumber: 103,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/header.tsx",
-                            lineNumber: 100,
+                            lineNumber: 102,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/header.tsx",
-                    lineNumber: 79,
+                    lineNumber: 81,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/header.tsx",
-            lineNumber: 18,
+            lineNumber: 20,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/header.tsx",
-        lineNumber: 17,
+        lineNumber: 19,
         columnNumber: 5
     }, this);
 }
@@ -1373,10 +1373,65 @@ const promoCards = [
         description: 'ALL WEEK LONG',
         imageUrl: '/racing-tires-blue-gradient.jpg',
         gradient: 'from-green-600 to-teal-600'
+    },
+    {
+        id: '5',
+        badge: 'MEGA TOURNAMENT',
+        title: 'WIN BIG',
+        subtitle: '$500,000',
+        description: 'PRIZE POOL',
+        imageUrl: '/gates-olympus-zeus-slot.jpg',
+        gradient: 'from-yellow-600 to-orange-600'
+    },
+    {
+        id: '6',
+        badge: 'VIP EXCLUSIVE',
+        title: 'CASHBACK',
+        subtitle: 'UP TO 25%',
+        description: 'ON ALL LOSSES',
+        imageUrl: '/star-badge-boost-purple.jpg',
+        gradient: 'from-indigo-600 to-purple-600'
+    },
+    {
+        id: '7',
+        badge: 'DAILY BONUS',
+        title: 'FREE SPINS',
+        subtitle: '100 SPINS',
+        description: 'EVERY DAY!',
+        imageUrl: '/sweet-candy-slot-game.jpg',
+        gradient: 'from-pink-500 to-rose-600'
+    },
+    {
+        id: '8',
+        badge: 'LIVE CASINO',
+        title: 'BLACKJACK',
+        subtitle: '$50,000',
+        description: 'LIVE TABLES',
+        imageUrl: '/blackjack-casino-dealer.jpg',
+        gradient: 'from-red-600 to-pink-600'
+    },
+    {
+        id: '9',
+        badge: 'SLOT RUSH',
+        title: 'MULTIPLIERS',
+        subtitle: 'UP TO 1000X',
+        description: 'WIN MASSIVE!',
+        imageUrl: '/book-of-dead-egypt-slot.jpg',
+        gradient: 'from-amber-600 to-yellow-600'
+    },
+    {
+        id: '10',
+        badge: 'WEEKEND SPECIAL',
+        title: 'RELOAD BONUS',
+        subtitle: '150% MATCH',
+        description: 'LIMITED TIME',
+        imageUrl: '/wanted-dead-wild-western-slot.jpg',
+        gradient: 'from-orange-600 to-red-600'
     }
 ];
 function PromoCarousel() {
     const scrollContainerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [activeIndex, setActiveIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const scroll = (direction)=>{
         if (scrollContainerRef.current) {
             const scrollAmount = 400;
@@ -1387,6 +1442,36 @@ function PromoCarousel() {
             });
         }
     };
+    const scrollToCard = (index)=>{
+        if (scrollContainerRef.current) {
+            const cardWidth = 380 // Width of each card
+            ;
+            const gap = 16 // Gap between cards (gap-4 = 1rem = 16px)
+            ;
+            const scrollPosition = index * (cardWidth + gap);
+            scrollContainerRef.current.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+    const updateActiveIndex = ()=>{
+        if (scrollContainerRef.current) {
+            const container = scrollContainerRef.current;
+            const cardWidth = 380;
+            const gap = 16;
+            const scrollLeft = container.scrollLeft;
+            const index = Math.round(scrollLeft / (cardWidth + gap));
+            setActiveIndex(Math.min(Math.max(0, index), promoCards.length - 1));
+        }
+    };
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', updateActiveIndex);
+            return ()=>container.removeEventListener('scroll', updateActiveIndex);
+        }
+    }, []);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "relative w-full mb-8",
         children: [
@@ -1397,12 +1482,12 @@ function PromoCarousel() {
                     className: "h-6 w-6"
                 }, void 0, false, {
                     fileName: "[project]/components/promo-carousel.tsx",
-                    lineNumber: 77,
+                    lineNumber: 163,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/promo-carousel.tsx",
-                lineNumber: 73,
+                lineNumber: 159,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1412,12 +1497,12 @@ function PromoCarousel() {
                     className: "h-6 w-6"
                 }, void 0, false, {
                     fileName: "[project]/components/promo-carousel.tsx",
-                    lineNumber: 83,
+                    lineNumber: 169,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/promo-carousel.tsx",
-                lineNumber: 79,
+                lineNumber: 165,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1435,12 +1520,12 @@ function PromoCarousel() {
                                     className: "object-cover"
                                 }, void 0, false, {
                                     fileName: "[project]/components/promo-carousel.tsx",
-                                    lineNumber: 98,
+                                    lineNumber: 184,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/promo-carousel.tsx",
-                                lineNumber: 97,
+                                lineNumber: 183,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1454,7 +1539,7 @@ function PromoCarousel() {
                                                 children: "🏆"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/promo-carousel.tsx",
-                                                lineNumber: 110,
+                                                lineNumber: 196,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1462,13 +1547,13 @@ function PromoCarousel() {
                                                 children: card.badge
                                             }, void 0, false, {
                                                 fileName: "[project]/components/promo-carousel.tsx",
-                                                lineNumber: 111,
+                                                lineNumber: 197,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/promo-carousel.tsx",
-                                        lineNumber: 109,
+                                        lineNumber: 195,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1479,7 +1564,7 @@ function PromoCarousel() {
                                                 children: card.title
                                             }, void 0, false, {
                                                 fileName: "[project]/components/promo-carousel.tsx",
-                                                lineNumber: 118,
+                                                lineNumber: 204,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1487,7 +1572,7 @@ function PromoCarousel() {
                                                 children: card.subtitle
                                             }, void 0, false, {
                                                 fileName: "[project]/components/promo-carousel.tsx",
-                                                lineNumber: 121,
+                                                lineNumber: 207,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1495,19 +1580,19 @@ function PromoCarousel() {
                                                 children: card.description
                                             }, void 0, false, {
                                                 fileName: "[project]/components/promo-carousel.tsx",
-                                                lineNumber: 124,
+                                                lineNumber: 210,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/promo-carousel.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 203,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/promo-carousel.tsx",
-                                lineNumber: 107,
+                                lineNumber: 193,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1515,38 +1600,40 @@ function PromoCarousel() {
                                 children: "💰"
                             }, void 0, false, {
                                 fileName: "[project]/components/promo-carousel.tsx",
-                                lineNumber: 131,
+                                lineNumber: 217,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, card.id, true, {
                         fileName: "[project]/components/promo-carousel.tsx",
-                        lineNumber: 92,
+                        lineNumber: 178,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/promo-carousel.tsx",
-                lineNumber: 87,
+                lineNumber: 173,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex justify-center gap-2 mt-4",
-                children: promoCards.map((_, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-2 h-2 rounded-full bg-gray-600"
+                children: promoCards.map((_, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: ()=>scrollToCard(index),
+                        className: `rounded-full transition-all cursor-pointer ${index === activeIndex ? 'w-8 h-2 bg-purple-500' : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'}`,
+                        "aria-label": `Go to slide ${index + 1}`
                     }, index, false, {
                         fileName: "[project]/components/promo-carousel.tsx",
-                        lineNumber: 141,
+                        lineNumber: 227,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/promo-carousel.tsx",
-                lineNumber: 139,
+                lineNumber: 225,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/promo-carousel.tsx",
-        lineNumber: 71,
+        lineNumber: 157,
         columnNumber: 5
     }, this);
 }
@@ -1691,6 +1778,357 @@ const mockGames = [
         playerCount: 4321,
         category: [
             'slots'
+        ]
+    },
+    // Additional Nest Originals
+    {
+        id: '13',
+        name: 'LIMBO',
+        provider: 'Nest Originals',
+        thumbnail: '/purple-rocket-crash-game.jpg',
+        playerCount: 2987,
+        category: [
+            'originals'
+        ]
+    },
+    {
+        id: '14',
+        name: 'WHEEL',
+        provider: 'Nest Originals',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 3456,
+        category: [
+            'originals'
+        ]
+    },
+    {
+        id: '15',
+        name: 'HILO',
+        provider: 'Nest Originals',
+        thumbnail: '/purple-neon-dice-game.jpg',
+        playerCount: 1876,
+        category: [
+            'originals'
+        ]
+    },
+    {
+        id: '16',
+        name: 'TOWER',
+        provider: 'Nest Originals',
+        thumbnail: '/purple-grid-mines-game.jpg',
+        playerCount: 2145,
+        category: [
+            'originals'
+        ]
+    },
+    // Additional Slots - Pragmatic Play
+    {
+        id: '17',
+        name: 'Starlight Princess',
+        provider: 'Pragmatic Play',
+        thumbnail: '/sweet-candy-slot-game.jpg',
+        playerCount: 9234,
+        category: [
+            'slots',
+            'trending'
+        ]
+    },
+    {
+        id: '18',
+        name: 'Wild West Gold',
+        provider: 'Pragmatic Play',
+        thumbnail: '/western-wanted-slot.jpg',
+        playerCount: 6789,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '19',
+        name: 'Big Bass Bonanza',
+        provider: 'Pragmatic Play',
+        thumbnail: '/lucky-paws-slot.png',
+        playerCount: 7891,
+        category: [
+            'slots',
+            'trending'
+        ]
+    },
+    {
+        id: '20',
+        name: 'Sugar Rush',
+        provider: 'Pragmatic Play',
+        thumbnail: '/sweet-candy-slot-game.jpg',
+        playerCount: 8456,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '21',
+        name: 'Zeus vs Hades',
+        provider: 'Pragmatic Play',
+        thumbnail: '/zeus-olympus-slot-game.png',
+        playerCount: 7234,
+        category: [
+            'slots'
+        ]
+    },
+    // Additional Slots - Play'n GO
+    {
+        id: '22',
+        name: 'Reactoonz',
+        provider: 'Play\'n GO',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 6876,
+        category: [
+            'slots',
+            'trending'
+        ]
+    },
+    {
+        id: '23',
+        name: 'Moon Princess',
+        provider: 'Play\'n GO',
+        thumbnail: '/sweet-candy-slot-game.jpg',
+        playerCount: 7543,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '24',
+        name: 'Fire Joker',
+        provider: 'Play\'n GO',
+        thumbnail: '/roulette-casino-red-gradient.jpg',
+        playerCount: 5432,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '25',
+        name: 'Rise of Olympus',
+        provider: 'Play\'n GO',
+        thumbnail: '/zeus-olympus-slot-game.png',
+        playerCount: 6987,
+        category: [
+            'slots'
+        ]
+    },
+    // Additional Slots - Hacksaw Gaming
+    {
+        id: '26',
+        name: 'Chaos Crew',
+        provider: 'Hacksaw Gaming',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 5678,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '27',
+        name: 'Le Bandit',
+        provider: 'Hacksaw Gaming',
+        thumbnail: '/western-wanted-slot.jpg',
+        playerCount: 4987,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '28',
+        name: 'Stacko',
+        provider: 'Hacksaw Gaming',
+        thumbnail: '/purple-grid-mines-game.jpg',
+        playerCount: 4234,
+        category: [
+            'slots'
+        ]
+    },
+    // Additional Slots - NetEnt
+    {
+        id: '29',
+        name: 'Starburst',
+        provider: 'NetEnt',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 8765,
+        category: [
+            'slots',
+            'trending'
+        ]
+    },
+    {
+        id: '30',
+        name: 'Gonzo\'s Quest',
+        provider: 'NetEnt',
+        thumbnail: '/egypt-book-of-dead-slot.jpg',
+        playerCount: 7654,
+        category: [
+            'slots',
+            'trending'
+        ]
+    },
+    {
+        id: '31',
+        name: 'Dead or Alive 2',
+        provider: 'NetEnt',
+        thumbnail: '/western-wanted-slot.jpg',
+        playerCount: 6543,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '32',
+        name: 'Twin Spin',
+        provider: 'NetEnt',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 5987,
+        category: [
+            'slots'
+        ]
+    },
+    // Additional Slots - NoLimit City
+    {
+        id: '33',
+        name: 'Tombstone',
+        provider: 'NoLimit City',
+        thumbnail: '/western-wanted-slot.jpg',
+        playerCount: 7234,
+        category: [
+            'slots',
+            'trending'
+        ]
+    },
+    {
+        id: '34',
+        name: 'San Quentin',
+        provider: 'NoLimit City',
+        thumbnail: '/western-wanted-slot.jpg',
+        playerCount: 6876,
+        category: [
+            'slots'
+        ]
+    },
+    {
+        id: '35',
+        name: 'Mental',
+        provider: 'NoLimit City',
+        thumbnail: '/crash-game-rocket-purple.jpg',
+        playerCount: 5987,
+        category: [
+            'slots'
+        ]
+    },
+    // Additional Live Casino Games
+    {
+        id: '36',
+        name: 'Lightning Roulette',
+        provider: 'Evolution',
+        thumbnail: '/roulette-casino-wheel.jpg',
+        playerCount: 4987,
+        category: [
+            'live-casino',
+            'roulette'
+        ]
+    },
+    {
+        id: '37',
+        name: 'Crazy Time',
+        provider: 'Evolution',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 8765,
+        category: [
+            'live-casino',
+            'trending'
+        ]
+    },
+    {
+        id: '38',
+        name: 'Mega Ball',
+        provider: 'Evolution',
+        thumbnail: '/purple-balls-plinko-game.jpg',
+        playerCount: 5432,
+        category: [
+            'live-casino'
+        ]
+    },
+    {
+        id: '39',
+        name: 'Dream Catcher',
+        provider: 'Evolution',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 4321,
+        category: [
+            'live-casino'
+        ]
+    },
+    {
+        id: '40',
+        name: 'Baccarat Live',
+        provider: 'Evolution',
+        thumbnail: '/blackjack-casino-dealer.jpg',
+        playerCount: 3987,
+        category: [
+            'live-casino',
+            'blackjack'
+        ]
+    },
+    {
+        id: '41',
+        name: 'Speed Blackjack',
+        provider: 'Evolution',
+        thumbnail: '/blackjack-casino-dealer.jpg',
+        playerCount: 4654,
+        category: [
+            'live-casino',
+            'blackjack'
+        ]
+    },
+    {
+        id: '42',
+        name: 'Infinite Blackjack',
+        provider: 'Evolution',
+        thumbnail: '/blackjack-casino-dealer.jpg',
+        playerCount: 5123,
+        category: [
+            'live-casino',
+            'blackjack'
+        ]
+    },
+    {
+        id: '43',
+        name: 'Auto Roulette',
+        provider: 'Evolution',
+        thumbnail: '/roulette-casino-wheel.jpg',
+        playerCount: 3654,
+        category: [
+            'live-casino',
+            'roulette'
+        ]
+    },
+    {
+        id: '44',
+        name: 'Immersive Roulette',
+        provider: 'Evolution',
+        thumbnail: '/roulette-casino-wheel.jpg',
+        playerCount: 4234,
+        category: [
+            'live-casino',
+            'roulette'
+        ]
+    },
+    {
+        id: '45',
+        name: 'Monopoly Live',
+        provider: 'Evolution',
+        thumbnail: '/slot-characters-multicolor-gradient.jpg',
+        playerCount: 6789,
+        category: [
+            'live-casino',
+            'trending'
         ]
     }
 ];
@@ -2649,7 +3087,7 @@ function GameSection({ title, icon, games }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>scroll('left'),
-                                className: "p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all",
+                                className: "p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all cursor-pointer",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$left$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronLeft$3e$__["ChevronLeft"], {
                                     className: "h-6 w-6"
                                 }, void 0, false, {
@@ -2664,7 +3102,7 @@ function GameSection({ title, icon, games }) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>scroll('right'),
-                                className: "p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all",
+                                className: "p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all cursor-pointer",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__["ChevronRight"], {
                                     className: "h-6 w-6"
                                 }, void 0, false, {

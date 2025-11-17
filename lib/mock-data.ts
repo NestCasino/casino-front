@@ -63,6 +63,53 @@ export const mockGames: Game[] = [
   { id: '10', name: 'The Dog House', provider: 'Pragmatic Play', thumbnail: '/lucky-paws-slot.png', playerCount: 5678, category: ['slots'] },
   { id: '11', name: 'Book of Dead', provider: 'Play\'n GO', thumbnail: '/egypt-book-of-dead-slot.jpg', playerCount: 6543, category: ['slots', 'trending'] },
   { id: '12', name: 'Wanted Dead or Wild', provider: 'Hacksaw Gaming', thumbnail: '/western-wanted-slot.jpg', playerCount: 4321, category: ['slots'] },
+  
+  // Additional Nest Originals
+  { id: '13', name: 'LIMBO', provider: 'Nest Originals', thumbnail: '/purple-rocket-crash-game.jpg', playerCount: 2987, category: ['originals'] },
+  { id: '14', name: 'WHEEL', provider: 'Nest Originals', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 3456, category: ['originals'] },
+  { id: '15', name: 'HILO', provider: 'Nest Originals', thumbnail: '/purple-neon-dice-game.jpg', playerCount: 1876, category: ['originals'] },
+  { id: '16', name: 'TOWER', provider: 'Nest Originals', thumbnail: '/purple-grid-mines-game.jpg', playerCount: 2145, category: ['originals'] },
+  
+  // Additional Slots - Pragmatic Play
+  { id: '17', name: 'Starlight Princess', provider: 'Pragmatic Play', thumbnail: '/sweet-candy-slot-game.jpg', playerCount: 9234, category: ['slots', 'trending'] },
+  { id: '18', name: 'Wild West Gold', provider: 'Pragmatic Play', thumbnail: '/western-wanted-slot.jpg', playerCount: 6789, category: ['slots'] },
+  { id: '19', name: 'Big Bass Bonanza', provider: 'Pragmatic Play', thumbnail: '/lucky-paws-slot.png', playerCount: 7891, category: ['slots', 'trending'] },
+  { id: '20', name: 'Sugar Rush', provider: 'Pragmatic Play', thumbnail: '/sweet-candy-slot-game.jpg', playerCount: 8456, category: ['slots'] },
+  { id: '21', name: 'Zeus vs Hades', provider: 'Pragmatic Play', thumbnail: '/zeus-olympus-slot-game.png', playerCount: 7234, category: ['slots'] },
+  
+  // Additional Slots - Play'n GO
+  { id: '22', name: 'Reactoonz', provider: 'Play\'n GO', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 6876, category: ['slots', 'trending'] },
+  { id: '23', name: 'Moon Princess', provider: 'Play\'n GO', thumbnail: '/sweet-candy-slot-game.jpg', playerCount: 7543, category: ['slots'] },
+  { id: '24', name: 'Fire Joker', provider: 'Play\'n GO', thumbnail: '/roulette-casino-red-gradient.jpg', playerCount: 5432, category: ['slots'] },
+  { id: '25', name: 'Rise of Olympus', provider: 'Play\'n GO', thumbnail: '/zeus-olympus-slot-game.png', playerCount: 6987, category: ['slots'] },
+  
+  // Additional Slots - Hacksaw Gaming
+  { id: '26', name: 'Chaos Crew', provider: 'Hacksaw Gaming', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 5678, category: ['slots'] },
+  { id: '27', name: 'Le Bandit', provider: 'Hacksaw Gaming', thumbnail: '/western-wanted-slot.jpg', playerCount: 4987, category: ['slots'] },
+  { id: '28', name: 'Stacko', provider: 'Hacksaw Gaming', thumbnail: '/purple-grid-mines-game.jpg', playerCount: 4234, category: ['slots'] },
+  
+  // Additional Slots - NetEnt
+  { id: '29', name: 'Starburst', provider: 'NetEnt', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 8765, category: ['slots', 'trending'] },
+  { id: '30', name: 'Gonzo\'s Quest', provider: 'NetEnt', thumbnail: '/egypt-book-of-dead-slot.jpg', playerCount: 7654, category: ['slots', 'trending'] },
+  { id: '31', name: 'Dead or Alive 2', provider: 'NetEnt', thumbnail: '/western-wanted-slot.jpg', playerCount: 6543, category: ['slots'] },
+  { id: '32', name: 'Twin Spin', provider: 'NetEnt', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 5987, category: ['slots'] },
+  
+  // Additional Slots - NoLimit City
+  { id: '33', name: 'Tombstone', provider: 'NoLimit City', thumbnail: '/western-wanted-slot.jpg', playerCount: 7234, category: ['slots', 'trending'] },
+  { id: '34', name: 'San Quentin', provider: 'NoLimit City', thumbnail: '/western-wanted-slot.jpg', playerCount: 6876, category: ['slots'] },
+  { id: '35', name: 'Mental', provider: 'NoLimit City', thumbnail: '/crash-game-rocket-purple.jpg', playerCount: 5987, category: ['slots'] },
+  
+  // Additional Live Casino Games
+  { id: '36', name: 'Lightning Roulette', provider: 'Evolution', thumbnail: '/roulette-casino-wheel.jpg', playerCount: 4987, category: ['live-casino', 'roulette'] },
+  { id: '37', name: 'Crazy Time', provider: 'Evolution', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 8765, category: ['live-casino', 'trending'] },
+  { id: '38', name: 'Mega Ball', provider: 'Evolution', thumbnail: '/purple-balls-plinko-game.jpg', playerCount: 5432, category: ['live-casino'] },
+  { id: '39', name: 'Dream Catcher', provider: 'Evolution', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 4321, category: ['live-casino'] },
+  { id: '40', name: 'Baccarat Live', provider: 'Evolution', thumbnail: '/blackjack-casino-dealer.jpg', playerCount: 3987, category: ['live-casino', 'blackjack'] },
+  { id: '41', name: 'Speed Blackjack', provider: 'Evolution', thumbnail: '/blackjack-casino-dealer.jpg', playerCount: 4654, category: ['live-casino', 'blackjack'] },
+  { id: '42', name: 'Infinite Blackjack', provider: 'Evolution', thumbnail: '/blackjack-casino-dealer.jpg', playerCount: 5123, category: ['live-casino', 'blackjack'] },
+  { id: '43', name: 'Auto Roulette', provider: 'Evolution', thumbnail: '/roulette-casino-wheel.jpg', playerCount: 3654, category: ['live-casino', 'roulette'] },
+  { id: '44', name: 'Immersive Roulette', provider: 'Evolution', thumbnail: '/roulette-casino-wheel.jpg', playerCount: 4234, category: ['live-casino', 'roulette'] },
+  { id: '45', name: 'Monopoly Live', provider: 'Evolution', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 6789, category: ['live-casino', 'trending'] },
 ]
 
 // Mock promotions data

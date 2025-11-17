@@ -39,13 +39,13 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => scroll('left')}
-            className="p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all"
+            className="p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all cursor-pointer"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all"
+            className="p-2 rounded-lg hover:bg-[rgb(var(--surface))] text-[rgb(var(--text-muted))] hover:text-white transition-all cursor-pointer"
           >
             <ChevronRight className="h-6 w-6" />
           </button>

@@ -5,12 +5,15 @@ import { Search, User, Bell, Settings, Menu, Wallet, Bitcoin, ChevronDown, Panel
 import { Button } from '@/components/ui/button'
 import { useSidebar } from '@/lib/sidebar-context'
 import { useSearch } from '@/lib/search-context'
+import { useWallet } from '@/lib/wallet-context'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { WalletSelector } from './wallet-selector'
 
 export function Header() {
   const { isCollapsed, toggleSidebar } = useSidebar()
   const { openSearch } = useSearch()
+  const { openWalletModal } = useWallet()
   const [activeTab, setActiveTab] = useState<'casino' | 'sports'>('casino')
 
   return (
@@ -68,17 +71,16 @@ export function Header() {
         </div>
 
         <div className="flex items-center justify-center flex-1">
-          <button className="flex items-center gap-2 bg-[rgb(var(--bg-elevated))] px-5 py-2.5 rounded-xl hover:bg-[rgb(var(--surface))] transition-colors cursor-pointer">
-            <Bitcoin className="h-5 w-5 text-[rgb(var(--secondary))]" />
-            <span className="text-base font-semibold">USD 0.00</span>
-            <ChevronDown className="h-4 w-4 text-[rgb(var(--text-muted))]" />
-          </button>
+          <WalletSelector />
         </div>
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
           {/* Wallet Button */}
-          <Button className="hidden sm:flex bg-[rgb(var(--info))] hover:bg-[rgb(var(--info))]/90 text-white font-semibold">
+          <Button 
+            onClick={openWalletModal}
+            className="hidden sm:flex bg-[rgb(var(--info))] hover:bg-[rgb(var(--info))]/90 text-white font-semibold"
+          >
             <Wallet className="h-4 w-4 mr-2" />
             Wallet
           </Button>
