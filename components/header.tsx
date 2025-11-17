@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, User, Bell, Settings, Menu, Wallet, Bitcoin, ChevronDown, PanelLeftClose, PanelLeft, Dice5, Dribbble } from 'lucide-react'
+import { Search, Bell, Settings, Menu, Wallet, PanelLeftClose, PanelLeft, Dice5, Dribbble } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useSidebar } from '@/lib/sidebar-context'
 import { useSearch } from '@/lib/search-context'
@@ -9,6 +9,7 @@ import { useWallet } from '@/lib/wallet-context'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { WalletSelector } from './wallet-selector'
+import { ProfileMenu } from './profile-menu'
 
 export function Header() {
   const { isCollapsed, toggleSidebar } = useSidebar()
@@ -96,12 +97,7 @@ export function Header() {
             <Bell className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
             <span className="absolute top-1 right-1 h-2 w-2 bg-[rgb(var(--error))] rounded-full"></span>
           </button>
-          <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer">
-            <User className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
-          </button>
-          <button className="hidden sm:block p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer">
-            <Settings className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
-          </button>
+          <ProfileMenu />
         </div>
       </div>
     </header>
