@@ -29,14 +29,14 @@ export function PromotionCard({
 
   return (
     <Link href={`/promotions/${id}`}>
-      <div className="group bg-[rgb(var(--bg-elevated))] rounded-2xl overflow-hidden hover:border-2 hover:border-[rgb(var(--primary))] transition-all cursor-pointer shadow-card">
+      <div className="group bg-[#2d1b4e] border border-[#3d2b5e]/50 rounded-2xl overflow-hidden hover:border-[rgb(var(--primary))] hover:shadow-elevated hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300 cursor-pointer shadow-card">
         {/* Image Section */}
         <div className="relative h-[200px] overflow-hidden">
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={title}
             fill
-            className="object-cover transition-all duration-250 group-hover:scale-105"
+            className="object-cover transition-all duration-300"
           />
         </div>
 

@@ -34,8 +34,8 @@ export function PromotionCategoryTabs({ activeCategory = 'all', onCategoryChange
           onClick={() => handleCategoryChange(category.id)}
           className={`flex-shrink-0 px-6 py-3 rounded-full font-semibold transition-all duration-200 cursor-pointer ${
             active === category.id
-              ? 'bg-[rgb(var(--primary))] text-white'
-              : 'bg-transparent border-2 border-[rgb(var(--surface))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--surface))] hover:border-[rgb(var(--surface-hover))]'
+              ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30'
+              : 'bg-[#1a1534] border-2 border-[#2a2449] text-gray-400 hover:bg-[#241d42] hover:border-[#332959] hover:text-gray-300'
           }`}
         >
           {category.label}

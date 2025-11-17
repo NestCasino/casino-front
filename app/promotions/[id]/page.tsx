@@ -7,20 +7,21 @@ import Image from 'next/image'
 import { mockPromotions } from '@/lib/mock-data'
 import { notFound } from 'next/navigation'
 
+// Exported for unit testing and reuse
+export function formatDateRange(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  })
+}
+
 export default function PromotionDetailPage({ params }: { params: { id: string } }) {
   const promotion = mockPromotions.find(p => p.id === params.id)
   
   if (!promotion) {
     notFound()
-  }
-
-  const formatDateRange = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    })
   }
 
   return (

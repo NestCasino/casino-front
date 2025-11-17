@@ -4,8 +4,37 @@ import { useState } from 'react'
 import { Eye, EyeOff, ChevronDown } from 'lucide-react'
 import { mockLiveBets, type LiveBet } from '@/lib/mock-data'
 
+export type LiveBetsTab = 'all' | 'my' | 'high' | 'race'
+
+// Helper used to filter bets based on the active tab; exported for unit testing
+export function filterLiveBets(bets: LiveBet[], tab: LiveBetsTab): LiveBet[] {
+  switch (tab) {
+    case 'my':
+      // Treat non-hidden bets as the user's own bets
+      return bets.filter((bet) => !bet.isHidden)
+    case 'high':
+      // High rollers: large bet amount or very large payout
+      return bets.filter((bet) => bet.betAmount >= 20000 || bet.payout >= 100000)
+    case 'race':
+      // Race leaderboard: focus on high multipliers
+      return bets.filter((bet) => bet.multiplier >= 10)
+    case 'all':
+    default:
+      return bets
+  }
+}
+
+// Convenience helper to apply both filtering and pagination in one step
+export function getVisibleLiveBets(
+  bets: LiveBet[],
+  tab: LiveBetsTab,
+  perPage: number
+): LiveBet[] {
+  return filterLiveBets(bets, tab).slice(0, perPage)
+}
+
 export function LiveBetsTable() {
-  const [activeTab, setActiveTab] = useState<'all' | 'my' | 'high' | 'race'>('all')
+  const [activeTab, setActiveTab] = useState<LiveBetsTab>('all')
   const [ghostMode, setGhostMode] = useState(false)
   const [perPage, setPerPage] = useState(10)
 
@@ -19,6 +48,8 @@ export function LiveBetsTable() {
   const getPayoutColor = (payout: number) => {
     return payout > 0 ? 'text-[rgb(var(--success))]' : 'text-[rgb(var(--error))]'
   }
+
+  const visibleBets = getVisibleLiveBets(mockLiveBets, activeTab, perPage)
 
   return (
     <div className="bg-[rgb(var(--bg-elevated))] rounded-2xl overflow-hidden shadow-card mb-8">
@@ -106,7 +137,7 @@ export function LiveBetsTable() {
             </tr>
           </thead>
           <tbody>
-            {mockLiveBets.slice(0, perPage).map((bet, index) => (
+            {visibleBets.map((bet, index) => (
               <tr
                 key={bet.id}
                 className={`border-b border-[rgb(var(--bg-elevated))] hover:bg-[rgb(var(--surface))] transition-colors ${

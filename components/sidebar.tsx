@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { Star, Clock, Trophy, CheckSquare, Sparkles, Gamepad2, Flame, Badge, Video, Mic, Bomb, TrendingUp, Gift, Users, Crown, FileText, MessageCircle, Handshake, Shield, Headphones, Globe, Dice5, Dribbble } from 'lucide-react'
+import { Star, Clock, Trophy, CheckSquare, Sparkles, Cherry, Video, Mic, Bomb, LayoutGrid, CircleDot, Spade, Diamond, Gift, Users, Crown, FileText, MessageCircle, Handshake, Shield, Headphones, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useSidebar } from '@/lib/sidebar-context'
@@ -63,7 +62,6 @@ function SidebarLabel({ children, collapsed }: { children: React.ReactNode; coll
 
 export function Sidebar() {
   const pathname = usePathname()
-  const [activeTab, setActiveTab] = useState<'casino' | 'sports'>('casino')
   const { isCollapsed } = useSidebar()
   
   return (
@@ -72,64 +70,6 @@ export function Sidebar() {
       isCollapsed ? "w-[70px]" : "w-60"
     )}>
       <nav className="py-4">
-        <div className={cn("mb-6", isCollapsed ? "px-2 space-y-2" : "px-4")}>
-          {isCollapsed ? (
-            // Icon-only mode for collapsed sidebar
-            <>
-              <button
-                onClick={() => setActiveTab('casino')}
-                className={cn(
-                  "w-full h-11 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer flex items-center justify-center",
-                  activeTab === 'casino' 
-                    ? "bg-[#ef4444] text-white shadow-lg shadow-red-500/30" 
-                    : "bg-[#1a0b33] text-gray-400 hover:bg-[#2d1b4e] hover:text-white"
-                )}
-                title="Casino"
-              >
-                <Dice5 className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => setActiveTab('sports')}
-                className={cn(
-                  "w-full h-11 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer flex items-center justify-center",
-                  activeTab === 'sports' 
-                    ? "bg-[#ef4444] text-white shadow-lg shadow-red-500/30" 
-                    : "bg-[#1a0b33] text-gray-400 hover:bg-[#2d1b4e] hover:text-white"
-                )}
-                title="Sports"
-              >
-                <Dribbble className="h-5 w-5" />
-              </button>
-            </>
-          ) : (
-            // Full text mode for expanded sidebar
-            <div className="flex gap-2">
-              <button
-                onClick={() => setActiveTab('casino')}
-                className={cn(
-                  "flex-1 py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer",
-                  activeTab === 'casino' 
-                    ? "bg-[#ef4444] text-white shadow-lg shadow-red-500/30" 
-                    : "bg-[#1a0b33] text-gray-400 hover:bg-[#2d1b4e] hover:text-white"
-                )}
-              >
-                Casino
-              </button>
-              <button
-                onClick={() => setActiveTab('sports')}
-                className={cn(
-                  "flex-1 py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer",
-                  activeTab === 'sports' 
-                    ? "bg-[#ef4444] text-white shadow-lg shadow-red-500/30" 
-                    : "bg-[#1a0b33] text-gray-400 hover:bg-[#2d1b4e] hover:text-white"
-                )}
-              >
-                Sports
-              </button>
-            </div>
-          )}
-        </div>
-
         {/* Personal Section */}
         <SidebarItem icon={<Star className="h-5 w-5" />} label="Favourites" href="/" active={pathname === '/favourites'} collapsed={isCollapsed} />
         <SidebarItem icon={<Clock className="h-5 w-5" />} label="Recent" href="/recent" active={pathname === '/recent'} collapsed={isCollapsed} />
@@ -141,14 +81,15 @@ export function Sidebar() {
         <SidebarLabel collapsed={isCollapsed}>Games</SidebarLabel>
 
         {/* Games Categories */}
+        <SidebarItem icon={<LayoutGrid className="h-5 w-5" />} label="All Games" href="/all-games" active={pathname === '/all-games'} collapsed={isCollapsed} />
         <SidebarItem icon={<Sparkles className="h-5 w-5" />} label="New Releases" href="/new-releases" active={pathname === '/new-releases'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Gamepad2 className="h-5 w-5" />} label="Slots" href="/slots" active={pathname === '/slots'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Flame className="h-5 w-5" />} label="Stake Originals" href="/originals" active={pathname === '/originals'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Badge className="h-5 w-5" />} label="Only on Stake" href="/exclusive" active={pathname === '/exclusive'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Cherry className="h-5 w-5" />} label="Slots" href="/slots" active={pathname === '/slots'} collapsed={isCollapsed} />
         <SidebarItem icon={<Video className="h-5 w-5" />} label="Live Casino" href="/live-casino" active={pathname === '/live-casino'} collapsed={isCollapsed} />
         <SidebarItem icon={<Mic className="h-5 w-5" />} label="Game Shows" href="/game-shows" active={pathname === '/game-shows'} collapsed={isCollapsed} />
         <SidebarItem icon={<Bomb className="h-5 w-5" />} label="Burst Games" href="/burst" active={pathname === '/burst'} collapsed={isCollapsed} />
-        <SidebarItem icon={<TrendingUp className="h-5 w-5" />} label="Enhanced RTP" href="/enhanced-rtp" active={pathname === '/enhanced-rtp'} collapsed={isCollapsed} />
+        <SidebarItem icon={<CircleDot className="h-5 w-5" />} label="Roulette" href="/roulette" active={pathname === '/roulette'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Spade className="h-5 w-5" />} label="Blackjack" href="/blackjack" active={pathname === '/blackjack'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Diamond className="h-5 w-5" />} label="Baccarat" href="/baccarat" active={pathname === '/baccarat'} collapsed={isCollapsed} />
 
         <SidebarDivider collapsed={isCollapsed} />
 

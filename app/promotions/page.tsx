@@ -23,12 +23,8 @@ export default function PromotionsPage() {
       )}>
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Page Title */}
-          <div className="relative mb-8">
+          <div className="mb-8">
             <h1 className="text-4xl font-bold text-[rgb(var(--text-primary))]">Promotions</h1>
-            {/* Decorative watermark */}
-            <div className="absolute top-0 right-0 text-9xl font-bold text-[rgb(var(--primary))]/5 select-none pointer-events-none">
-              Nest
-            </div>
           </div>
 
           {/* Category Tabs */}

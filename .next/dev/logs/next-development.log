@@ -1,0 +1,250 @@
+[00:00:02.255] Server  LOG      ✓ Ready in 1499ms
+[00:00:06.906] Server  LOG      ○ Compiling / ...
+[00:00:08.123] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:08.767] Browser WARN    Image with src "/purple-neon-dice-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:00:08.767] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="page.tsx">
+      <SegmentTrieNode>
+      <ClientPageRoot Component={function HomePage} serverProvidedParams={{...}}>
+        <HomePage params={Promise} searchParams={Promise}>
+          <div className="min-h-screen">
+            <Header>
+            <Sidebar>
+            <main className="pt-[70px] ...">
+              <div className="max-w-[160...">
+                <PromoCarousel>
+                <SearchBar>
+                <CategoryTabs>
+                <div className="space-y-12">
+                  <GameSection title="Nest Origi..." icon="🔥" games={[...]}>
+                    <section className="space-y-4">
+                      <div>
+                      <div ref={{current:null}} className="flex gap-4..." style={{...}}>
+                        <GameCard id="1" name="DICE" provider="Nest Origi..." thumbnail="/purple-ne..." ...>
+                          <div className="group rela...">
+                            <div className="relative w...">
+                              <img>
+                              <div>
+                              <div className="absolute b...">
+                                <div>
+                                <span className="text-[11px...">
++                                 2,604
+-                                 2604
+                                  ...
+                              ...
+                        ...
+                  ...
+              ...
+
+[00:00:08.767] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:08.767] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:08.767] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763364533624}
+[00:01:51.579] Server  LOG      ✓ Compiled in 215ms
+[00:04:44.482] Server  LOG      ✓ Compiled in 315ms
+[00:06:30.834] Server  LOG      ✓ Compiled in 266ms
+[00:07:41.359] Server  LOG      ✓ Compiled in 251ms
+[00:09:14.761] Server  LOG      ✓ Compiled in 255ms
+[00:09:23.792] Server  LOG      ✓ Compiled in 173ms
+[00:13:59.954] Server  LOG      ✓ Compiled in 235ms
+[00:14:00.056] Browser ERROR   uncaughtError: ReferenceError: useState is not defined
+[00:14:28.862] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:14:28.865] Server  LOG      ✓ Compiled in 271ms
+[00:14:29.824] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:14:31.195] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:14:31.195] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:14:31.195] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763365395398}
+[00:14:41.018] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:15:36.827] Server  LOG      ✓ Compiled in 448ms
+[00:15:52.412] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:15:52.674] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:15:52.674] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:15:52.674] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:15:52.674] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763365477533}
+[00:16:19.740] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:19.974] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:16:19.974] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:16:19.974] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:16:19.974] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763365504834}
+[00:16:21.638] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:21.882] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:16:21.882] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:16:21.883] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:16:21.883] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763365506732}
+[00:17:51.798] Server  LOG      ✓ Compiled in 333ms
+[00:23:36.527] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:36.744] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:23:36.744] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/new-releases","route":"/new-releases"}
+[00:23:36.745] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/new-releases color: rgb(120, 120, 120) color: inherit {"dp":"/new-releases","o":"http://localhost:3000/new-releases","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763365941601}
+[00:23:39.230] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:39.541] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:23:39.541] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:23:39.541] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:23:39.541] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763365944397}
+[00:23:53.437] Server  LOG      ✓ Compiled in 452ms
+[00:24:07.749] Server  LOG      ✓ Compiled in 283ms
+[00:24:25.193] Server  LOG      ✓ Compiled in 161ms
+[00:24:42.761] Server  LOG      ✓ Compiled in 178ms
+[00:27:02.711] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366147558}
+[00:27:10.889] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\node_modules_next_dist_3b4d20e1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:10.890] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\[root-of-the-server]__8b9a485e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:10.899] Server  WARN    Error: Route "/promotions/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:27:11.086] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions/1 color: rgb(120, 120, 120) color: inherit {"dp":"/promotions/[id]","o":"http://localhost:3000/promotions/1","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366155946}
+[00:27:27.782] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366172621}
+[00:27:39.159] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:39.360] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:27:39.360] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/affiliate","route":"/affiliate"}
+[00:27:39.360] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/affiliate color: rgb(120, 120, 120) color: inherit {"dp":"/affiliate","o":"http://localhost:3000/affiliate","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366184216}
+[00:27:40.710] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:40.962] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:27:40.962] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <LoadingBoundary name="promotions/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/promotions" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+              <SegmentViewNode type="page" pagePath="promotions...">
+                <SegmentTrieNode>
+                <ClientPageRoot Component={function PromotionsPage} serverProvidedParams={{...}}>
+                  <PromotionsPage params={Promise} searchParams={Promise}>
+                    <div className="min-h-screen">
+                      <Header>
+                        <header className="fixed top-...">
+                          <div className="h-full px-...">
+                            <div className="flex items...">
+                              <button>
+                              <Button>
+                              <LinkComponent>
++                             <div className="hidden md:flex gap-2 ml-2">
+                            ...
+                      ...
+              ...
+            ...
+
+[00:27:40.962] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:27:40.962] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/promotions","route":"/promotions"}
+[00:27:40.962] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366185821}
+[00:36:17.446] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\node_modules_next_dist_3b4d20e1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:36:17.447] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\[root-of-the-server]__8b9a485e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:36:17.448] Server  WARN    Error: Route "/promotions/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:36:17.610] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions/2 color: rgb(120, 120, 120) color: inherit {"dp":"/promotions/[id]","o":"http://localhost:3000/promotions/2","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366702469}
+[00:36:18.948] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366703797}
+[00:38:23.686] Server  LOG      ✓ Compiled in 213ms
+[00:40:19.974] Server  LOG      ✓ Compiled in 404ms
+[00:40:27.134] Server  LOG      ✓ Compiled in 172ms
+[00:41:05.526] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366990381}
+[00:41:14.478] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763366999333}
+[00:41:43.603] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763367028456}
+[00:42:02.218] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763367047069}
+[00:42:03.008] Server  LOG      ✓ Compiled in 84ms
+[00:45:45.491] Server  LOG      ✓ Compiled in 173ms
+[00:46:45.027] Server  LOG      ✓ Compiled in 119ms
+[00:47:32.960] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:47:33.248] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:47:33.248] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/affiliate","route":"/affiliate"}
+[00:47:33.248] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/affiliate color: rgb(120, 120, 120) color: inherit {"dp":"/affiliate","o":"http://localhost:3000/affiliate","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763367378107}
+[00:47:34.494] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:47:34.662] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:47:34.662] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/promotions","route":"/promotions"}
+[00:47:34.662] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763367379517}
+[00:47:34.919] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:47:37.620] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:47:37.773] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:47:37.773] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/originals","route":"/originals"}
+[00:47:37.773] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/originals color: rgb(120, 120, 120) color: inherit {"dp":"/originals","o":"http://localhost:3000/originals","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763367382632}
+[00:47:39.128] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:47:39.383] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:47:39.383] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:47:39.383] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/promotions","route":"/promotions"}
+[00:47:39.383] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763367384237}
+[01:02:15.228] Server  LOG      ✓ Compiled in 225ms
+[01:02:15.341] Browser ERROR   uncaughtError: ReferenceError: Gamepad2 is not defined
+[01:02:26.895] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:02:28.386] Server  LOG      ✓ Compiled in 197ms
+[01:02:28.387] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763368271960}
+[01:02:29.225] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:29.699] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:02:29.699] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:02:29.699] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/promotions","route":"/promotions"}
+[01:02:29.699] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763368274542}
+[01:02:59.681] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763368304527}
+[01:08:08.788] Server  LOG      ✓ Compiled in 551ms
+[01:09:58.515] Server  LOG      ✓ Compiled in 265ms
+[01:09:58.647] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:10:09.232] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:10:09.252] Server  LOG      ✓ Compiled in 216ms
+[01:10:09.944] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\_da4e1218._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:10:09.947] Server  ERROR    ⨯ Error: useSearch must be used within a SearchProvider
+[01:10:09.959] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:10:10.454] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:11.159] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:10:19.945] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:10:19.972] Server  LOG      ✓ Compiled in 150ms
+[01:10:20.584] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\_da4e1218._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:10:20.585] Server  ERROR    ⨯ Error: useSearch must be used within a SearchProvider
+[01:10:20.969] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:21.535] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:10:38.243] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:10:38.267] Server  LOG      ✓ Compiled in 167ms
+[01:10:38.963] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\_da4e1218._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:10:38.967] Server  ERROR    ⨯ Error: useSearch must be used within a SearchProvider
+[01:10:39.352] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:39.979] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:10:48.217] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:10:48.897] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\_4026c955._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:10:48.902] Server  ERROR    ⨯ Error: useSearch must be used within a SearchProvider
+[01:10:48.918] Server  LOG      ✓ Compiled in 158ms
+[01:10:49.233] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:49.528] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:10:54.850] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:10:54.890] Server  LOG      ✓ Compiled in 142ms
+[01:10:55.372] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\_4026c955._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:10:55.373] Server  ERROR    ⨯ Error: useSearch must be used within a SearchProvider
+[01:10:55.703] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:55.906] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:11:13.036] Server  LOG      ✓ Compiled in 148ms
+[01:11:13.458] Server  ERROR   C:\Users\Lasha\Documents\casino-front\.next\dev\server\chunks\ssr\_4026c955._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:11:13.460] Server  ERROR    ⨯ Error: useSearch must be used within a SearchProvider
+[01:11:13.871] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:11:14.200] Browser ERROR   uncaughtError: Error: useSearch must be used within a SearchProvider
+[01:11:18.868] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:11:18.874] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:11:20.529] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:11:21.193] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:11:21.345] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:11:21.345] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:11:21.345] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763368806196}

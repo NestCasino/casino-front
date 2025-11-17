@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SidebarProvider } from '@/lib/sidebar-context'
+import { SearchProvider } from '@/lib/search-context'
 import './globals.css'
 
 const inter = Inter({ 
@@ -42,7 +43,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.variable}>
         <SidebarProvider>
-          {children}
+          <SearchProvider>
+            {children}
+          </SearchProvider>
         </SidebarProvider>
         <Analytics />
       </body>

@@ -10,15 +10,21 @@ import { GameSection } from '@/components/game-section'
 import { mockGames } from '@/lib/mock-data'
 import { useSidebar } from '@/lib/sidebar-context'
 import { cn } from '@/lib/utils'
+import {
+  filterOriginalsGames,
+  filterSlotsGames,
+  filterTrendingGames,
+  filterLiveCasinoGames,
+} from '@/lib/game-filters'
 
 export default function HomePage() {
   const { isCollapsed } = useSidebar()
 
-  // Filter games by category
-  const originalsGames = mockGames.filter(game => game.category.includes('originals'))
-  const slotsGames = mockGames.filter(game => game.category.includes('slots'))
-  const trendingGames = mockGames.filter(game => game.category.includes('trending'))
-  const liveCasinoGames = mockGames.filter(game => game.category.includes('live-casino'))
+  // Filter games by category (delegated to reusable helpers for testability)
+  const originalsGames = filterOriginalsGames(mockGames)
+  const slotsGames = filterSlotsGames(mockGames)
+  const trendingGames = filterTrendingGames(mockGames)
+  const liveCasinoGames = filterLiveCasinoGames(mockGames)
 
   return (
     <div className="min-h-screen">

@@ -33,7 +33,7 @@ export function GameCard({ name, provider, thumbnail, playerCount }: GameCardPro
         <div className="absolute bottom-16 left-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-lg">
           <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
           <span className="text-[11px] text-gray-300 font-medium">
-            {playerCount.toLocaleString()} playing
+            {playerCount.toLocaleString('en-US')} playing
           </span>
         </div>
 

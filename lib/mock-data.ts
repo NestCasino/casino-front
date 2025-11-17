@@ -106,7 +106,7 @@ export const mockPromotions: Promotion[] = [
     id: '5',
     title: 'Valentina Shevchenko - Prize Pool',
     description: 'Championship round finish 25k Prize Pool.',
-    imageUrl: '/placeholder.svg?height=200&width=420',
+    imageUrl: '/crash-game-rocket-purple.jpg',
     endDate: '2025-11-16T11:00:00',
     prizePool: '$25,000',
     category: 'sport'
@@ -115,7 +115,7 @@ export const mockPromotions: Promotion[] = [
     id: '6',
     title: 'Royal Club Of Originals',
     description: 'Enter the $3,000 Limbo Competition and win big',
-    imageUrl: '/placeholder.svg?height=200&width=420',
+    imageUrl: '/gates-olympus-zeus-slot.jpg',
     endDate: '2025-11-17T17:00:00',
     prizePool: '$3,000',
     category: 'casino'
@@ -124,7 +124,7 @@ export const mockPromotions: Promotion[] = [
     id: '7',
     title: 'Nest\'s Weekly Raffle',
     description: '$75,000 Weekly Raffle',
-    imageUrl: '/placeholder.svg?height=200&width=420',
+    imageUrl: '/wanted-dead-wild-western-slot.jpg',
     endDate: '2025-12-31T16:59:00',
     prizePool: '$75,000',
     category: 'community'
@@ -133,7 +133,7 @@ export const mockPromotions: Promotion[] = [
     id: '8',
     title: 'The Level Up',
     description: '$40,000 Prize Pool',
-    imageUrl: '/placeholder.svg?height=200&width=420',
+    imageUrl: '/book-of-dead-egypt-slot.jpg',
     endDate: '2025-11-19T09:00:00',
     prizePool: '$40,000',
     category: 'casino'

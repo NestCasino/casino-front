@@ -11,6 +11,15 @@ interface BetSlipItem {
   stake: number
 }
 
+// Helper functions extracted for easier unit testing
+export function calculateTotalStake(bets: BetSlipItem[]): number {
+  return bets.reduce((sum, bet) => sum + bet.stake, 0)
+}
+
+export function calculateTotalReturn(bets: BetSlipItem[]): number {
+  return bets.reduce((sum, bet) => sum + bet.stake * bet.odds, 0)
+}
+
 export function BetSlip() {
   const [isExpanded, setIsExpanded] = useState(true)
   const [bets, setBets] = useState<BetSlipItem[]>([
@@ -23,8 +32,8 @@ export function BetSlip() {
     }
   ])
 
-  const totalStake = bets.reduce((sum, bet) => sum + bet.stake, 0)
-  const totalReturn = bets.reduce((sum, bet) => sum + (bet.stake * bet.odds), 0)
+  const totalStake = calculateTotalStake(bets)
+  const totalReturn = calculateTotalReturn(bets)
 
   const removeBet = (id: string) => {
     setBets(bets.filter(bet => bet.id !== id))

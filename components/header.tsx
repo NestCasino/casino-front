@@ -1,12 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, User, Bell, Settings, Menu, Wallet, Bitcoin, ChevronDown, PanelLeftClose, PanelLeft } from 'lucide-react'
+import { Search, User, Bell, Settings, Menu, Wallet, Bitcoin, ChevronDown, PanelLeftClose, PanelLeft, Dice5, Dribbble } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useSidebar } from '@/lib/sidebar-context'
+import { useSearch } from '@/lib/search-context'
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 export function Header() {
   const { isCollapsed, toggleSidebar } = useSidebar()
+  const { openSearch } = useSearch()
+  const [activeTab, setActiveTab] = useState<'casino' | 'sports'>('casino')
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-[70px] bg-[rgb(var(--bg-base))]/95 backdrop-blur-md border-b border-[rgb(var(--surface))]">
@@ -32,6 +37,34 @@ export function Header() {
               Nest
             </span>
           </Link>
+          
+          {/* Casino/Sports Tabs */}
+          <div className="hidden md:flex gap-2 ml-2">
+            <button
+              onClick={() => setActiveTab('casino')}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer",
+                activeTab === 'casino' 
+                  ? "bg-purple-600 text-white shadow-md shadow-purple-500/30" 
+                  : "bg-[#1a1534] text-gray-400 hover:bg-[#241d42] hover:text-gray-300"
+              )}
+            >
+              <Dice5 className="h-4 w-4" />
+              <span>Casino</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('sports')}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer",
+                activeTab === 'sports' 
+                  ? "bg-purple-600 text-white shadow-md shadow-purple-500/30" 
+                  : "bg-[#1a1534] text-gray-400 hover:bg-[#241d42] hover:text-gray-300"
+              )}
+            >
+              <Dribbble className="h-4 w-4" />
+              <span>Sports</span>
+            </button>
+          </div>
         </div>
 
         <div className="flex items-center justify-center flex-1">
@@ -51,7 +84,10 @@ export function Header() {
           </Button>
 
           {/* Icon Cluster */}
-          <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer">
+          <button 
+            onClick={openSearch}
+            className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors cursor-pointer"
+          >
             <Search className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
           </button>
           <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors relative cursor-pointer">
