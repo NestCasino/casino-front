@@ -1,9 +1,19 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/all-games/page": "app/all-games/page.js",
+  "/baccarat/page": "app/baccarat/page.js",
+  "/blackjack/page": "app/blackjack/page.js",
   "/bonuses/page": "app/bonuses/page.js",
+  "/burst/page": "app/burst/page.js",
   "/favorites/page": "app/favorites/page.js",
+  "/game-shows/page": "app/game-shows/page.js",
+  "/live-casino/page": "app/live-casino/page.js",
+  "/new-releases/page": "app/new-releases/page.js",
   "/page": "app/page.js",
+  "/promotions/page": "app/promotions/page.js",
   "/recent/page": "app/recent/page.js",
+  "/roulette/page": "app/roulette/page.js",
+  "/slots/page": "app/slots/page.js",
   "/tournaments/[id]/page": "app/tournaments/[id]/page.js",
   "/tournaments/page": "app/tournaments/page.js"
 }
