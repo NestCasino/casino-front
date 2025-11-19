@@ -3349,6 +3349,17 @@ function SearchBar() {
     const { isSearchOpen, openSearch, closeSearch } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$search$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSearch"])();
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
     const [filteredGames, setFilteredGames] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const scrollRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // Scroll function for horizontal navigation
+    const scroll = (direction)=>{
+        if (scrollRef.current) {
+            const scrollAmount = 440;
+            scrollRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
     // Filter games based on search query
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (searchQuery.trim() === '') {
@@ -3406,7 +3417,7 @@ function SearchBar() {
                             className: "absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[rgb(var(--text-muted))] pointer-events-none"
                         }, void 0, false, {
                             fileName: "[project]/components/search-bar.tsx",
-                            lineNumber: 70,
+                            lineNumber: 82,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3416,18 +3427,18 @@ function SearchBar() {
                             className: "jsx-18b5d4a34924a3ea" + " " + "w-full h-12 pl-12 pr-4 bg-[rgb(var(--bg-elevated))] border border-[rgb(var(--surface))] rounded-xl text-[rgb(var(--text-primary))] placeholder:text-[rgb(var(--text-disabled))] cursor-pointer transition-all hover:border-[rgb(var(--primary))]/50"
                         }, void 0, false, {
                             fileName: "[project]/components/search-bar.tsx",
-                            lineNumber: 71,
+                            lineNumber: 83,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/search-bar.tsx",
-                    lineNumber: 66,
+                    lineNumber: 78,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/search-bar.tsx",
-                lineNumber: 65,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             isSearchOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3441,11 +3452,11 @@ function SearchBar() {
                         className: "jsx-18b5d4a34924a3ea" + " " + "absolute inset-0 bg-black/60 backdrop-blur-md"
                     }, void 0, false, {
                         fileName: "[project]/components/search-bar.tsx",
-                        lineNumber: 84,
+                        lineNumber: 96,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-18b5d4a34924a3ea" + " " + "relative w-full max-w-2xl bg-[#0f0420] border border-[#2d1b4e] rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300",
+                        className: "jsx-18b5d4a34924a3ea" + " " + "relative w-full max-w-7xl bg-[#0f0420] border border-[#2d1b4e] rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "jsx-18b5d4a34924a3ea" + " " + "relative border-b border-[#2d1b4e] bg-[#1a0b33]",
@@ -3454,7 +3465,7 @@ function SearchBar() {
                                         className: "absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
                                     }, void 0, false, {
                                         fileName: "[project]/components/search-bar.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 108,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3466,7 +3477,7 @@ function SearchBar() {
                                         className: "jsx-18b5d4a34924a3ea" + " " + "w-full h-16 pl-12 pr-12 bg-transparent text-white placeholder:text-gray-500 focus:outline-none text-lg"
                                     }, void 0, false, {
                                         fileName: "[project]/components/search-bar.tsx",
-                                        lineNumber: 97,
+                                        lineNumber: 109,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3479,18 +3490,18 @@ function SearchBar() {
                                             className: "h-5 w-5 text-gray-400"
                                         }, void 0, false, {
                                             fileName: "[project]/components/search-bar.tsx",
-                                            lineNumber: 112,
+                                            lineNumber: 124,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/search-bar.tsx",
-                                        lineNumber: 105,
+                                        lineNumber: 117,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/search-bar.tsx",
-                                lineNumber: 95,
+                                lineNumber: 107,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3503,7 +3514,7 @@ function SearchBar() {
                                             children: "No games found"
                                         }, void 0, false, {
                                             fileName: "[project]/components/search-bar.tsx",
-                                            lineNumber: 120,
+                                            lineNumber: 132,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3511,13 +3522,13 @@ function SearchBar() {
                                             children: "Try searching with different keywords"
                                         }, void 0, false, {
                                             fileName: "[project]/components/search-bar.tsx",
-                                            lineNumber: 121,
+                                            lineNumber: 133,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/search-bar.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 131,
                                     columnNumber: 17
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "jsx-18b5d4a34924a3ea" + " " + "p-2",
@@ -3531,7 +3542,7 @@ function SearchBar() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/search-bar.tsx",
-                                            lineNumber: 126,
+                                            lineNumber: 138,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3547,12 +3558,12 @@ function SearchBar() {
                                                                 children: "🎮"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/search-bar.tsx",
-                                                                lineNumber: 139,
+                                                                lineNumber: 151,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/search-bar.tsx",
-                                                            lineNumber: 138,
+                                                            lineNumber: 150,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3563,7 +3574,7 @@ function SearchBar() {
                                                                     children: game.name
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/search-bar.tsx",
-                                                                    lineNumber: 146,
+                                                                    lineNumber: 158,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3571,7 +3582,7 @@ function SearchBar() {
                                                                     children: game.provider
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/search-bar.tsx",
-                                                                    lineNumber: 149,
+                                                                    lineNumber: 161,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3585,7 +3596,7 @@ function SearchBar() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/search-bar.tsx",
-                                                                            lineNumber: 153,
+                                                                            lineNumber: 165,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         game.category.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -3595,7 +3606,7 @@ function SearchBar() {
                                                                                     children: "•"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/search-bar.tsx",
-                                                                                    lineNumber: 158,
+                                                                                    lineNumber: 170,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3603,7 +3614,7 @@ function SearchBar() {
                                                                                     children: game.category[0]
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/search-bar.tsx",
-                                                                                    lineNumber: 159,
+                                                                                    lineNumber: 171,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             ]
@@ -3611,13 +3622,13 @@ function SearchBar() {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/search-bar.tsx",
-                                                                    lineNumber: 152,
+                                                                    lineNumber: 164,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/search-bar.tsx",
-                                                            lineNumber: 145,
+                                                            lineNumber: 157,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3633,44 +3644,44 @@ function SearchBar() {
                                                                         className: "jsx-18b5d4a34924a3ea"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/search-bar.tsx",
-                                                                        lineNumber: 171,
+                                                                        lineNumber: 183,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/search-bar.tsx",
-                                                                    lineNumber: 170,
+                                                                    lineNumber: 182,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/search-bar.tsx",
-                                                                lineNumber: 169,
+                                                                lineNumber: 181,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/search-bar.tsx",
-                                                            lineNumber: 168,
+                                                            lineNumber: 180,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, game.id, true, {
                                                     fileName: "[project]/components/search-bar.tsx",
-                                                    lineNumber: 132,
+                                                    lineNumber: 144,
                                                     columnNumber: 23
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/components/search-bar.tsx",
-                                            lineNumber: 130,
+                                            lineNumber: 142,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/search-bar.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 136,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/search-bar.tsx",
-                                lineNumber: 117,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3687,14 +3698,14 @@ function SearchBar() {
                                                         children: "↑↓"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/search-bar.tsx",
-                                                        lineNumber: 186,
+                                                        lineNumber: 198,
                                                         columnNumber: 19
                                                     }, this),
                                                     "Navigate"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/search-bar.tsx",
-                                                lineNumber: 185,
+                                                lineNumber: 197,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3705,20 +3716,20 @@ function SearchBar() {
                                                         children: "Enter"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/search-bar.tsx",
-                                                        lineNumber: 190,
+                                                        lineNumber: 202,
                                                         columnNumber: 19
                                                     }, this),
                                                     "Select"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/search-bar.tsx",
-                                                lineNumber: 189,
+                                                lineNumber: 201,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/search-bar.tsx",
-                                        lineNumber: 184,
+                                        lineNumber: 196,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3729,32 +3740,32 @@ function SearchBar() {
                                                 children: "Esc"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/search-bar.tsx",
-                                                lineNumber: 195,
+                                                lineNumber: 207,
                                                 columnNumber: 17
                                             }, this),
                                             "Close"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/search-bar.tsx",
-                                        lineNumber: 194,
+                                        lineNumber: 206,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/search-bar.tsx",
-                                lineNumber: 183,
+                                lineNumber: 195,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/search-bar.tsx",
-                        lineNumber: 93,
+                        lineNumber: 105,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/search-bar.tsx",
-                lineNumber: 82,
+                lineNumber: 94,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {

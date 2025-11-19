@@ -5,6 +5,8 @@ import { SidebarProvider } from '@/lib/sidebar-context'
 import { SearchProvider } from '@/lib/search-context'
 import { WalletProvider } from '@/lib/wallet-context'
 import { UserProvider } from '@/lib/user-context'
+import { NotificationProvider } from '@/lib/notification-context'
+import { BonusProvider } from '@/lib/bonus-context'
 import { WalletModal } from '@/components/wallet-modal'
 import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
@@ -50,9 +52,13 @@ export default function RootLayout({
           <SearchProvider>
             <WalletProvider>
               <UserProvider>
-                {children}
-                <WalletModal />
-                <Toaster />
+                <NotificationProvider>
+                  <BonusProvider>
+                    {children}
+                    <WalletModal />
+                    <Toaster />
+                  </BonusProvider>
+                </NotificationProvider>
               </UserProvider>
             </WalletProvider>
           </SearchProvider>

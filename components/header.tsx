@@ -1,20 +1,26 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, Bell, Settings, Menu, Wallet, PanelLeftClose, PanelLeft, Dice5, Dribbble } from 'lucide-react'
+import { Search, Bell, Settings, Menu, Gift, PanelLeftClose, PanelLeft, Dice5, Dribbble } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useSidebar } from '@/lib/sidebar-context'
 import { useSearch } from '@/lib/search-context'
 import { useWallet } from '@/lib/wallet-context'
+import { useNotifications } from '@/lib/notification-context'
+import { useBonuses } from '@/lib/bonus-context'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { WalletSelector } from './wallet-selector'
 import { ProfileMenu } from './profile-menu'
+import { NotificationDropdown } from './notification-dropdown'
+import { BonusesDropdown } from './bonuses-dropdown'
 
 export function Header() {
   const { isCollapsed, toggleSidebar } = useSidebar()
   const { openSearch } = useSearch()
   const { openWalletModal } = useWallet()
+  const { openNotifications, unreadCount } = useNotifications()
+  const { openBonuses } = useBonuses()
   const [activeTab, setActiveTab] = useState<'casino' | 'sports'>('casino')
 
   return (
@@ -77,14 +83,17 @@ export function Header() {
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
-          {/* Wallet Button */}
-          <Button 
-            onClick={openWalletModal}
-            className="hidden sm:flex bg-[rgb(var(--info))] hover:bg-[rgb(var(--info))]/90 text-white font-semibold"
-          >
-            <Wallet className="h-4 w-4 mr-2" />
-            Wallet
-          </Button>
+          {/* Bonuses Button with Dropdown */}
+          <div className="relative">
+            <Button 
+              onClick={openBonuses}
+              className="hidden sm:flex bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold shadow-md shadow-orange-500/30"
+            >
+              <Gift className="h-4 w-4 mr-2" />
+              Bonuses
+            </Button>
+            <BonusesDropdown />
+          </div>
 
           {/* Icon Cluster */}
           <button 
@@ -93,10 +102,26 @@ export function Header() {
           >
             <Search className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
           </button>
-          <button className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors relative cursor-pointer">
-            <Bell className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-[rgb(var(--error))] rounded-full"></span>
-          </button>
+          
+          {/* Notification Bell with Dropdown */}
+          <div className="relative">
+            <button 
+              onClick={openNotifications}
+              className="p-2 hover:bg-[rgb(var(--surface))] rounded-lg transition-colors relative cursor-pointer"
+            >
+              <Bell className="h-5 w-5 text-[rgb(var(--text-secondary))]" />
+              {unreadCount > 0 && (
+                <>
+                  <span className="absolute top-1 right-1 h-2 w-2 bg-[rgb(var(--error))] rounded-full animate-pulse"></span>
+                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1">
+                    {unreadCount > 9 ? '9+' : unreadCount}
+                  </span>
+                </>
+              )}
+            </button>
+            <NotificationDropdown />
+          </div>
+          
           <ProfileMenu />
         </div>
       </div>

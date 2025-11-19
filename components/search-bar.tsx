@@ -1,16 +1,28 @@
 'use client'
 
-import { Search, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Search, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 import { mockGames, type Game } from '@/lib/mock-data'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { useSearch } from '@/lib/search-context'
+import { GameCard } from './game-card'
 
 export function SearchBar() {
   const { isSearchOpen, openSearch, closeSearch } = useSearch()
   const [searchQuery, setSearchQuery] = useState('')
   const [filteredGames, setFilteredGames] = useState<Game[]>([])
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  // Scroll function for horizontal navigation
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 440
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   // Filter games based on search query
   useEffect(() => {
@@ -90,7 +102,7 @@ export function SearchBar() {
           />
           
           {/* Modal Content */}
-          <div className="relative w-full max-w-2xl bg-[#0f0420] border border-[#2d1b4e] rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="relative w-full max-w-7xl bg-[#0f0420] border border-[#2d1b4e] rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
             {/* Search Input */}
             <div className="relative border-b border-[#2d1b4e] bg-[#1a0b33]">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -113,66 +125,62 @@ export function SearchBar() {
               </button>
             </div>
 
-            {/* Results List */}
-            <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
+            {/* Results Section */}
+            <div className="p-6">
               {filteredGames.length === 0 ? (
                 <div className="py-16 text-center">
                   <div className="text-gray-500 text-lg mb-2">No games found</div>
                   <div className="text-gray-600 text-sm">Try searching with different keywords</div>
                 </div>
               ) : (
-                <div className="p-2">
-                  {searchQuery && (
-                    <div className="px-3 py-2 text-xs text-gray-500 uppercase tracking-wider">
-                      {filteredGames.length} {filteredGames.length === 1 ? 'Result' : 'Results'}
+                <div className="space-y-4">
+                  {/* Section Header with Results Count and Navigation */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Search className="h-5 w-5 text-purple-400" />
+                      <h2 className="text-xl font-semibold text-white">
+                        Search Results
+                      </h2>
+                      {searchQuery && (
+                        <span className="text-sm text-gray-400">
+                          ({filteredGames.length} {filteredGames.length === 1 ? 'game' : 'games'})
+                        </span>
+                      )}
                     </div>
-                  )}
-                  <div className="space-y-1">
-                    {filteredGames.map((game) => (
+
+                    {/* Navigation Arrows */}
+                    <div className="flex items-center gap-2">
                       <button
-                        key={game.id}
-                        onClick={() => handleGameClick(game)}
-                        className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-[#1a0b33] transition-colors group cursor-pointer text-left"
+                        onClick={() => scroll('left')}
+                        className="p-2 rounded-lg hover:bg-[#2d1b4e] text-gray-400 hover:text-white transition-all cursor-pointer"
                       >
-                        {/* Game Thumbnail */}
-                        <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-[#2d1b4e]">
-                          <div className="w-full h-full flex items-center justify-center text-2xl">
-                            🎮
-                          </div>
-                        </div>
-
-                        {/* Game Info */}
-                        <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-white group-hover:text-purple-400 transition-colors truncate">
-                            {game.name}
-                          </div>
-                          <div className="text-sm text-gray-400 truncate">
-                            {game.provider}
-                          </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xs text-gray-500">
-                              {game.playerCount.toLocaleString()} playing
-                            </span>
-                            {game.category.length > 0 && (
-                              <>
-                                <span className="text-gray-600">•</span>
-                                <span className="text-xs text-purple-400">
-                                  {game.category[0]}
-                                </span>
-                              </>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Play Icon */}
-                        <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
-                            <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                            </svg>
-                          </div>
-                        </div>
+                        <ChevronLeft className="h-6 w-6" />
                       </button>
+                      <button
+                        onClick={() => scroll('right')}
+                        className="p-2 rounded-lg hover:bg-[#2d1b4e] text-gray-400 hover:text-white transition-all cursor-pointer"
+                      >
+                        <ChevronRight className="h-6 w-6" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Horizontal Game Cards Carousel - 2 Rows */}
+                  <div
+                    ref={scrollRef}
+                    className="grid grid-rows-2 grid-flow-col gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2 auto-cols-max"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    {filteredGames.map((game) => (
+                      <div key={game.id} onClick={() => handleGameClick(game)}>
+                        <GameCard
+                          id={game.id}
+                          name={game.name}
+                          provider={game.provider}
+                          thumbnail={game.thumbnail}
+                          playerCount={game.playerCount}
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -201,18 +209,12 @@ export function SearchBar() {
       )}
 
       <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #1a0b33;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #2d1b4e;
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #3d2b5e;
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
         @keyframes slide-in-from-top-4 {
           from {
