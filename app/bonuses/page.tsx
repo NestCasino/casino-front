@@ -9,6 +9,7 @@ import { useUser } from '@/lib/user-context'
 import { cn } from '@/lib/utils'
 import { Gift, Calendar, Crown, Sparkles, Info, ChevronDown, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export default function BonusesPage() {
@@ -387,9 +388,9 @@ export default function BonusesPage() {
                 <Crown className="h-8 w-8 text-amber-500" />
                 <h2 className="text-3xl font-bold text-white">VIP bonuses</h2>
               </div>
-              <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1">
+              <Link href="/vip" className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1">
                 VIP Benefits <ChevronRight className="h-5 w-5" />
-              </button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

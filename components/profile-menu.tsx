@@ -1,6 +1,7 @@
 'use client'
 
 import { useUser } from '@/lib/user-context'
+import { useWallet } from '@/lib/wallet-context'
 import { 
   Wallet, 
   Crown, 
@@ -27,10 +28,11 @@ import { AvatarSelectorModal } from './avatar-selector-modal'
 
 export function ProfileMenu() {
   const { user, getAvatar, openAvatarModal } = useUser()
+  const { openWalletModal } = useWallet()
   const currentAvatar = getAvatar(user.avatarId)
 
   const menuItems = [
-    { icon: Wallet, label: 'Wallet', href: '/wallet' },
+    { icon: Wallet, label: 'Wallet', action: openWalletModal },
     { icon: Crown, label: 'Vip Club', href: '/vip' },
     { icon: Gift, label: 'Bonuses', href: '/bonuses' },
     { icon: Zap, label: 'Wild Points', href: '/wild-points' },
@@ -126,8 +128,8 @@ export function ProfileMenu() {
 
           {/* Menu Items */}
           <div className="p-2">
-            {menuItems.map((item, index) => (
-              <Link key={item.href} href={item.href}>
+            {menuItems.map((item, index) => {
+              const content = (
                 <div
                   className={cn(
                     "flex items-center justify-between px-4 py-3 rounded-lg",
@@ -144,8 +146,22 @@ export function ProfileMenu() {
                   </div>
                   <ChevronRight className="h-4 w-4 text-[#9ca3af] group-hover:text-purple-400 transition-colors" />
                 </div>
-              </Link>
-            ))}
+              )
+
+              if ('action' in item && item.action) {
+                return (
+                  <button key={item.label} onClick={item.action} className="w-full">
+                    {content}
+                  </button>
+                )
+              }
+
+              return (
+                <Link key={item.href} href={item.href || '#'}>
+                  {content}
+                </Link>
+              )
+            })}
           </div>
 
           <DropdownMenuSeparator className="bg-[#2d1b4e]" />
