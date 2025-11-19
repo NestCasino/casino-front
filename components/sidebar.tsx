@@ -71,10 +71,9 @@ export function Sidebar() {
     )}>
       <nav className="py-4">
         {/* Personal Section */}
-        <SidebarItem icon={<Star className="h-5 w-5" />} label="Favourites" href="/" active={pathname === '/favourites'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Star className="h-5 w-5" />} label="Favourites" href="/favorites" active={pathname === '/favorites'} collapsed={isCollapsed} />
         <SidebarItem icon={<Clock className="h-5 w-5" />} label="Recent" href="/recent" active={pathname === '/recent'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Trophy className="h-5 w-5" />} label="Challenges" href="/challenges" active={pathname === '/challenges'} collapsed={isCollapsed} />
-        <SidebarItem icon={<CheckSquare className="h-5 w-5" />} label="My Bets" href="/my-bets" active={pathname === '/my-bets'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Trophy className="h-5 w-5" />} label="Tournaments" href="/tournaments" active={pathname === '/tournaments'} collapsed={isCollapsed} />
 
         <SidebarDivider collapsed={isCollapsed} />
 

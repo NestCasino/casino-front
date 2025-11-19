@@ -2403,8 +2403,8 @@ function Sidebar() {
                         columnNumber: 28
                     }, void 0),
                     label: "Favourites",
-                    href: "/",
-                    active: pathname === '/favourites',
+                    href: "/favorites",
+                    active: pathname === '/favorites',
                     collapsed: isCollapsed
                 }, void 0, false, {
                     fileName: "[project]/components/sidebar.tsx",

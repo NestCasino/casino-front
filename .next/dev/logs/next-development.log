@@ -88,3 +88,67 @@ Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
 [00:49:52.184] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543012519}
 [00:49:57.984] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543018318}
 [00:50:51.940] Server  LOG      ✓ Compiled in 257ms
+[00:54:40.423] Server  LOG      ✓ Compiled in 242ms
+[00:55:21.328] Server  LOG      ✓ Compiled in 108ms
+[00:56:52.306] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543432632}
+[00:56:55.654] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543435988}
+[00:57:06.029] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543446267}
+[00:57:28.717] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543468906}
+[00:57:47.270] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543487435}
+[00:57:51.254] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543491448}
+[00:57:56.054] Server  LOG      ✓ Compiled in 116ms
+[00:58:11.081] Server  LOG      ✓ Compiled in 130ms
+[00:58:44.971] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:45.168] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:58:45.168] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/challenges","route":"/challenges"}
+[00:58:45.168] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/challenges color: rgb(120, 120, 120) color: inherit {"dp":"/challenges","o":"http://localhost:3000/challenges","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543545507}
+[00:58:46.063] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:46.232] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:58:46.232] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/challenges","route":"/challenges"}
+[00:58:46.232] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/challenges color: rgb(120, 120, 120) color: inherit {"dp":"/challenges","o":"http://localhost:3000/challenges","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543546560}
+[00:58:47.526] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:47.750] Browser WARN    Image with src "/sweet-candy-slot-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:58:47.750] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:58:47.750] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/recent","route":"/recent"}
+[00:58:47.751] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543548090}
+[00:58:48.815] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543549150}
+[00:58:55.550] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543555873}
+[01:02:39.809] Server  LOG      ✓ Compiled in 104ms
+[01:02:49.476] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:49.771] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:02:49.771] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/all-games","route":"/all-games"}
+[01:02:49.771] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543790108}
+[01:02:51.377] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:51.682] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:02:51.682] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/recent","route":"/recent"}
+[01:02:51.682] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543791956}
+[01:02:51.682] Browser WARN    Image with src "/sweet-candy-slot-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:02:57.122] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:57.283] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:02:57.283] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/slots","route":"/slots"}
+[01:02:57.283] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/slots color: rgb(120, 120, 120) color: inherit {"dp":"/slots","o":"http://localhost:3000/slots","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543797621}
+[01:02:59.052] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:59.276] Browser WARN    Image with src "/sweet-candy-slot-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:02:59.276] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:02:59.276] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/recent","route":"/recent"}
+[01:02:59.276] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543799613}
+[01:03:01.714] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543802045}
+[01:03:19.408] Server  LOG      ✓ Compiled in 253ms
+[01:03:58.537] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments","o":"http://localhost:3000/tournaments","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543858870}
+[01:07:01.545] Server  LOG      ✓ Compiled in 217ms
+[01:07:15.614] Server  LOG      ✓ Compiled in 125ms
+[01:07:15.832] Browser ERROR   uncaughtError: ReferenceError: Link is not defined
+[01:07:29.058] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:07:29.069] Server  LOG      ✓ Compiled in 130ms
+[01:07:29.748] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:07:30.784] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:07:30.784] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/tournaments","route":"/tournaments"}
+[01:07:30.784] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments","o":"http://localhost:3000/tournaments","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544070963}
+[01:07:39.146] Browser WARN    Image with src "/slot-characters-multicolor-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:08:07.756] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments/2 color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments/[id]","o":"http://localhost:3000/tournaments/2","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544108083}
+[01:08:40.819] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments","o":"http://localhost:3000/tournaments","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544141153}
+[01:08:42.659] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments/2 color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments/[id]","o":"http://localhost:3000/tournaments/2","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544142987}
