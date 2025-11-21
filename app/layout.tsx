@@ -4,10 +4,12 @@ import { Analytics } from '@vercel/analytics/next'
 import { SidebarProvider } from '@/lib/sidebar-context'
 import { SearchProvider } from '@/lib/search-context'
 import { WalletProvider } from '@/lib/wallet-context'
+import { AuthProvider } from '@/lib/auth-context'
 import { UserProvider } from '@/lib/user-context'
 import { NotificationProvider } from '@/lib/notification-context'
 import { BonusProvider } from '@/lib/bonus-context'
 import { WalletModal } from '@/components/wallet-modal'
+import { AuthModal } from '@/components/auth-modal'
 import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
@@ -51,15 +53,18 @@ export default function RootLayout({
         <SidebarProvider>
           <SearchProvider>
             <WalletProvider>
-              <UserProvider>
-                <NotificationProvider>
-                  <BonusProvider>
-                    {children}
-                    <WalletModal />
-                    <Toaster />
-                  </BonusProvider>
-                </NotificationProvider>
-              </UserProvider>
+              <AuthProvider>
+                <UserProvider>
+                  <NotificationProvider>
+                    <BonusProvider>
+                      {children}
+                      <WalletModal />
+                      <AuthModal />
+                      <Toaster />
+                    </BonusProvider>
+                  </NotificationProvider>
+                </UserProvider>
+              </AuthProvider>
             </WalletProvider>
           </SearchProvider>
         </SidebarProvider>

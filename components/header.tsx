@@ -8,6 +8,7 @@ import { useSearch } from '@/lib/search-context'
 import { useWallet } from '@/lib/wallet-context'
 import { useNotifications } from '@/lib/notification-context'
 import { useBonuses } from '@/lib/bonus-context'
+import { useAuth } from '@/lib/auth-context'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { WalletSelector } from './wallet-selector'
@@ -21,6 +22,7 @@ export function Header() {
   const { openWalletModal } = useWallet()
   const { openNotifications, unreadCount } = useNotifications()
   const { openBonuses } = useBonuses()
+  const { isAuthenticated, openAuthModal } = useAuth()
   const [activeTab, setActiveTab] = useState<'casino' | 'sports'>('casino')
 
   return (
@@ -78,11 +80,31 @@ export function Header() {
         </div>
 
         <div className="flex items-center justify-center flex-1">
-          <WalletSelector />
+          {isAuthenticated && <WalletSelector />}
         </div>
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
+          {!isAuthenticated && (
+            <>
+              <Button
+                onClick={() => openAuthModal('login')}
+                variant="ghost"
+                className="hidden sm:flex text-gray-300 hover:text-white hover:bg-[rgb(var(--surface))]"
+              >
+                Login
+              </Button>
+              <Button
+                onClick={() => openAuthModal('register')}
+                className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold shadow-md shadow-purple-500/30"
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
+          
+          {isAuthenticated && (
+            <>
           {/* Bonuses Button with Dropdown */}
           <div className="relative">
             <Button 
@@ -122,7 +144,9 @@ export function Header() {
             <NotificationDropdown />
           </div>
           
-          <ProfileMenu />
+              <ProfileMenu />
+            </>
+          )}
         </div>
       </div>
     </header>

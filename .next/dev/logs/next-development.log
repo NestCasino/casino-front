@@ -1,236 +1,357 @@
-[00:00:02.019] Server  LOG      ✓ Ready in 1422ms
-[00:00:07.350] Server  LOG      ○ Compiling / ...
-[00:00:11.630] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:12.126] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:12.126] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:12.126] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763540032458}
-[00:00:12.126] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:00:01.051] Server  LOG      ✓ Ready in 663ms
+[00:00:05.356] Server  LOG      ○ Compiling / ...
+[00:00:09.401] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:10.067] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:10.067] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:10.067] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763734775318}
+[00:00:10.067] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:05:15.266] Server  LOG      ✓ Compiled in 82ms
-[00:05:24.495] Server  LOG      ✓ Compiled in 140ms
-[00:05:46.770] Server  LOG      ✓ Compiled in 95ms
-[00:05:56.867] Server  LOG      ✓ Compiled in 91ms
-[00:21:41.437] Server  LOG      ✓ Compiled in 175ms
-[00:21:41.781] Browser ERROR   uncaughtError: ReferenceError: Wallet is not defined
-[00:21:49.049] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:49.451] Server  LOG      ✓ Compiled in 189ms
-[00:21:49.758] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:50.485] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:00:11.828] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:00:11.828] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:00:11.829] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:00:33.945] Server  LOG      ✓ Compiled in 170ms
+[00:05:49.705] Server  LOG      ✓ Compiled in 152ms
+[00:05:54.549] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:05:54.549] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:06:00.527] Server  LOG      ✓ Compiled in 182ms
+[00:06:06.564] Server  LOG      ✓ Compiled in 311ms
+[00:06:10.976] Server  LOG      ✓ Compiled in 184ms
+[00:06:16.768] Server  LOG      ✓ Compiled in 135ms
+[00:06:26.377] Server  LOG      ✓ Compiled in 144ms
+[00:12:10.064] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:12:10.064] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:12:39.272] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:40.203] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:21:50.486] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:50.486] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:21:50.486] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541330822}
-[00:22:29.369] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:22:29.529] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:22:29.529] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/bonuses","route":"/bonuses"}
-[00:22:29.529] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541369867}
-[00:22:30.815] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:22:31.099] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:12:40.203] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:12:40.203] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:12:40.203] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763735525507}
+[00:12:40.719] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:12:40.719] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:12:40.865] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:20:17.948] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:20:17.948] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:21:18.385] Server  LOG      ✓ Compiled in 241ms
+[00:21:36.818] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:37.414] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:21:37.414] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:21:37.414] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763736062710}
+[00:21:37.414] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:22:31.099] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:22:31.099] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:22:31.099] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541371428}
-[00:24:17.102] Server  LOG      ✓ Compiled in 197ms
-[00:24:32.111] Server  LOG      ✓ Compiled in 225ms
-[00:24:32.841] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:24:33.205] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:24:33.205] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:24:33.205] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541493494}
-[00:24:33.205] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:21:38.362] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:21:38.362] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:21:38.362] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:27:50.845] Server  LOG      ✓ Compiled in 183ms
+[00:28:11.864] Server  LOG      ✓ Compiled in 184ms
+[00:28:25.729] Server  LOG      ✓ Compiled in 325ms
+[00:28:36.879] Server  LOG      ✓ Compiled in 356ms
+[00:28:50.250] Server  LOG      ✓ Compiled in 435ms
+[00:28:50.506] Browser ERROR   ./components/auth-forms/register-form.tsx:340:16
+Parsing ecmascript source code failed
+  338 |           )}
+  339 |         />
+> 340 |         {errors.currency && (
+      |                ^
+  341 |           <p className="text-xs text-red-400">{errors.currency.message}</p>
+  342 |         )}
+  343 |       </div>
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./components/auth-forms/register-form.tsx [Client Component Browser]
+    ./components/auth-modal.tsx [Client Component Browser]
+    ./components/auth-modal.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/auth-forms/register-form.tsx [Client Component SSR]
+    ./components/auth-modal.tsx [Client Component SSR]
+    ./components/auth-modal.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+[00:28:50.506] Browser ERROR   ./components/auth-forms/register-form.tsx:339:10
+Parsing ecmascript source code failed
+  337 |             </Select>
+  338 |           )}
+> 339 |         />
+      |          ^
+  340 |         {errors.currency && (
+  341 |           <p className="text-xs text-red-400">{errors.currency.message}</p>
+  342 |         )}
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./components/auth-forms/register-form.tsx [Client Component Browser]
+    ./components/auth-modal.tsx [Client Component Browser]
+    ./components/auth-modal.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/auth-forms/register-form.tsx [Client Component SSR]
+    ./components/auth-modal.tsx [Client Component SSR]
+    ./components/auth-modal.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+[00:29:07.295] Server  LOG      ✓ Compiled in 371ms
+[00:29:07.687] Browser LOG     Currency field value: 
+[00:29:07.687] Browser LOG     Available currencies: 2
+[00:29:07.687] Browser LOG     Currency field value: 
+[00:29:07.687] Browser LOG     Available currencies: 2
+[00:29:09.170] Browser LOG     Currency field value: 
+[00:29:09.170] Browser LOG     Available currencies: 2
+[00:29:09.170] Browser LOG     Currency field value: 
+[00:29:09.170] Browser LOG     Available currencies: 2
+[00:29:21.939] Browser LOG     Currency changed to: undefined
+[00:29:21.939] Browser LOG     Currency field value: 
+[00:29:21.939] Browser LOG     Available currencies: 2
+[00:29:21.939] Browser LOG     Currency field value: 
+[00:29:21.939] Browser LOG     Available currencies: 2
+[00:29:26.276] Server  LOG      ✓ Compiled in 520ms
+[00:29:26.383] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:26.383] Browser LOG     Available currencies: 2
+[00:29:26.383] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:26.383] Browser LOG     Available currencies: 2
+[00:29:30.946] Browser LOG     Currency changed to: undefined
+[00:29:30.946] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:30.946] Browser LOG     Available currencies: 2
+[00:29:30.946] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:30.946] Browser LOG     Available currencies: 2
+[00:29:43.522] Server  LOG      ✓ Compiled in 633ms
+[00:29:46.595] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:49.746] Browser LOG     Currency field value:  Watched value: 
+[00:29:49.746] Browser LOG     Available currencies: 0
+[00:29:49.746] Browser LOG     Currency field value:  Watched value: 
+[00:29:49.746] Browser LOG     Available currencies: 0
+[00:29:49.746] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:29:49.746] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:29:49.746] Browser LOG     Currency field value:  Watched value: 
+[00:29:49.746] Browser LOG     Available currencies: 0
+[00:29:49.746] Browser LOG     Currency field value:  Watched value: 
+[00:29:49.746] Browser LOG     Available currencies: 0
+[00:29:49.746] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:24:40.891] Server  LOG      ✓ Compiled in 130ms
-[00:24:47.803] Server  LOG      ✓ Compiled in 87ms
-[00:24:58.484] Server  LOG      ✓ Compiled in 188ms
-[00:27:24.916] Server  LOG      ✓ Compiled in 228ms
-[00:27:39.609] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:39.812] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:27:39.812] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/bonuses","route":"/bonuses"}
-[00:27:39.812] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541680151}
-[00:27:41.081] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:41.420] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:29:49.746] Browser LOG     Currency field value:  Watched value: 
+[00:29:49.746] Browser LOG     Available currencies: 2
+[00:29:49.746] Browser LOG     Currency field value:  Watched value: 
+[00:29:49.746] Browser LOG     Available currencies: 2
+[00:29:49.746] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:29:50.203] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:29:50.203] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:29:50.203] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763736558459}
+[00:29:51.672] Browser LOG     Currency changed to: undefined
+[00:29:51.672] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:51.672] Browser LOG     Available currencies: 2
+[00:29:51.672] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:51.672] Browser LOG     Available currencies: 2
+[00:29:51.717] Server  LOG      ✓ Compiled in 300ms
+[00:29:51.881] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:51.881] Browser LOG     Available currencies: 2
+[00:29:51.881] Browser LOG     Currency field value:  Watched value: undefined
+[00:29:51.882] Browser LOG     Available currencies: 2
+[00:30:05.077] Server  LOG      ✓ Compiled in 248ms
+[00:30:05.164] Browser LOG     Currency field value:  Watched value: undefined
+[00:30:05.164] Browser LOG     Available currencies: 2
+[00:30:05.164] Browser LOG     Currency field value:  Watched value: undefined
+[00:30:05.164] Browser LOG     Available currencies: 2
+[00:30:26.919] Browser LOG     Currency changed to: undefined
+[00:30:26.919] Browser LOG     Currency field value:  Watched value: undefined
+[00:30:26.919] Browser LOG     Available currencies: 2
+[00:30:26.919] Browser LOG     Currency field value:  Watched value: undefined
+[00:30:26.919] Browser LOG     Available currencies: 2
+[00:30:30.033] Browser LOG     Currency field value:  Watched value: undefined
+[00:30:30.034] Browser LOG     Available currencies: 2
+[00:30:30.035] Browser LOG     Currency field value:  Watched value: undefined
+[00:30:30.035] Browser LOG     Available currencies: 2
+[00:30:34.111] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:30:35.798] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:27:41.420] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:27:41.420] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:27:41.420] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541681753}
-[00:27:42.288] Server  LOG      ✓ Compiled in 223ms
-[00:27:42.512] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:42.898] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:27:42.898] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:27:42.898] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763541683184}
-[00:27:42.898] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:30:35.930] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:30:35.930] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:30:35.930] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763736604287}
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: EUR
+[00:30:43.663] Browser LOG     Available currencies: 0
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: EUR
+[00:30:43.663] Browser LOG     Available currencies: 0
+[00:30:43.663] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:30:43.663] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: EUR
+[00:30:43.663] Browser LOG     Available currencies: 0
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: EUR
+[00:30:43.663] Browser LOG     Available currencies: 0
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:30:43.663] Browser LOG     Available currencies: 2
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:30:43.663] Browser LOG     Available currencies: 2
+[00:30:43.663] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:30:43.663] Browser LOG     Available currencies: 2
+[00:30:43.663] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:30:43.663] Browser LOG     Available currencies: 2
+[00:30:48.120] Browser LOG     Currency changed to: undefined
+[00:30:48.120] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:30:48.120] Browser LOG     Available currencies: 2
+[00:30:48.120] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:30:48.120] Browser LOG     Available currencies: 2
+[00:31:18.922] Browser LOG     Currency changed to: undefined
+[00:31:18.922] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:31:18.922] Browser LOG     Available currencies: 2
+[00:31:18.922] Browser LOG     Currency field value: EUR Watched value: undefined
+[00:31:18.922] Browser LOG     Available currencies: 2
+[00:32:20.550] Server  LOG      ✓ Compiled in 170ms
+[00:32:20.707] Browser ERROR   ./components/auth-forms/register-form.tsx:334:12
+Parsing ecmascript source code failed
+  332 |             </Select>
+  333 |             )
+> 334 |           }}
+      |            ^
+  335 |         />
+  336 |         {errors.currency && (
+  337 |           <p className="text-xs text-red-400">{errors.currency.message}</p>
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./components/auth-forms/register-form.tsx [Client Component Browser]
+    ./components/auth-modal.tsx [Client Component Browser]
+    ./components/auth-modal.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/auth-forms/register-form.tsx [Client Component SSR]
+    ./components/auth-modal.tsx [Client Component SSR]
+    ./components/auth-modal.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+[00:32:39.746] Server  LOG      ✓ Compiled in 177ms
+[00:32:57.191] Server  LOG      ✓ Compiled in 198ms
+[00:33:31.073] Server  LOG      ✓ Compiled in 682ms
+[00:33:46.658] Server  LOG      ✓ Compiled in 286ms
+[00:33:46.771] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:33:57.064] Server  LOG      ✓ Compiled in 351ms
+[00:33:57.179] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:01.468] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:01.468] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:01.468] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:02.455] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:02.455] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:02.455] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:04.654] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:04.654] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:04.654] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:05.950] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:05.950] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:05.950] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:06.981] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:06.981] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:06.981] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:08.189] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:08.189] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:08.189] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:11.144] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:11.144] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:11.144] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:12.831] Server  LOG      ✓ Compiled in 531ms
+[00:34:12.967] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:26.412] Server  LOG      ✓ Compiled in 305ms
+[00:34:26.525] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:39.538] Server  LOG      ✓ Compiled in 308ms
+[00:34:39.708] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. undefined
+[00:34:45.919] Server  LOG      ✓ Compiled in 219ms
+[00:34:53.364] Server  LOG      ✓ Compiled in 238ms
+[00:35:15.564] Server  LOG      ✓ Compiled in 374ms
+[00:35:43.332] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:45.236] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:35:45.236] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:35:45.584] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:35:45.996] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:35:45.996] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:35:45.996] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763736914320}
+[00:36:48.578] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:49.636] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:27:51.174] Server  LOG      ✓ Compiled in 174ms
-[00:27:58.398] Server  LOG      ✓ Compiled in 107ms
-[00:28:06.579] Server  LOG      ✓ Compiled in 89ms
-[00:34:05.664] Server  LOG      ✓ Compiled in 197ms
-[00:34:38.801] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763542099080}
-[00:37:03.996] Server  LOG      ✓ Compiled in 250ms
-[00:37:16.677] Server  LOG      ✓ Compiled in 137ms
-[00:37:24.637] Server  LOG      ✓ Compiled in 96ms
-[00:37:35.823] Server  LOG      ✓ Compiled in 149ms
-[00:37:47.060] Server  LOG      ✓ Compiled in 84ms
-[00:37:58.083] Server  LOG      ✓ Compiled in 76ms
-[00:38:07.535] Server  LOG      ✓ Compiled in 88ms
-[00:38:17.270] Server  LOG      ✓ Compiled in 109ms
-[00:38:27.395] Server  LOG      ✓ Compiled in 91ms
-[00:38:37.161] Server  LOG      ✓ Compiled in 85ms
-[00:38:44.560] Server  LOG      ✓ Compiled in 88ms
-[00:40:18.265] Server  LOG      ✓ Compiled in 233ms
-[00:40:43.950] Server  LOG      ✓ Compiled in 91ms
-[00:41:00.291] Server  LOG      ✓ Compiled in 112ms
-[00:43:33.547] Server  LOG      ✓ Compiled in 259ms
-[00:44:01.698] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:44:02.041] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:44:02.041] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/bonuses","route":"/bonuses"}
-[00:44:02.041] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763542662380}
-[00:49:24.891] Server  LOG      ✓ Compiled in 89ms
-[00:49:47.131] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543007471}
-[00:49:52.184] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543012519}
-[00:49:57.984] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543018318}
-[00:50:51.940] Server  LOG      ✓ Compiled in 257ms
-[00:54:40.423] Server  LOG      ✓ Compiled in 242ms
-[00:55:21.328] Server  LOG      ✓ Compiled in 108ms
-[00:56:52.306] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543432632}
-[00:56:55.654] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543435988}
-[00:57:06.029] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543446267}
-[00:57:28.717] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543468906}
-[00:57:47.270] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543487435}
-[00:57:51.254] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543491448}
-[00:57:56.054] Server  LOG      ✓ Compiled in 116ms
-[00:58:11.081] Server  LOG      ✓ Compiled in 130ms
-[00:58:44.971] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:58:45.168] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:58:45.168] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/challenges","route":"/challenges"}
-[00:58:45.168] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/challenges color: rgb(120, 120, 120) color: inherit {"dp":"/challenges","o":"http://localhost:3000/challenges","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543545507}
-[00:58:46.063] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:58:46.232] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:58:46.232] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/challenges","route":"/challenges"}
-[00:58:46.232] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/challenges color: rgb(120, 120, 120) color: inherit {"dp":"/challenges","o":"http://localhost:3000/challenges","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543546560}
-[00:58:47.526] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:58:47.750] Browser WARN    Image with src "/sweet-candy-slot-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:36:49.636] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:36:49.636] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:36:49.636] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763736977983}
+[00:36:50.084] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:36:50.084] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:36:50.270] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:37:58.556] Server  LOG      ✓ Compiled in 247ms
+[00:38:42.051] Server  LOG      ✓ Compiled in 730ms
+[00:39:05.346] Server  LOG      ✓ Compiled in 264ms
+[00:40:08.836] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:40:10.280] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:58:47.750] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:58:47.750] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/recent","route":"/recent"}
-[00:58:47.751] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543548090}
-[00:58:48.815] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/favorites color: rgb(120, 120, 120) color: inherit {"dp":"/favorites","o":"http://localhost:3000/favorites","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543549150}
-[00:58:55.550] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543555873}
-[01:02:39.809] Server  LOG      ✓ Compiled in 104ms
-[01:02:49.476] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:02:49.771] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:02:49.771] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/all-games","route":"/all-games"}
-[01:02:49.771] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543790108}
-[01:02:51.377] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:02:51.682] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:02:51.682] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/recent","route":"/recent"}
-[01:02:51.682] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543791956}
-[01:02:51.682] Browser WARN    Image with src "/sweet-candy-slot-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:40:10.280] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:40:10.280] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:40:10.280] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763737178640}
+[00:40:11.872] Browser LOG     Loading currencies...
+[00:40:11.872] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:40:11.872] Browser LOG     Loading currencies...
+[00:40:11.872] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:40:11.872] Browser LOG     Currencies response: {"data":[{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"},{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.002Z","groupName":"USD","id":"30","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.002Z","modifyUid":"0","name":"US Dollar","symbol":"USD","type":"fiat"}],"message":"Currencies by type retrieved successfully","path":"/api/v1/currencies/by-type/fiat","success":true,"timestamp":"2025-11-21T14:59:40.150Z"}
+[00:40:11.872] Browser LOG     Currencies loaded: 2
+[00:40:11.872] Browser LOG     Setting default currency: undefined
+[00:40:11.872] Browser LOG     Finished loading currencies
+[00:40:11.872] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:40:11.872] Browser LOG     Currencies response: {"data":[{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"},{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.002Z","groupName":"USD","id":"30","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.002Z","modifyUid":"0","name":"US Dollar","symbol":"USD","type":"fiat"}],"message":"Currencies by type retrieved successfully","path":"/api/v1/currencies/by-type/fiat","success":true,"timestamp":"2025-11-21T14:59:40.161Z"}
+[00:40:11.872] Browser LOG     Currencies loaded: 2
+[00:40:11.872] Browser LOG     Setting default currency: undefined
+[00:40:11.872] Browser LOG     Finished loading currencies
+[00:41:23.455] Server  LOG      ✓ Compiled in 129ms
+[00:44:27.273] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:28.240] Browser WARN    Image with src "/racing-tires-blue-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:02:57.122] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:02:57.283] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:02:57.283] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/slots","route":"/slots"}
-[01:02:57.283] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/slots color: rgb(120, 120, 120) color: inherit {"dp":"/slots","o":"http://localhost:3000/slots","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543797621}
-[01:02:59.052] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:02:59.276] Browser WARN    Image with src "/sweet-candy-slot-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:02:59.276] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:02:59.276] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/recent","route":"/recent"}
-[01:02:59.276] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/recent color: rgb(120, 120, 120) color: inherit {"dp":"/recent","o":"http://localhost:3000/recent","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543799613}
-[01:03:01.714] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543802045}
-[01:03:19.408] Server  LOG      ✓ Compiled in 253ms
-[01:03:58.537] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments","o":"http://localhost:3000/tournaments","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763543858870}
-[01:07:01.545] Server  LOG      ✓ Compiled in 217ms
-[01:07:15.614] Server  LOG      ✓ Compiled in 125ms
-[01:07:15.832] Browser ERROR   uncaughtError: ReferenceError: Link is not defined
-[01:07:29.058] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:07:29.069] Server  LOG      ✓ Compiled in 130ms
-[01:07:29.748] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:07:30.784] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:07:30.784] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/tournaments","route":"/tournaments"}
-[01:07:30.784] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments","o":"http://localhost:3000/tournaments","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544070963}
-[01:07:39.146] Browser WARN    Image with src "/slot-characters-multicolor-gradient.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:08:07.756] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments/2 color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments/[id]","o":"http://localhost:3000/tournaments/2","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544108083}
-[01:08:40.819] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments","o":"http://localhost:3000/tournaments","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544141153}
-[01:08:42.659] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/tournaments/2 color: rgb(120, 120, 120) color: inherit {"dp":"/tournaments/[id]","o":"http://localhost:3000/tournaments/2","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544142987}
-[01:13:21.355] Server  LOG      ✓ Compiled in 145ms
-[01:13:26.449] Server  LOG      ✓ Compiled in 155ms
-[01:13:31.981] Server  LOG      ✓ Compiled in 124ms
-[01:13:52.748] Server  LOG      ✓ Compiled in 149ms
-[01:13:58.539] Server  LOG      ✓ Compiled in 127ms
-[01:14:02.737] Server  LOG      ✓ Compiled in 122ms
-[01:16:05.129] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544585461}
-[01:16:07.025] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/new-releases color: rgb(120, 120, 120) color: inherit {"dp":"/new-releases","o":"http://localhost:3000/new-releases","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544587360}
-[01:16:10.935] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/slots color: rgb(120, 120, 120) color: inherit {"dp":"/slots","o":"http://localhost:3000/slots","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544591274}
-[01:16:12.697] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/live-casino color: rgb(120, 120, 120) color: inherit {"dp":"/live-casino","o":"http://localhost:3000/live-casino","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544593034}
-[01:16:14.722] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game-shows color: rgb(120, 120, 120) color: inherit {"dp":"/game-shows","o":"http://localhost:3000/game-shows","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544595056}
-[01:16:16.192] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/burst color: rgb(120, 120, 120) color: inherit {"dp":"/burst","o":"http://localhost:3000/burst","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544596530}
-[01:16:17.860] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/roulette color: rgb(120, 120, 120) color: inherit {"dp":"/roulette","o":"http://localhost:3000/roulette","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544598197}
-[01:16:19.615] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/blackjack color: rgb(120, 120, 120) color: inherit {"dp":"/blackjack","o":"http://localhost:3000/blackjack","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544599945}
-[01:16:21.550] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/baccarat color: rgb(120, 120, 120) color: inherit {"dp":"/baccarat","o":"http://localhost:3000/baccarat","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544601887}
-[01:16:33.113] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/slots color: rgb(120, 120, 120) color: inherit {"dp":"/slots","o":"http://localhost:3000/slots","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544613443}
-[01:16:34.142] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/live-casino color: rgb(120, 120, 120) color: inherit {"dp":"/live-casino","o":"http://localhost:3000/live-casino","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544614477}
-[01:16:34.769] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game-shows color: rgb(120, 120, 120) color: inherit {"dp":"/game-shows","o":"http://localhost:3000/game-shows","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544615094}
-[01:16:35.222] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/burst color: rgb(120, 120, 120) color: inherit {"dp":"/burst","o":"http://localhost:3000/burst","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544615553}
-[01:16:36.556] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/roulette color: rgb(120, 120, 120) color: inherit {"dp":"/roulette","o":"http://localhost:3000/roulette","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544616886}
-[01:16:37.183] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/blackjack color: rgb(120, 120, 120) color: inherit {"dp":"/blackjack","o":"http://localhost:3000/blackjack","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544617519}
-[01:16:38.570] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544618894}
-[01:16:39.048] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/new-releases color: rgb(120, 120, 120) color: inherit {"dp":"/new-releases","o":"http://localhost:3000/new-releases","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544619380}
-[01:16:39.533] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/slots color: rgb(120, 120, 120) color: inherit {"dp":"/slots","o":"http://localhost:3000/slots","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544619862}
-[01:16:39.905] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/live-casino color: rgb(120, 120, 120) color: inherit {"dp":"/live-casino","o":"http://localhost:3000/live-casino","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544620238}
-[01:16:40.438] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game-shows color: rgb(120, 120, 120) color: inherit {"dp":"/game-shows","o":"http://localhost:3000/game-shows","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544620775}
-[01:16:41.128] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/burst color: rgb(120, 120, 120) color: inherit {"dp":"/burst","o":"http://localhost:3000/burst","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544621463}
-[01:16:41.785] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/roulette color: rgb(120, 120, 120) color: inherit {"dp":"/roulette","o":"http://localhost:3000/roulette","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544622116}
-[01:16:42.252] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/blackjack color: rgb(120, 120, 120) color: inherit {"dp":"/blackjack","o":"http://localhost:3000/blackjack","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544622581}
-[01:16:43.091] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/baccarat color: rgb(120, 120, 120) color: inherit {"dp":"/baccarat","o":"http://localhost:3000/baccarat","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544623422}
-[01:16:44.466] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544624804}
-[01:16:47.015] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/baccarat color: rgb(120, 120, 120) color: inherit {"dp":"/baccarat","o":"http://localhost:3000/baccarat","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544627347}
-[01:16:47.532] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/promotions color: rgb(120, 120, 120) color: inherit {"dp":"/promotions","o":"http://localhost:3000/promotions","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544627865}
-[01:19:55.746] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544816082}
-[01:19:59.217] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/new-releases color: rgb(120, 120, 120) color: inherit {"dp":"/new-releases","o":"http://localhost:3000/new-releases","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544819545}
-[01:20:04.538] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544824869}
-[01:20:10.822] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/new-releases color: rgb(120, 120, 120) color: inherit {"dp":"/new-releases","o":"http://localhost:3000/new-releases","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763544831158}
-[01:24:00.090] Server  LOG      ✓ Compiled in 121ms
-[01:24:15.927] Server  LOG      ✓ Compiled in 243ms
-[01:24:33.223] Server  LOG      ✓ Compiled in 71ms
-[01:24:43.080] Server  LOG      ✓ Compiled in 70ms
-[01:24:52.403] Server  LOG      ✓ Compiled in 64ms
-[01:25:01.873] Server  LOG      ✓ Compiled in 69ms
-[01:25:16.612] Server  LOG      ✓ Compiled in 71ms
-[01:25:26.721] Server  LOG      ✓ Compiled in 76ms
-[01:25:36.006] Server  LOG      ✓ Compiled in 73ms
-[01:25:45.249] Server  LOG      ✓ Compiled in 69ms
-[01:25:54.816] Server  LOG      ✓ Compiled in 67ms
-[01:37:06.980] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/slots color: rgb(120, 120, 120) color: inherit {"dp":"/slots","o":"http://localhost:3000/slots","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545847309}
-[01:37:20.373] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game-shows color: rgb(120, 120, 120) color: inherit {"dp":"/game-shows","o":"http://localhost:3000/game-shows","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545860703}
-[01:37:21.145] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/live-casino color: rgb(120, 120, 120) color: inherit {"dp":"/live-casino","o":"http://localhost:3000/live-casino","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545861474}
-[01:37:25.505] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/burst color: rgb(120, 120, 120) color: inherit {"dp":"/burst","o":"http://localhost:3000/burst","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545865840}
-[01:37:26.452] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/roulette color: rgb(120, 120, 120) color: inherit {"dp":"/roulette","o":"http://localhost:3000/roulette","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545866785}
-[01:37:27.591] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/blackjack color: rgb(120, 120, 120) color: inherit {"dp":"/blackjack","o":"http://localhost:3000/blackjack","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545867903}
-[01:37:28.576] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/baccarat color: rgb(120, 120, 120) color: inherit {"dp":"/baccarat","o":"http://localhost:3000/baccarat","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545868902}
-[01:37:30.139] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545870475}
-[01:38:21.496] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:38:21.767] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:38:21.767] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/wallet","route":"/wallet"}
-[01:38:21.767] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/wallet color: rgb(120, 120, 120) color: inherit {"dp":"/wallet","o":"http://localhost:3000/wallet","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545922097}
-[01:38:23.128] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:38:23.382] Browser WARN    Image with src "/purple-neon-dice-game.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:38:23.382] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:38:23.382] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/all-games","route":"/all-games"}
-[01:38:23.382] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545923720}
-[01:38:40.508] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[01:38:40.508] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[01:39:02.767] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/bonuses color: rgb(120, 120, 120) color: inherit {"dp":"/bonuses","o":"http://localhost:3000/bonuses","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545963100}
-[01:39:04.664] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/all-games color: rgb(120, 120, 120) color: inherit {"dp":"/all-games","o":"http://localhost:3000/all-games","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545964996}
-[01:39:09.323] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/settings color: rgb(120, 120, 120) color: inherit {"dp":"/settings","o":"http://localhost:3000/settings","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763545969656}
-[01:39:21.749] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[01:39:21.749] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[01:40:17.889] Server  LOG      ✓ Compiled in 149ms
-[01:40:31.214] Server  LOG      ✓ Compiled in 157ms
-[01:42:14.789] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[01:42:14.789] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[01:42:35.186] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763546175518}
-[01:48:09.983] Server  LOG      ✓ Compiled in 455ms
-[01:48:17.112] Server  LOG      ✓ Compiled in 230ms
-[01:48:19.299] Server  LOG      ✓ Compiled in 220ms
-[01:57:43.435] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/vip color: rgb(120, 120, 120) color: inherit {"dp":"/vip","o":"http://localhost:3000/vip","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763547083733}
+[00:44:28.980] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:44:28.980] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:44:28.980] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1763737437001}
+[00:44:28.980] Browser LOG     Loading currencies...
+[00:44:28.980] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:44:28.980] Browser LOG     Loading currencies...
+[00:44:28.980] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:44:28.980] Browser LOG     Currencies response: {"data":[{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"},{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.002Z","groupName":"USD","id":"30","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.002Z","modifyUid":"0","name":"US Dollar","symbol":"USD","type":"fiat"}],"message":"Currencies by type retrieved successfully","path":"/api/v1/currencies/by-type/fiat","success":true,"timestamp":"2025-11-21T15:03:57.276Z"}
+[00:44:28.980] Browser LOG     Currencies loaded: 2
+[00:44:28.980] Browser LOG     First currency object: {"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"}
+[00:44:28.980] Browser LOG     Currency properties: ["id","groupName","name","symbol","type","coinNetworkId","logo","baseCommission","minAmount","minWithdraw","isActive","modifyUid","createDt","modifyDt"]
+[00:44:28.980] Browser LOG     EUR currency found: undefined
+[00:44:28.980] Browser LOG     Default currency object: {"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"}
+[00:44:28.980] Browser LOG     Default currency code: undefined
+[00:44:28.980] Browser ERROR   Default currency or code is undefined!
+[00:44:28.980] Browser LOG     Finished loading currencies
+[00:44:28.980] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `select`.  It was passed a child from SelectItemText.
+[00:44:28.980] Browser LOG     Currencies response: {"data":[{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"},{"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.002Z","groupName":"USD","id":"30","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.002Z","modifyUid":"0","name":"US Dollar","symbol":"USD","type":"fiat"}],"message":"Currencies by type retrieved successfully","path":"/api/v1/currencies/by-type/fiat","success":true,"timestamp":"2025-11-21T15:03:57.287Z"}
+[00:44:28.980] Browser LOG     Currencies loaded: 2
+[00:44:28.980] Browser LOG     First currency object: {"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"}
+[00:44:28.980] Browser LOG     Currency properties: ["id","groupName","name","symbol","type","coinNetworkId","logo","baseCommission","minAmount","minWithdraw","isActive","modifyUid","createDt","modifyDt"]
+[00:44:28.980] Browser LOG     EUR currency found: undefined
+[00:44:28.980] Browser LOG     Default currency object: {"baseCommission":"1.00000000","coinNetworkId":null,"createDt":"2025-11-21T06:56:13.019Z","groupName":"EUR","id":"31","isActive":true,"logo":null,"minAmount":"0.00000000","minWithdraw":"0.00000000","modifyDt":"2025-11-21T06:56:13.019Z","modifyUid":"0","name":"Euro","symbol":"EUR","type":"fiat"}
+[00:44:28.980] Browser LOG     Default currency code: undefined
+[00:44:28.980] Browser ERROR   Default currency or code is undefined!
+[00:44:28.980] Browser LOG     Finished loading currencies
+[00:46:36.029] Server  LOG      ✓ Compiled in 195ms
+[00:46:48.510] Server  LOG      ✓ Compiled in 136ms
+[00:46:58.204] Server  LOG      ✓ Compiled in 177ms
+[00:47:13.613] Server  LOG      ✓ Compiled in 178ms
+[00:47:17.813] Browser LOG     Setting currency to: EUR
+[00:47:23.724] Server  LOG      ✓ Compiled in 624ms
+[00:47:35.405] Server  LOG      ✓ Compiled in 1674ms
+[00:48:08.361] Server  LOG      ✓ Compiled in 201ms

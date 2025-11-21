@@ -2,6 +2,7 @@
 
 import { useUser } from '@/lib/user-context'
 import { useWallet } from '@/lib/wallet-context'
+import { useAuth } from '@/lib/auth-context'
 import { 
   Wallet, 
   Crown, 
@@ -27,8 +28,12 @@ import {
 import { AvatarSelectorModal } from './avatar-selector-modal'
 
 export function ProfileMenu() {
-  const { user, getAvatar, openAvatarModal } = useUser()
+  const { user, getAvatar, openAvatarModal, clearUser } = useUser()
   const { openWalletModal } = useWallet()
+  const { logout } = useAuth()
+  
+  if (!user) return null
+  
   const currentAvatar = getAvatar(user.avatarId)
 
   const menuItems = [
@@ -90,7 +95,11 @@ export function ProfileMenu() {
                   <h3 className="text-lg font-semibold">{user.username}</h3>
                   <span className="text-xs text-purple-200">#{user.id}</span>
                 </div>
-                <p className="text-sm text-purple-200 mb-2">{user.name}</p>
+                {(user.firstName || user.lastName) && (
+                  <p className="text-sm text-purple-200 mb-2">
+                    {user.firstName} {user.lastName}
+                  </p>
+                )}
                 
                 {/* Email Verification Status */}
                 {!user.emailVerified && (
@@ -169,6 +178,10 @@ export function ProfileMenu() {
           {/* Logout Button */}
           <div className="p-2">
             <button
+              onClick={async () => {
+                await logout()
+                clearUser()
+              }}
               className={cn(
                 "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg",
                 "text-red-400 hover:bg-red-500/10 transition-colors font-medium"

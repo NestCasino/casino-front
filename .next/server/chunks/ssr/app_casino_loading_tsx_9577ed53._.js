@@ -1,0 +1,3 @@
+module.exports=[87359,a=>{"use strict";var b=a.i(7997);function c(){return(0,b.jsx)("div",{className:"flex h-screen w-full items-center justify-center bg-[#0f0420]",children:(0,b.jsxs)("div",{className:"flex flex-col items-center gap-4",children:[(0,b.jsx)("div",{className:"h-12 w-12 animate-spin rounded-full border-4 border-purple-500 border-t-transparent"}),(0,b.jsx)("p",{className:"text-sm text-gray-400",children:"Loading Casino..."})]})})}a.s(["default",()=>c])}];
+
+//# sourceMappingURL=app_casino_loading_tsx_9577ed53._.js.map

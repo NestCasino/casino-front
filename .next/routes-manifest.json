@@ -1,0 +1,187 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/promotions/[id]",
+      "regex": "^/promotions/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/promotions/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/tournaments/[id]",
+      "regex": "^/tournaments/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/tournaments/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/all-games",
+      "regex": "^/all\\-games(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/all\\-games(?:/)?$"
+    },
+    {
+      "page": "/baccarat",
+      "regex": "^/baccarat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/baccarat(?:/)?$"
+    },
+    {
+      "page": "/blackjack",
+      "regex": "^/blackjack(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blackjack(?:/)?$"
+    },
+    {
+      "page": "/bonuses",
+      "regex": "^/bonuses(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/bonuses(?:/)?$"
+    },
+    {
+      "page": "/burst",
+      "regex": "^/burst(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/burst(?:/)?$"
+    },
+    {
+      "page": "/casino",
+      "regex": "^/casino(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/casino(?:/)?$"
+    },
+    {
+      "page": "/favorites",
+      "regex": "^/favorites(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favorites(?:/)?$"
+    },
+    {
+      "page": "/game-shows",
+      "regex": "^/game\\-shows(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/game\\-shows(?:/)?$"
+    },
+    {
+      "page": "/live-casino",
+      "regex": "^/live\\-casino(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/live\\-casino(?:/)?$"
+    },
+    {
+      "page": "/new-releases",
+      "regex": "^/new\\-releases(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/new\\-releases(?:/)?$"
+    },
+    {
+      "page": "/promotions",
+      "regex": "^/promotions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/promotions(?:/)?$"
+    },
+    {
+      "page": "/recent",
+      "regex": "^/recent(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/recent(?:/)?$"
+    },
+    {
+      "page": "/roulette",
+      "regex": "^/roulette(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/roulette(?:/)?$"
+    },
+    {
+      "page": "/settings",
+      "regex": "^/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/settings(?:/)?$"
+    },
+    {
+      "page": "/slots",
+      "regex": "^/slots(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/slots(?:/)?$"
+    },
+    {
+      "page": "/sports",
+      "regex": "^/sports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sports(?:/)?$"
+    },
+    {
+      "page": "/tournaments",
+      "regex": "^/tournaments(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tournaments(?:/)?$"
+    },
+    {
+      "page": "/vip",
+      "regex": "^/vip(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/vip(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

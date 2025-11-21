@@ -1,6 +1,8 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { useAuth } from './auth-context'
+import { api } from './api-client'
 
 export interface Avatar {
   id: string
@@ -11,15 +13,19 @@ export interface Avatar {
 
 export interface User {
   id: string
-  name: string
+  playerUuid: string
   username: string
   email: string
   emailVerified: boolean
+  firstName?: string
+  lastName?: string
   balance: number
   currency: string
   level: number
   levelProgress: number
   avatarId: string
+  country?: string
+  lang: string
 }
 
 export const AVAILABLE_AVATARS: Avatar[] = [
@@ -35,38 +41,76 @@ export const AVAILABLE_AVATARS: Avatar[] = [
 ]
 
 interface UserContextType {
-  user: User
+  user: User | null
+  isLoadingUser: boolean
   updateUser: (updates: Partial<User>) => void
   selectAvatar: (avatarId: string) => void
   getAvatar: (avatarId: string) => Avatar | undefined
   isAvatarModalOpen: boolean
   openAvatarModal: () => void
   closeAvatarModal: () => void
+  loadUserProfile: () => Promise<void>
+  clearUser: () => void
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
+  const [user, setUser] = useState<User | null>(null)
+  const [isLoadingUser, setIsLoadingUser] = useState(false)
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false)
-  const [user, setUser] = useState<User>({
-    id: '1',
-    name: 'John Smith',
-    username: 'jsmith',
-    email: 'john.smith@example.com',
-    emailVerified: false,
-    balance: 0.00,
-    currency: 'USD',
-    level: 1,
-    levelProgress: 0,
-    avatarId: '2', // Default to Fox
-  })
+
+  // Load user profile when authenticated
+  useEffect(() => {
+    if (isAuthenticated && !isAuthLoading && !user) {
+      loadUserProfile()
+    }
+  }, [isAuthenticated, isAuthLoading])
+
+  const loadUserProfile = async () => {
+    const playerId = localStorage.getItem('player_id')
+    if (!playerId) return
+
+    setIsLoadingUser(true)
+    try {
+      const response = await api.players.getProfile(playerId)
+      if (response.success && response.data) {
+        const playerData = response.data
+        setUser({
+          id: playerData.id,
+          playerUuid: playerData.playerUuid,
+          username: playerData.username,
+          email: playerData.email,
+          emailVerified: playerData.emailVerified || false,
+          firstName: playerData.firstName,
+          lastName: playerData.lastName,
+          balance: 0.00, // TODO: Get from wallet/balance API
+          currency: 'USD', // TODO: Get from player settings
+          level: 1, // TODO: Get from player stats
+          levelProgress: 0, // TODO: Get from player stats
+          avatarId: '2', // TODO: Get from player settings or use avatar field
+          country: playerData.country,
+          lang: playerData.lang || 'EN',
+        })
+      }
+    } catch (error) {
+      console.error('Failed to load user profile:', error)
+    } finally {
+      setIsLoadingUser(false)
+    }
+  }
+
+  const clearUser = () => {
+    setUser(null)
+  }
 
   const updateUser = (updates: Partial<User>) => {
-    setUser(prev => ({ ...prev, ...updates }))
+    setUser(prev => prev ? ({ ...prev, ...updates }) : null)
   }
 
   const selectAvatar = (avatarId: string) => {
-    setUser(prev => ({ ...prev, avatarId }))
+    setUser(prev => prev ? ({ ...prev, avatarId }) : null)
     setIsAvatarModalOpen(false)
   }
 
@@ -80,12 +124,15 @@ export function UserProvider({ children }: { children: ReactNode }) {
   return (
     <UserContext.Provider value={{
       user,
+      isLoadingUser,
       updateUser,
       selectAvatar,
       getAvatar,
       isAvatarModalOpen,
       openAvatarModal,
       closeAvatarModal,
+      loadUserProfile,
+      clearUser,
     }}>
       {children}
     </UserContext.Provider>
@@ -99,6 +146,7 @@ export function useUser() {
   }
   return context
 }
+
 
 
 
