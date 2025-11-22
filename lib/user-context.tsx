@@ -61,20 +61,21 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [isLoadingUser, setIsLoadingUser] = useState(false)
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false)
 
-  // Load user profile when authenticated
+  // Load user profile when authenticated, clear when not
   useEffect(() => {
-    if (isAuthenticated && !isAuthLoading && !user) {
-      loadUserProfile()
+    if (!isAuthLoading) {
+      if (isAuthenticated && !user) {
+        loadUserProfile()
+      } else if (!isAuthenticated && user) {
+        clearUser()
+      }
     }
   }, [isAuthenticated, isAuthLoading])
 
   const loadUserProfile = async () => {
-    const playerId = localStorage.getItem('player_id')
-    if (!playerId) return
-
     setIsLoadingUser(true)
     try {
-      const response = await api.players.getProfile(playerId)
+      const response = await api.players.getMe()
       if (response.success && response.data) {
         const playerData = response.data
         setUser({
@@ -86,7 +87,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
           firstName: playerData.firstName,
           lastName: playerData.lastName,
           balance: 0.00, // TODO: Get from wallet/balance API
-          currency: 'USD', // TODO: Get from player settings
+          currency: playerData.currency,
           level: 1, // TODO: Get from player stats
           levelProgress: 0, // TODO: Get from player stats
           avatarId: '2', // TODO: Get from player settings or use avatar field

@@ -684,6 +684,24 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$avatar$2d$sele
 ;
 ;
 ;
+// Helper function to get currency symbol
+const getCurrencySymbol = (currency)=>{
+    const symbols = {
+        USD: '$',
+        EUR: '€',
+        GBP: '£',
+        JPY: '¥',
+        CNY: '¥',
+        AUD: 'A$',
+        CAD: 'C$',
+        CHF: 'Fr',
+        SEK: 'kr',
+        NZD: 'NZ$',
+        BTC: '₿',
+        ETH: 'Ξ'
+    };
+    return symbols[currency] || currency + ' ';
+};
 function ProfileMenu() {
     const { user, getAvatar, openAvatarModal, clearUser } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$user$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useUser"])();
     const { openWalletModal } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$wallet$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWallet"])();
@@ -737,22 +755,22 @@ function ProfileMenu() {
                                     children: currentAvatar?.emoji
                                 }, void 0, false, {
                                     fileName: "[project]/components/profile-menu.tsx",
-                                    lineNumber: 61,
+                                    lineNumber: 80,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/profile-menu.tsx",
-                                lineNumber: 56,
+                                lineNumber: 75,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/profile-menu.tsx",
-                            lineNumber: 52,
+                            lineNumber: 71,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/profile-menu.tsx",
-                        lineNumber: 51,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenuContent"], {
@@ -775,12 +793,12 @@ function ProfileMenu() {
                                                             children: currentAvatar?.emoji
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/profile-menu.tsx",
-                                                            lineNumber: 79,
+                                                            lineNumber: 98,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 75,
+                                                        lineNumber: 94,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -793,18 +811,18 @@ function ProfileMenu() {
                                                             className: "h-3.5 w-3.5 text-gray-700"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/profile-menu.tsx",
-                                                            lineNumber: 88,
+                                                            lineNumber: 107,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 81,
+                                                        lineNumber: 100,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 74,
+                                                lineNumber: 93,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -818,7 +836,7 @@ function ProfileMenu() {
                                                                 children: user.username
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                                lineNumber: 95,
+                                                                lineNumber: 114,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -829,13 +847,13 @@ function ProfileMenu() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                                lineNumber: 96,
+                                                                lineNumber: 115,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 94,
+                                                        lineNumber: 113,
                                                         columnNumber: 17
                                                     }, this),
                                                     (user.firstName || user.lastName) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -847,7 +865,7 @@ function ProfileMenu() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 99,
+                                                        lineNumber: 118,
                                                         columnNumber: 19
                                                     }, this),
                                                     !user.emailVerified && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -857,26 +875,26 @@ function ProfileMenu() {
                                                                 className: "h-3 w-3"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                                lineNumber: 107,
+                                                                lineNumber: 126,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                 children: "Email Not Verified"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                                lineNumber: 108,
+                                                                lineNumber: 127,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 106,
+                                                        lineNumber: 125,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 93,
+                                                lineNumber: 112,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -885,12 +903,12 @@ function ProfileMenu() {
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "text-2xl font-bold text-white",
                                                         children: [
-                                                            "$",
+                                                            getCurrencySymbol(user.currency),
                                                             user.balance.toFixed(2)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 115,
+                                                        lineNumber: 134,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -898,19 +916,19 @@ function ProfileMenu() {
                                                         children: user.currency
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 118,
+                                                        lineNumber: 137,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 114,
+                                                lineNumber: 133,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/profile-menu.tsx",
-                                        lineNumber: 72,
+                                        lineNumber: 91,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -927,7 +945,7 @@ function ProfileMenu() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 125,
+                                                        lineNumber: 144,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -938,7 +956,7 @@ function ProfileMenu() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 126,
+                                                        lineNumber: 145,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -949,13 +967,13 @@ function ProfileMenu() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 127,
+                                                        lineNumber: 146,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 124,
+                                                lineNumber: 143,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -967,24 +985,24 @@ function ProfileMenu() {
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/profile-menu.tsx",
-                                                    lineNumber: 130,
+                                                    lineNumber: 149,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 129,
+                                                lineNumber: 148,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/profile-menu.tsx",
-                                        lineNumber: 123,
+                                        lineNumber: 142,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/profile-menu.tsx",
-                                lineNumber: 71,
+                                lineNumber: 90,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1002,12 +1020,12 @@ function ProfileMenu() {
                                                             className: "h-4 w-4 text-[#d1d5db] group-hover:text-purple-400"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/profile-menu.tsx",
-                                                            lineNumber: 150,
+                                                            lineNumber: 169,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 149,
+                                                        lineNumber: 168,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1015,26 +1033,26 @@ function ProfileMenu() {
                                                         children: item.label
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/profile-menu.tsx",
-                                                        lineNumber: 152,
+                                                        lineNumber: 171,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 148,
+                                                lineNumber: 167,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__["ChevronRight"], {
                                                 className: "h-4 w-4 text-[#9ca3af] group-hover:text-purple-400 transition-colors"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/profile-menu.tsx",
-                                                lineNumber: 156,
+                                                lineNumber: 175,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/profile-menu.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 161,
                                         columnNumber: 17
                                     }, this);
                                     if ('action' in item && item.action) {
@@ -1044,7 +1062,7 @@ function ProfileMenu() {
                                             children: content
                                         }, item.label, false, {
                                             fileName: "[project]/components/profile-menu.tsx",
-                                            lineNumber: 162,
+                                            lineNumber: 181,
                                             columnNumber: 19
                                         }, this);
                                     }
@@ -1053,20 +1071,20 @@ function ProfileMenu() {
                                         children: content
                                     }, item.href, false, {
                                         fileName: "[project]/components/profile-menu.tsx",
-                                        lineNumber: 169,
+                                        lineNumber: 188,
                                         columnNumber: 17
                                     }, this);
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/components/profile-menu.tsx",
-                                lineNumber: 139,
+                                lineNumber: 158,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenuSeparator"], {
                                 className: "bg-[#2d1b4e]"
                             }, void 0, false, {
                                 fileName: "[project]/components/profile-menu.tsx",
-                                lineNumber: 176,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1082,42 +1100,42 @@ function ProfileMenu() {
                                             className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/profile-menu.tsx",
-                                            lineNumber: 190,
+                                            lineNumber: 209,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "Log Out"
                                         }, void 0, false, {
                                             fileName: "[project]/components/profile-menu.tsx",
-                                            lineNumber: 191,
+                                            lineNumber: 210,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/profile-menu.tsx",
-                                    lineNumber: 180,
+                                    lineNumber: 199,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/profile-menu.tsx",
-                                lineNumber: 179,
+                                lineNumber: 198,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/profile-menu.tsx",
-                        lineNumber: 66,
+                        lineNumber: 85,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/profile-menu.tsx",
-                lineNumber: 50,
+                lineNumber: 69,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$avatar$2d$selector$2d$modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AvatarSelectorModal"], {}, void 0, false, {
                 fileName: "[project]/components/profile-menu.tsx",
-                lineNumber: 197,
+                lineNumber: 216,
                 columnNumber: 7
             }, this)
         ]

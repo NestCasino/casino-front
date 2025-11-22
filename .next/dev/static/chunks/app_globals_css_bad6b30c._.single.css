@@ -1537,10 +1537,6 @@
     width: 100px;
   }
 
-  .w-\[100vw\] {
-    width: 100vw;
-  }
-
   .w-\[200px\] {
     width: 200px;
   }
@@ -1581,28 +1577,8 @@
     width: 1px;
   }
 
-  .\!max-w-\[100px\] {
-    max-width: 100px !important;
-  }
-
   .\!max-w-\[900px\] {
     max-width: 900px !important;
-  }
-
-  .\!max-w-\[1000px\] {
-    max-width: 1000px !important;
-  }
-
-  .\!max-w-\[1100px\] {
-    max-width: 1100px !important;
-  }
-
-  .\!max-w-\[1200px\] {
-    max-width: 1200px !important;
-  }
-
-  .\!max-w-\[1300px\] {
-    max-width: 1300px !important;
   }
 
   .max-w-\(--skeleton-width\) {
@@ -1627,10 +1603,6 @@
 
   .max-w-\[900px\] {
     max-width: 900px;
-  }
-
-  .max-w-\[1300px\] {
-    max-width: 1300px;
   }
 
   .max-w-\[1600px\] {
@@ -4281,10 +4253,6 @@
     white-space: nowrap;
   }
 
-  .\!text-white {
-    color: var(--color-white) !important;
-  }
-
   .text-\[\#9ca3af\] {
     color: #9ca3af;
   }
@@ -5613,18 +5581,6 @@
     .hover\:bg-primary\/90:hover {
       background-color: #8b5cf6e6;
       background-color: lab(50.6911% 45.8505 -71.7974 / .9);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-purple-600\/30:hover {
-      background-color: #9810fa4d;
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:bg-purple-600\/30:hover {
-        background-color: color-mix(in oklab, var(--color-purple-600) 30%, transparent);
-      }
     }
   }
 
@@ -7682,10 +7638,6 @@
     width: calc(var(--spacing) * 5);
   }
 
-  .\[\&_\[data-slot\=select-value\]\]\:\!text-white [data-slot="select-value"] {
-    color: var(--color-white) !important;
-  }
-
   .\[\&_img\]\:size-full img {
     width: 100%;
     height: 100%;
@@ -7934,14 +7886,6 @@
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
 
-  .\[\&\>span\]\:\!text-white > span {
-    color: var(--color-white) !important;
-  }
-
-  .\[\&\>span\]\:text-white > span {
-    color: var(--color-white);
-  }
-
   .\[\&\>span\]\:opacity-70 > span {
     opacity: .7;
   }
@@ -7950,10 +7894,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-  }
-
-  .\[\&\>span\[data-slot\=select-value\]\]\:text-white > span[data-slot="select-value"] {
-    color: var(--color-white);
   }
 
   .\[\&\>svg\]\:pointer-events-none > svg {

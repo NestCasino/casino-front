@@ -27,6 +27,25 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { AvatarSelectorModal } from './avatar-selector-modal'
 
+// Helper function to get currency symbol
+const getCurrencySymbol = (currency: string): string => {
+  const symbols: Record<string, string> = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+    CNY: '¥',
+    AUD: 'A$',
+    CAD: 'C$',
+    CHF: 'Fr',
+    SEK: 'kr',
+    NZD: 'NZ$',
+    BTC: '₿',
+    ETH: 'Ξ',
+  }
+  return symbols[currency] || currency + ' '
+}
+
 export function ProfileMenu() {
   const { user, getAvatar, openAvatarModal, clearUser } = useUser()
   const { openWalletModal } = useWallet()
@@ -113,7 +132,7 @@ export function ProfileMenu() {
               {/* Balance */}
               <div className="text-right">
                 <div className="text-2xl font-bold text-white">
-                  ${user.balance.toFixed(2)}
+                  {getCurrencySymbol(user.currency)}{user.balance.toFixed(2)}
                 </div>
                 <div className="text-xs text-purple-200">{user.currency}</div>
               </div>

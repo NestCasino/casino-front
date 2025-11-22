@@ -21,10 +21,17 @@ interface ApiErrorResponse {
 type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
 
 // Data Types
-interface Player {
+export interface Player {
   id: string;
+  playerUuid: string;
   username: string;
   email: string;
+  emailVerified?: boolean;
+  firstName?: string;
+  lastName?: string;
+  country?: string;
+  lang?: string;
+  currency: string;
 }
 
 interface AuthResponse {
@@ -295,6 +302,24 @@ export const api = {
     getProfile: async (playerId: string): Promise<ApiResponse<Player>> => {
       try {
         const response = await apiClient.get(`/api/v1/players/${playerId}`);
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to get profile',
+          },
+        };
+      }
+    },
+
+    // Get current authenticated user's profile
+    getMe: async (): Promise<ApiResponse<Player>> => {
+      try {
+        const response = await apiClient.get('/api/v1/players/me');
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {

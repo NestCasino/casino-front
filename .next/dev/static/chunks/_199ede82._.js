@@ -796,6 +796,23 @@ const api = {
                     }
                 };
             }
+        },
+        // Get current authenticated user's profile
+        getMe: async ()=>{
+            try {
+                const response = await apiClient.get('/api/v1/players/me');
+                return response.data;
+            } catch (error) {
+                if (error.response?.data) {
+                    return error.response.data;
+                }
+                return {
+                    success: false,
+                    error: {
+                        message: error.message || 'Failed to get profile'
+                    }
+                };
+            }
         }
     },
     // Currency endpoints
@@ -1307,11 +1324,15 @@ function UserProvider({ children }) {
     const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isLoadingUser, setIsLoadingUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isAvatarModalOpen, setIsAvatarModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Load user profile when authenticated
+    // Load user profile when authenticated, clear when not
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "UserProvider.useEffect": ()=>{
-            if (isAuthenticated && !isAuthLoading && !user) {
-                loadUserProfile();
+            if (!isAuthLoading) {
+                if (isAuthenticated && !user) {
+                    loadUserProfile();
+                } else if (!isAuthenticated && user) {
+                    clearUser();
+                }
             }
         }
     }["UserProvider.useEffect"], [
@@ -1319,11 +1340,9 @@ function UserProvider({ children }) {
         isAuthLoading
     ]);
     const loadUserProfile = async ()=>{
-        const playerId = localStorage.getItem('player_id');
-        if (!playerId) return;
         setIsLoadingUser(true);
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2d$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].players.getProfile(playerId);
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2d$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].players.getMe();
             if (response.success && response.data) {
                 const playerData = response.data;
                 setUser({
@@ -1335,7 +1354,7 @@ function UserProvider({ children }) {
                     firstName: playerData.firstName,
                     lastName: playerData.lastName,
                     balance: 0.00,
-                    currency: 'USD',
+                    currency: playerData.currency,
                     level: 1,
                     levelProgress: 0,
                     avatarId: '2',
@@ -1386,7 +1405,7 @@ function UserProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/lib/user-context.tsx",
-        lineNumber: 125,
+        lineNumber: 126,
         columnNumber: 5
     }, this);
 }
