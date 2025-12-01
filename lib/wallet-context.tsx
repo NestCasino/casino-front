@@ -1,7 +1,9 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { Wallet, WalletSettings, Transaction, Currency, getCurrencyByCode } from './wallet-types'
+import { Wallet, WalletSettings, Transaction, mapBackendWalletToFrontend, mapBackendTransactionToFrontend } from './wallet-types'
+import { api } from './api-client'
+import { useAuth } from './auth-context'
 
 interface WalletContextType {
   wallets: Wallet[]
@@ -9,107 +11,107 @@ interface WalletContextType {
   settings: WalletSettings
   transactions: Transaction[]
   isWalletModalOpen: boolean
-  addWallet: (currencyCode: string) => void
-  removeWallet: (walletId: string) => void
+  isLoadingWallets: boolean
+  isLoadingTransactions: boolean
+  error: string | null
   setActiveWallet: (walletId: string) => void
-  updateWalletBalance: (walletId: string, amount: number) => void
   updateSettings: (settings: Partial<WalletSettings>) => void
-  addTransaction: (transaction: Omit<Transaction, 'id' | 'timestamp'>) => void
   openWalletModal: () => void
   closeWalletModal: () => void
   toggleWalletModal: () => void
   getWalletByCurrency: (currencyCode: string) => Wallet | undefined
+  refreshWallets: () => Promise<void>
+  refreshTransactions: () => Promise<void>
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
-// Mock initial wallets
-const initialWallets: Wallet[] = [
-  {
-    id: 'wallet-1',
-    currency: getCurrencyByCode('USD')!,
-    balance: 1250.50,
-    lockedBalance: 0,
-    isDefault: true,
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: 'wallet-2',
-    currency: getCurrencyByCode('EUR')!,
-    balance: 850.75,
-    lockedBalance: 0,
-    isDefault: false,
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: 'wallet-3',
-    currency: getCurrencyByCode('BTC')!,
-    balance: 0.0245,
-    lockedBalance: 0,
-    isDefault: false,
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: 'wallet-4',
-    currency: getCurrencyByCode('USDT')!,
-    balance: 500.00,
-    lockedBalance: 0,
-    isDefault: false,
-    createdAt: new Date().toISOString(),
-  },
-]
-
-// Mock initial transactions
-const initialTransactions: Transaction[] = []
-
 export function WalletProvider({ children }: { children: ReactNode }) {
-  const [wallets, setWallets] = useState<Wallet[]>(initialWallets)
-  const [activeWallet, setActiveWalletState] = useState<Wallet | null>(initialWallets[0])
-  const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions)
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
+  const [wallets, setWallets] = useState<Wallet[]>([])
+  const [activeWallet, setActiveWalletState] = useState<Wallet | null>(null)
+  const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
+  const [isLoadingWallets, setIsLoadingWallets] = useState(false)
+  const [isLoadingTransactions, setIsLoadingTransactions] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [settings, setSettings] = useState<WalletSettings>({
     hideZeroBalances: false,
     displayCryptoInFiat: false,
     preferredFiatCurrency: 'USD',
   })
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    const savedWallets = localStorage.getItem('casino-wallets')
-    const savedSettings = localStorage.getItem('casino-wallet-settings')
-    const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
-    const walletVersion = localStorage.getItem('casino-wallet-version')
-    const CURRENT_VERSION = '1.0'
-    
-    // Force reload if version changed or no wallets
-    if (!savedWallets || walletVersion !== CURRENT_VERSION) {
-      setWallets(initialWallets)
-      setActiveWalletState(initialWallets[0])
-      localStorage.setItem('casino-wallet-version', CURRENT_VERSION)
-    } else {
-      try {
-        const parsed = JSON.parse(savedWallets)
-        // Update wallets with latest currency data
-        const updatedWallets = parsed.map((wallet: Wallet) => {
-          const latestCurrency = getCurrencyByCode(wallet.currency.code)
-          return {
-            ...wallet,
-            currency: latestCurrency || wallet.currency
-          }
-        })
-        setWallets(updatedWallets)
-        
-        if (savedActiveWalletId) {
-          const active = updatedWallets.find((w: Wallet) => w.id === savedActiveWalletId)
-          if (active) setActiveWalletState(active)
-        }
-      } catch (e) {
-        console.error('Failed to load wallets', e)
-        setWallets(initialWallets)
-        setActiveWalletState(initialWallets[0])
-      }
+  // Fetch wallets from API
+  const fetchWallets = async () => {
+    if (!isAuthenticated) {
+      setWallets([])
+      setActiveWalletState(null)
+      return
     }
-    
+
+    setIsLoadingWallets(true)
+    setError(null)
+
+    try {
+      const response = await api.wallets.getWallets()
+      
+      if (response.success && response.data) {
+        const mappedWallets = response.data
+          .map(mapBackendWalletToFrontend)
+          .filter((w): w is Wallet => w !== null)
+        
+        setWallets(mappedWallets)
+        
+        // Set active wallet: restore from localStorage or use first/default wallet
+        const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
+        if (savedActiveWalletId) {
+          const savedWallet = mappedWallets.find(w => w.id === savedActiveWalletId)
+          if (savedWallet) {
+            setActiveWalletState(savedWallet)
+            return
+          }
+        }
+        
+        // Fallback: use default wallet or first wallet
+        const defaultWallet = mappedWallets.find(w => w.isDefault) || mappedWallets[0]
+        setActiveWalletState(defaultWallet || null)
+      } else {
+        setError(response.error?.message || 'Failed to load wallets')
+      }
+    } catch (err: any) {
+      console.error('Failed to fetch wallets:', err)
+      setError(err.message || 'Failed to load wallets')
+    } finally {
+      setIsLoadingWallets(false)
+    }
+  }
+
+  // Fetch transactions from API
+  const fetchTransactions = async () => {
+    if (!isAuthenticated) {
+      setTransactions([])
+      return
+    }
+
+    setIsLoadingTransactions(true)
+
+    try {
+      const response = await api.wallets.getTransactions()
+      
+      if (response.success && response.data) {
+        const mappedTransactions = response.data.map(mapBackendTransactionToFrontend)
+        setTransactions(mappedTransactions)
+      }
+    } catch (err: any) {
+      console.error('Failed to fetch transactions:', err)
+    } finally {
+      setIsLoadingTransactions(false)
+    }
+  }
+
+  // Load settings from localStorage on mount
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('casino-wallet-settings')
     if (savedSettings) {
       try {
         setSettings(JSON.parse(savedSettings))
@@ -119,68 +121,32 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Save to localStorage whenever wallets change
+  // Fetch wallets when authentication state changes
   useEffect(() => {
-    localStorage.setItem('casino-wallets', JSON.stringify(wallets))
-  }, [wallets])
+    if (!isAuthLoading) {
+      if (isAuthenticated) {
+        fetchWallets()
+      } else {
+        // Clear wallet data when logged out
+        setWallets([])
+        setActiveWalletState(null)
+        setTransactions([])
+        setError(null)
+      }
+    }
+  }, [isAuthenticated, isAuthLoading])
 
-  // Save active wallet
+  // Save active wallet to localStorage
   useEffect(() => {
     if (activeWallet) {
       localStorage.setItem('casino-active-wallet', activeWallet.id)
     }
   }, [activeWallet])
 
-  // Save settings
+  // Save settings to localStorage
   useEffect(() => {
     localStorage.setItem('casino-wallet-settings', JSON.stringify(settings))
   }, [settings])
-
-  const addWallet = (currencyCode: string) => {
-    const currency = getCurrencyByCode(currencyCode)
-    if (!currency) return
-
-    // Check if wallet already exists
-    const exists = wallets.find((w) => w.currency.code === currencyCode)
-    if (exists) {
-      setActiveWalletState(exists)
-      return
-    }
-
-    const newWallet: Wallet = {
-      id: `wallet-${Date.now()}`,
-      currency,
-      balance: 0,
-      lockedBalance: 0,
-      isDefault: wallets.length === 0,
-      createdAt: new Date().toISOString(),
-    }
-
-    setWallets([...wallets, newWallet])
-    setActiveWalletState(newWallet)
-  }
-
-  const removeWallet = (walletId: string) => {
-    const wallet = wallets.find((w) => w.id === walletId)
-    if (!wallet) return
-
-    // Don't allow removing the last wallet
-    if (wallets.length === 1) return
-
-    // Don't allow removing wallet with balance
-    if (wallet.balance > 0 || wallet.lockedBalance > 0) {
-      alert('Cannot remove wallet with balance. Please withdraw funds first.')
-      return
-    }
-
-    const updatedWallets = wallets.filter((w) => w.id !== walletId)
-    setWallets(updatedWallets)
-
-    // If active wallet was removed, set a new active wallet
-    if (activeWallet?.id === walletId) {
-      setActiveWalletState(updatedWallets[0])
-    }
-  }
 
   const setActiveWallet = (walletId: string) => {
     const wallet = wallets.find((w) => w.id === walletId)
@@ -189,28 +155,16 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const updateWalletBalance = (walletId: string, amount: number) => {
-    setWallets(
-      wallets.map((w) => (w.id === walletId ? { ...w, balance: amount } : w))
-    )
-
-    // Update active wallet if it's the one being updated
-    if (activeWallet?.id === walletId) {
-      setActiveWalletState({ ...activeWallet, balance: amount })
-    }
-  }
-
   const updateSettings = (newSettings: Partial<WalletSettings>) => {
     setSettings({ ...settings, ...newSettings })
   }
 
-  const addTransaction = (transaction: Omit<Transaction, 'id' | 'timestamp'>) => {
-    const newTransaction: Transaction = {
-      ...transaction,
-      id: `tx-${Date.now()}`,
-      timestamp: new Date().toISOString(),
-    }
-    setTransactions([newTransaction, ...transactions])
+  const refreshWallets = async () => {
+    await fetchWallets()
+  }
+
+  const refreshTransactions = async () => {
+    await fetchTransactions()
   }
 
   const openWalletModal = () => setIsWalletModalOpen(true)
@@ -229,16 +183,17 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         settings,
         transactions,
         isWalletModalOpen,
-        addWallet,
-        removeWallet,
+        isLoadingWallets,
+        isLoadingTransactions,
+        error,
         setActiveWallet,
-        updateWalletBalance,
         updateSettings,
-        addTransaction,
         openWalletModal,
         closeWalletModal,
         toggleWalletModal,
         getWalletByCurrency,
+        refreshWallets,
+        refreshTransactions,
       }}
     >
       {children}

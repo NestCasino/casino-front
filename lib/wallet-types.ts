@@ -234,3 +234,133 @@ export function formatBalance(amount: number, currencyCode: string): string {
   return formatCurrency(amount, currency)
 }
 
+// Backend-to-Frontend Type Mappers
+
+export interface BackendWallet {
+  id: string
+  playerId: string
+  currency: string
+  walletType: 'crypto' | 'fiat'
+  balance: number
+  bonusBalance: number
+  isDefault: boolean
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface BackendTransaction {
+  id: string
+  walletId: string
+  playerId: string
+  type: string
+  amount: number
+  balanceBefore: number
+  balanceAfter: number
+  bonusBalanceBefore: number
+  bonusBalanceAfter: number
+  status: string
+  currency: string
+  txid: string | null
+  provider: string | null
+  metadata: any
+  createdAt: string
+}
+
+/**
+ * Maps backend wallet data to frontend wallet format
+ */
+export function mapBackendWalletToFrontend(backendWallet: BackendWallet): Wallet | null {
+  const currency = getCurrencyByCode(backendWallet.currency)
+  
+  if (!currency) {
+    console.warn(`Unknown currency code: ${backendWallet.currency}`)
+    return null
+  }
+
+  return {
+    id: backendWallet.id,
+    currency,
+    balance: Number(backendWallet.balance),
+    lockedBalance: Number(backendWallet.bonusBalance),
+    isDefault: backendWallet.isDefault,
+    createdAt: backendWallet.createdAt,
+  }
+}
+
+/**
+ * Generate a human-readable description for a transaction
+ */
+function generateTransactionDescription(type: string, amount: number, currency: string): string {
+  const formattedAmount = formatBalance(amount, currency)
+  
+  switch (type.toLowerCase()) {
+    case 'deposit':
+    case 'manual_deposit':
+      return `Deposited ${formattedAmount}`
+    case 'withdraw':
+    case 'manual_withdraw':
+      return `Withdrew ${formattedAmount}`
+    case 'bet':
+      return `Bet placed ${formattedAmount}`
+    case 'win':
+      return `Win ${formattedAmount}`
+    case 'bonus_credit':
+      return `Bonus credited ${formattedAmount}`
+    case 'bonus_release':
+      return `Bonus released ${formattedAmount}`
+    case 'bonus_forfeit':
+      return `Bonus forfeited ${formattedAmount}`
+    case 'refund':
+      return `Refund ${formattedAmount}`
+    default:
+      return `Transaction ${formattedAmount}`
+  }
+}
+
+/**
+ * Map backend transaction type to frontend type
+ */
+function mapTransactionType(backendType: string): Transaction['type'] {
+  const type = backendType.toLowerCase()
+  
+  if (type.includes('deposit')) return 'deposit'
+  if (type.includes('withdraw')) return 'withdraw'
+  if (type === 'bet') return 'bet'
+  if (type === 'win') return 'win'
+  if (type.includes('bonus')) return 'bonus'
+  
+  return 'deposit' // default fallback
+}
+
+/**
+ * Map backend transaction status to frontend status
+ */
+function mapTransactionStatus(backendStatus: string): Transaction['status'] {
+  const status = backendStatus.toLowerCase()
+  
+  if (status === 'completed') return 'completed'
+  if (status === 'pending' || status === 'confirming' || status === 'init') return 'pending'
+  if (status === 'failed' || status === 'expired') return 'failed'
+  if (status === 'cancelled' || status === 'refunded') return 'cancelled'
+  
+  return 'pending' // default fallback
+}
+
+/**
+ * Maps backend transaction data to frontend transaction format
+ */
+export function mapBackendTransactionToFrontend(backendTx: BackendTransaction): Transaction {
+  return {
+    id: backendTx.id,
+    walletId: backendTx.walletId,
+    type: mapTransactionType(backendTx.type),
+    amount: Number(backendTx.amount),
+    currency: backendTx.currency,
+    status: mapTransactionStatus(backendTx.status),
+    timestamp: backendTx.createdAt,
+    description: generateTransactionDescription(backendTx.type, backendTx.amount, backendTx.currency),
+    txHash: backendTx.txid || undefined,
+  }
+}
+

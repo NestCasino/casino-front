@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { toast } from '@/hooks/use-toast'
 
 export function WalletSwapCrypto() {
-  const { wallets, updateWalletBalance } = useWallet()
+  const { wallets } = useWallet()
   const cryptoWallets = wallets.filter((w) => w.currency.type === 'crypto' && w.balance > 0)
   
   const [fromWallet, setFromWallet] = useState(cryptoWallets[0] || null)
@@ -23,41 +23,10 @@ export function WalletSwapCrypto() {
   const fee = 0.005 // 0.5% swap fee
 
   const handleSwap = () => {
-    if (!fromWallet || !toWallet) {
-      toast({
-        title: 'Invalid Selection',
-        description: 'Please select both currencies',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    if (!fromAmount || parseFloat(fromAmount) <= 0) {
-      toast({
-        title: 'Invalid Amount',
-        description: 'Please enter a valid amount',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    const amount = parseFloat(fromAmount)
-    if (amount > fromWallet.balance) {
-      toast({
-        title: 'Insufficient Balance',
-        description: 'You do not have enough balance',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    // Perform swap
-    updateWalletBalance(fromWallet.id, fromWallet.balance - amount)
-    updateWalletBalance(toWallet.id, toWallet.balance + parseFloat(toAmount))
-    
     toast({
-      title: 'Swap Successful',
-      description: `Swapped ${formatBalance(amount, fromWallet.currency.code)} to ${formatBalance(parseFloat(toAmount), toWallet.currency.code)}`,
+      title: 'Feature Coming Soon',
+      description: 'Crypto swap feature requires DEX/exchange integration',
+      variant: 'default',
     })
     
     setFromAmount('')
@@ -89,15 +58,18 @@ export function WalletSwapCrypto() {
 
   return (
     <div className="space-y-6">
-      {/* Info Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 flex items-start gap-3">
-        <Info className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-        <div className="text-sm text-blue-300">
-          <p className="font-semibold mb-1">Instant Crypto Swap</p>
-          <p>
-            Swap between your cryptocurrency wallets instantly with competitive rates.
-            No external exchanges needed.
-          </p>
+      {/* Coming Soon Notice */}
+      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+        <div className="flex items-start gap-3">
+          <Info className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+          <div>
+            <h4 className="text-sm font-semibold text-[rgb(var(--text-primary))] mb-1">
+              Demo Mode - Crypto Swap Coming Soon
+            </h4>
+            <p className="text-xs text-[rgb(var(--text-muted))]">
+              This is a UI demonstration. Real swap functionality requires DEX or exchange API integration.
+            </p>
+          </div>
         </div>
       </div>
 

@@ -36,7 +36,7 @@ const fiatPaymentMethods = [
 ]
 
 export function WalletDeposit() {
-  const { activeWallet, wallets, setActiveWallet, updateWalletBalance } = useWallet()
+  const { activeWallet, wallets, setActiveWallet } = useWallet()
   const [selectedWallet, setSelectedWallet] = useState(activeWallet)
   const [showWalletSelect, setShowWalletSelect] = useState(false)
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
@@ -91,6 +91,21 @@ export function WalletDeposit() {
 
   return (
     <div className="space-y-6">
+      {/* Coming Soon Notice */}
+      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+          <div>
+            <h4 className="text-sm font-semibold text-[rgb(var(--text-primary))] mb-1">
+              Demo Mode - Payment Integration Coming Soon
+            </h4>
+            <p className="text-xs text-[rgb(var(--text-muted))]">
+              This is a UI demonstration. Real deposit functionality requires payment provider integration.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Currency Selector */}
       <div className="space-y-2">
         <Label>Currency</Label>

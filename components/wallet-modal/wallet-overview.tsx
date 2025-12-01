@@ -9,23 +9,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { cn } from '@/lib/utils'
 
 export function WalletOverview() {
-  const { wallets, activeWallet, setActiveWallet, addWallet, settings } = useWallet()
-  const [showAddCurrency, setShowAddCurrency] = useState(false)
+  const { wallets, activeWallet, setActiveWallet, settings, isLoadingWallets, error, refreshWallets } = useWallet()
   const [showBalance, setShowBalance] = useState(true)
-
-  const handleAddCurrency = (currencyCode: string) => {
-    addWallet(currencyCode)
-    setShowAddCurrency(false)
-  }
 
   const totalBalanceUSD = wallets.reduce((sum, wallet) => {
     // Mock conversion rate - in real app, use actual exchange rates
     return sum + wallet.balance
   }, 0)
-
-  const availableCurrencies = AVAILABLE_CURRENCIES.filter(
-    (currency) => !wallets.some((w) => w.currency.code === currency.code)
-  )
 
   const filteredWallets = settings.hideZeroBalances 
     ? wallets.filter((w) => w.balance > 0)
@@ -129,23 +119,48 @@ export function WalletOverview() {
         </div>
       )}
 
-      {/* All Wallets */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-[rgb(var(--text-primary))]">All Wallets</h3>
-          <Button
-            onClick={() => setShowAddCurrency(true)}
-            variant="ghost"
-            size="sm"
-            className="text-[rgb(var(--primary))] hover:text-[rgb(var(--primary))]/90"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Add Currency
-          </Button>
+      {/* Loading State */}
+      {isLoadingWallets && (
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[rgb(var(--primary))]"></div>
         </div>
+      )}
 
-        <div className="grid gap-3">
-          {filteredWallets.map((wallet) => (
+      {/* Error State */}
+      {error && !isLoadingWallets && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <h4 className="text-sm font-semibold text-[rgb(var(--text-primary))] mb-1">
+              Failed to load wallets
+            </h4>
+            <p className="text-sm text-[rgb(var(--text-muted))] mb-2">{error}</p>
+            <Button
+              onClick={refreshWallets}
+              variant="outline"
+              size="sm"
+              className="border-red-500/50 text-red-400 hover:bg-red-500/10"
+            >
+              Retry
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* All Wallets */}
+      {!isLoadingWallets && !error && (
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-[rgb(var(--text-primary))]">All Wallets</h3>
+          </div>
+
+          {filteredWallets.length === 0 ? (
+            <div className="text-center py-8 text-[rgb(var(--text-muted))]">
+              <p>No wallets available</p>
+            </div>
+          ) : (
+            <div className="grid gap-3">
+              {filteredWallets.map((wallet) => (
             <button
               key={wallet.id}
               onClick={() => setActiveWallet(wallet.id)}
@@ -176,51 +191,11 @@ export function WalletOverview() {
                 </div>
               </div>
             </button>
-          ))}
-        </div>
-
-        {filteredWallets.length === 0 && (
-          <div className="text-center py-8 text-[rgb(var(--text-muted))]">
-            <p>No wallets with balance</p>
-          </div>
-        )}
-      </div>
-
-      {/* Add Currency Modal */}
-      <Dialog open={showAddCurrency} onOpenChange={setShowAddCurrency}>
-        <DialogContent className="bg-[#1a1534] border-purple-800/30">
-          <DialogHeader>
-            <DialogTitle className="text-white">Select a currency to add</DialogTitle>
-          </DialogHeader>
-          
-          <div className="grid grid-cols-4 gap-3 max-h-[400px] overflow-y-auto">
-            {availableCurrencies.map((currency) => (
-              <button
-                key={currency.code}
-                onClick={() => handleAddCurrency(currency.code)}
-                className="p-4 bg-[#0f0a1f] hover:bg-purple-800/20 rounded-lg border border-purple-800/30 transition-colors cursor-pointer"
-              >
-                <div className="flex flex-col items-center gap-2">
-                  <span className="text-lg font-semibold text-[rgb(var(--text-primary))]">
-                    {currency.code}
-                  </span>
-                  {currency.network && (
-                    <span className="text-xs text-[rgb(var(--text-muted))] text-center">
-                      {currency.network}
-                    </span>
-                  )}
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {availableCurrencies.length === 0 && (
-            <div className="text-center py-8 text-[rgb(var(--text-muted))]">
-              <p>All available currencies have been added</p>
+              ))}
             </div>
           )}
-        </DialogContent>
-      </Dialog>
+        </div>
+      )}
     </div>
   )
 }

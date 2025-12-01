@@ -115,7 +115,11 @@ __turbopack_context__.s([
     "formatCurrency",
     ()=>formatCurrency,
     "getCurrencyByCode",
-    ()=>getCurrencyByCode
+    ()=>getCurrencyByCode,
+    "mapBackendTransactionToFrontend",
+    ()=>mapBackendTransactionToFrontend,
+    "mapBackendWalletToFrontend",
+    ()=>mapBackendWalletToFrontend
 ]);
 const AVAILABLE_CURRENCIES = [
     // Fiat Currencies
@@ -301,6 +305,84 @@ function formatBalance(amount, currencyCode) {
     const currency = getCurrencyByCode(currencyCode);
     if (!currency) return `${amount}`;
     return formatCurrency(amount, currency);
+}
+function mapBackendWalletToFrontend(backendWallet) {
+    const currency = getCurrencyByCode(backendWallet.currency);
+    if (!currency) {
+        console.warn(`Unknown currency code: ${backendWallet.currency}`);
+        return null;
+    }
+    return {
+        id: backendWallet.id,
+        currency,
+        balance: Number(backendWallet.balance),
+        lockedBalance: Number(backendWallet.bonusBalance),
+        isDefault: backendWallet.isDefault,
+        createdAt: backendWallet.createdAt
+    };
+}
+/**
+ * Generate a human-readable description for a transaction
+ */ function generateTransactionDescription(type, amount, currency) {
+    const formattedAmount = formatBalance(amount, currency);
+    switch(type.toLowerCase()){
+        case 'deposit':
+        case 'manual_deposit':
+            return `Deposited ${formattedAmount}`;
+        case 'withdraw':
+        case 'manual_withdraw':
+            return `Withdrew ${formattedAmount}`;
+        case 'bet':
+            return `Bet placed ${formattedAmount}`;
+        case 'win':
+            return `Win ${formattedAmount}`;
+        case 'bonus_credit':
+            return `Bonus credited ${formattedAmount}`;
+        case 'bonus_release':
+            return `Bonus released ${formattedAmount}`;
+        case 'bonus_forfeit':
+            return `Bonus forfeited ${formattedAmount}`;
+        case 'refund':
+            return `Refund ${formattedAmount}`;
+        default:
+            return `Transaction ${formattedAmount}`;
+    }
+}
+/**
+ * Map backend transaction type to frontend type
+ */ function mapTransactionType(backendType) {
+    const type = backendType.toLowerCase();
+    if (type.includes('deposit')) return 'deposit';
+    if (type.includes('withdraw')) return 'withdraw';
+    if (type === 'bet') return 'bet';
+    if (type === 'win') return 'win';
+    if (type.includes('bonus')) return 'bonus';
+    return 'deposit' // default fallback
+    ;
+}
+/**
+ * Map backend transaction status to frontend status
+ */ function mapTransactionStatus(backendStatus) {
+    const status = backendStatus.toLowerCase();
+    if (status === 'completed') return 'completed';
+    if (status === 'pending' || status === 'confirming' || status === 'init') return 'pending';
+    if (status === 'failed' || status === 'expired') return 'failed';
+    if (status === 'cancelled' || status === 'refunded') return 'cancelled';
+    return 'pending' // default fallback
+    ;
+}
+function mapBackendTransactionToFrontend(backendTx) {
+    return {
+        id: backendTx.id,
+        walletId: backendTx.walletId,
+        type: mapTransactionType(backendTx.type),
+        amount: Number(backendTx.amount),
+        currency: backendTx.currency,
+        status: mapTransactionStatus(backendTx.status),
+        timestamp: backendTx.createdAt,
+        description: generateTransactionDescription(backendTx.type, backendTx.amount, backendTx.currency),
+        txHash: backendTx.txid || undefined
+    };
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -845,6 +927,66 @@ const api = {
                     success: false,
                     error: {
                         message: error.message || 'Failed to load currencies'
+                    }
+                };
+            }
+        }
+    },
+    // Wallet endpoints
+    wallets: {
+        getWallets: async ()=>{
+            try {
+                const response = await apiClient.get('/api/v1/wallets');
+                return {
+                    success: true,
+                    data: response.data.data || response.data
+                };
+            } catch (error) {
+                if (error.response?.data) {
+                    return error.response.data;
+                }
+                return {
+                    success: false,
+                    error: {
+                        message: error.message || 'Failed to load wallets'
+                    }
+                };
+            }
+        },
+        getTotalBalance: async ()=>{
+            try {
+                const response = await apiClient.get('/api/v1/wallets/balance');
+                return {
+                    success: true,
+                    data: response.data.data || response.data
+                };
+            } catch (error) {
+                if (error.response?.data) {
+                    return error.response.data;
+                }
+                return {
+                    success: false,
+                    error: {
+                        message: error.message || 'Failed to load balance'
+                    }
+                };
+            }
+        },
+        getTransactions: async ()=>{
+            try {
+                const response = await apiClient.get('/api/v1/wallets/transactions');
+                return {
+                    success: true,
+                    data: response.data.data || response.data
+                };
+            } catch (error) {
+                if (error.response?.data) {
+                    return error.response.data;
+                }
+                return {
+                    success: false,
+                    error: {
+                        message: error.message || 'Failed to load transactions'
                     }
                 };
             }

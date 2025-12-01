@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { TrendingUp, TrendingDown, Gift, Trophy, CheckCircle2, Clock, XCircle, ExternalLink } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { TrendingUp, TrendingDown, Gift, Trophy, CheckCircle2, Clock, XCircle, ExternalLink, Loader2 } from 'lucide-react'
 import { useWallet } from '@/lib/wallet-context'
 import { formatBalance } from '@/lib/wallet-types'
 import { cn } from '@/lib/utils'
 
-// Mock transactions for display
+// Mock transactions for display (kept for reference, but not used when real transactions exist)
 const mockTransactions = [
   {
     id: 'tx-1',
@@ -123,15 +123,17 @@ const statusConfig = {
 }
 
 export function WalletTransactions() {
-  const { transactions, activeWallet } = useWallet()
+  const { transactions, activeWallet, isLoadingTransactions, refreshTransactions } = useWallet()
   const [filter, setFilter] = useState<'all' | 'deposit' | 'withdraw' | 'bet' | 'win'>('all')
 
-  // Use mock transactions if no real transactions
-  const displayTransactions = transactions.length > 0 ? transactions : mockTransactions
+  // Fetch transactions when component mounts
+  useEffect(() => {
+    refreshTransactions()
+  }, [])
 
   const filteredTransactions = filter === 'all'
-    ? displayTransactions
-    : displayTransactions.filter((tx) => tx.type === filter)
+    ? transactions
+    : transactions.filter((tx) => tx.type === filter)
 
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp)
@@ -172,8 +174,12 @@ export function WalletTransactions() {
         ))}
       </div>
 
-      {/* Transactions List */}
-      {filteredTransactions.length > 0 ? (
+      {/* Loading State */}
+      {isLoadingTransactions ? (
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-[rgb(var(--primary))]" />
+        </div>
+      ) : filteredTransactions.length > 0 ? (
         <div className="space-y-2">
           {filteredTransactions.map((transaction) => {
             const config = typeConfig[transaction.type as keyof typeof typeConfig]

@@ -1,4 +1,0 @@
-1:"$Sreact.fragment"
-2:I[39756,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-3:I[37457,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-0:{"buildId":"UYI9Zhdm1u6dWe0Bjol-6","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":[["$","div","l",{"className":"flex h-screen w-full items-center justify-center bg-[#0f0420]","children":["$","div",null,{"className":"flex flex-col items-center gap-4","children":[["$","div",null,{"className":"h-12 w-12 animate-spin rounded-full border-4 border-purple-500 border-t-transparent"}],["$","p",null,{"className":"text-sm text-gray-400","children":"Loading Casino..."}]]}]}],[],[]],"isPartial":false}

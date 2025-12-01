@@ -32,6 +32,45 @@ export interface Player {
   country?: string;
   lang?: string;
   currency: string;
+  phone?: string;
+  birthDate?: string;
+  gender?: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  avatar?: string;
+  kycStatus?: string;
+  kycFront?: string;
+  kycBack?: string;
+  kycSelfie?: string;
+  kycAddress?: string;
+  addressProofStatus?: string;
+}
+
+export interface UpdateProfileData {
+  // Password fields
+  password?: string;
+  new_password?: string;
+  repeat_password?: string;
+  
+  // Personal info
+  email?: string;
+  phone?: string;
+  first_name?: string;
+  last_name?: string;
+  birthday?: string;
+  country?: string;
+  gender?: 'Male' | 'Female' | 'Other';
+  address?: string;
+  city?: string;
+  postal_code?: string;
+  
+  // Files
+  avatar?: File;
+  kyc_front?: File;
+  kyc_back?: File;
+  kyc_selfie?: File;
+  kyc_address?: File;
 }
 
 interface AuthResponse {
@@ -52,6 +91,44 @@ interface Currency {
   type: 'fiat' | 'crypto';
   symbol: string;
   is_active: boolean;
+}
+
+// Backend Wallet Types
+interface BackendWallet {
+  id: string;
+  playerId: string;
+  currency: string;
+  walletType: 'crypto' | 'fiat';
+  balance: number;
+  bonusBalance: number;
+  isDefault: boolean;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface BackendTransaction {
+  id: string;
+  walletId: string;
+  playerId: string;
+  type: string;
+  amount: number;
+  balanceBefore: number;
+  balanceAfter: number;
+  bonusBalanceBefore: number;
+  bonusBalanceAfter: number;
+  status: string;
+  currency: string;
+  txid: string | null;
+  provider: string | null;
+  metadata: any;
+  createdAt: string;
+}
+
+interface WalletBalanceResponse {
+  totalBalance: number;
+  totalBonusBalance: number;
+  walletCount: number;
 }
 
 // Create axios instance
@@ -333,6 +410,58 @@ export const api = {
         };
       }
     },
+
+    // Update current user's profile with multipart/form-data support
+    updateProfile: async (data: UpdateProfileData): Promise<ApiResponse<{ message: string; data: Player }>> => {
+      try {
+        const formData = new FormData();
+        
+        // Add text fields to FormData
+        Object.entries(data).forEach(([key, value]) => {
+          if (value !== undefined && value !== null && value !== '') {
+            // Skip file objects for now, handle them separately
+            if (!(value instanceof File)) {
+              formData.append(key, String(value));
+            }
+          }
+        });
+        
+        // Add files to FormData
+        if (data.avatar instanceof File) {
+          formData.append('avatar', data.avatar);
+        }
+        if (data.kyc_front instanceof File) {
+          formData.append('kyc_front', data.kyc_front);
+        }
+        if (data.kyc_back instanceof File) {
+          formData.append('kyc_back', data.kyc_back);
+        }
+        if (data.kyc_selfie instanceof File) {
+          formData.append('kyc_selfie', data.kyc_selfie);
+        }
+        if (data.kyc_address instanceof File) {
+          formData.append('kyc_address', data.kyc_address);
+        }
+        
+        const response = await apiClient.post('/api/v1/players', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to update profile',
+          },
+        };
+      }
+    },
   },
 
   // Currency endpoints
@@ -371,7 +500,73 @@ export const api = {
       }
     },
   },
+
+  // Wallet endpoints
+  wallets: {
+    getWallets: async (): Promise<ApiResponse<BackendWallet[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/wallets');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load wallets',
+          },
+        };
+      }
+    },
+
+    getTotalBalance: async (): Promise<ApiResponse<WalletBalanceResponse>> => {
+      try {
+        const response = await apiClient.get('/api/v1/wallets/balance');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load balance',
+          },
+        };
+      }
+    },
+
+    getTransactions: async (): Promise<ApiResponse<BackendTransaction[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/wallets/transactions');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load transactions',
+          },
+        };
+      }
+    },
+  },
 };
 
 export default apiClient;
+
+// Export types for use in other files
+export type { BackendWallet, BackendTransaction, WalletBalanceResponse };
 

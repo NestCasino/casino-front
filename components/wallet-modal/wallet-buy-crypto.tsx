@@ -12,7 +12,7 @@ import { toast } from '@/hooks/use-toast'
 const cryptoCurrencies = AVAILABLE_CURRENCIES.filter((c) => c.type === 'crypto')
 
 export function WalletBuyCrypto() {
-  const { wallets, updateWalletBalance, getWalletByCurrency, addWallet } = useWallet()
+  const { wallets, getWalletByCurrency } = useWallet()
   const [selectedCrypto, setSelectedCrypto] = useState(cryptoCurrencies[0])
   const [buyAmount, setBuyAmount] = useState('')
   const [paymentCurrency, setPaymentCurrency] = useState('USD')
@@ -22,42 +22,24 @@ export function WalletBuyCrypto() {
   const cryptoAmount = buyAmount ? (parseFloat(buyAmount) / exchangeRate).toFixed(selectedCrypto.decimals) : '0'
 
   const handleBuy = () => {
-    if (!buyAmount || parseFloat(buyAmount) <= 0) {
-      toast({
-        title: 'Invalid Amount',
-        description: 'Please enter a valid amount',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    // Get or create wallet for the selected crypto
-    let wallet = getWalletByCurrency(selectedCrypto.code)
-    if (!wallet) {
-      addWallet(selectedCrypto.code)
-      wallet = getWalletByCurrency(selectedCrypto.code)
-    }
-
-    if (wallet) {
-      // Mock buy - add crypto to wallet
-      const amount = parseFloat(cryptoAmount)
-      updateWalletBalance(wallet.id, wallet.balance + amount)
-      
-      toast({
-        title: 'Purchase Successful',
-        description: `Bought ${formatBalance(amount, selectedCrypto.code)}`,
-      })
-      
-      setBuyAmount('')
-    }
+    toast({
+      title: 'Feature Coming Soon',
+      description: 'Crypto purchase feature requires payment provider integration',
+      variant: 'default',
+    })
   }
 
   return (
     <div className="space-y-6">
-      {/* Info Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 flex items-start gap-3">
-        <AlertCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-        <div className="text-sm text-blue-300">
+      {/* Coming Soon Notice */}
+      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+        <div className="flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+          <div>
+            <h4 className="text-sm font-semibold text-[rgb(var(--text-primary))] mb-1">
+              Demo Mode - Buy Crypto Coming Soon
+            </h4>
+            <p className="text-xs text-[rgb(var(--text-muted))]">
           <p className="font-semibold mb-1">Buy Crypto Instantly</p>
           <p>
             Purchase cryptocurrency using your preferred payment method. 

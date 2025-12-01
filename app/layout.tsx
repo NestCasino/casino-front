@@ -52,8 +52,8 @@ export default function RootLayout({
       <body className={inter.variable}>
         <SidebarProvider>
           <SearchProvider>
-            <WalletProvider>
-              <AuthProvider>
+            <AuthProvider>
+              <WalletProvider>
                 <UserProvider>
                   <NotificationProvider>
                     <BonusProvider>
@@ -64,8 +64,8 @@ export default function RootLayout({
                     </BonusProvider>
                   </NotificationProvider>
                 </UserProvider>
-              </AuthProvider>
-            </WalletProvider>
+              </WalletProvider>
+            </AuthProvider>
           </SearchProvider>
         </SidebarProvider>
         <Analytics />

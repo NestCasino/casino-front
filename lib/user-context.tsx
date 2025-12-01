@@ -26,6 +26,19 @@ export interface User {
   avatarId: string
   country?: string
   lang: string
+  phone?: string
+  birthDate?: string
+  gender?: string
+  address?: string
+  city?: string
+  postalCode?: string
+  avatar?: string
+  kycStatus?: string
+  kycFront?: string
+  kycBack?: string
+  kycSelfie?: string
+  kycAddress?: string
+  addressProofStatus?: string
 }
 
 export const AVAILABLE_AVATARS: Avatar[] = [
@@ -78,6 +91,19 @@ export function UserProvider({ children }: { children: ReactNode }) {
       const response = await api.players.getMe()
       if (response.success && response.data) {
         const playerData = response.data
+        
+        // Fetch wallet balance
+        let totalBalance = 0.00
+        try {
+          const balanceResponse = await api.wallets.getTotalBalance()
+          if (balanceResponse.success && balanceResponse.data) {
+            totalBalance = balanceResponse.data.totalBalance || 0.00
+          }
+        } catch (balanceError) {
+          console.error('Failed to load wallet balance:', balanceError)
+          // Continue with zero balance if wallet fetch fails
+        }
+        
         setUser({
           id: playerData.id,
           playerUuid: playerData.playerUuid,
@@ -86,13 +112,26 @@ export function UserProvider({ children }: { children: ReactNode }) {
           emailVerified: playerData.emailVerified || false,
           firstName: playerData.firstName,
           lastName: playerData.lastName,
-          balance: 0.00, // TODO: Get from wallet/balance API
+          balance: totalBalance,
           currency: playerData.currency,
           level: 1, // TODO: Get from player stats
           levelProgress: 0, // TODO: Get from player stats
           avatarId: '2', // TODO: Get from player settings or use avatar field
           country: playerData.country,
           lang: playerData.lang || 'EN',
+          phone: playerData.phone,
+          birthDate: playerData.birthDate,
+          gender: playerData.gender,
+          address: playerData.address,
+          city: playerData.city,
+          postalCode: playerData.postalCode,
+          avatar: playerData.avatar,
+          kycStatus: playerData.kycStatus,
+          kycFront: playerData.kycFront,
+          kycBack: playerData.kycBack,
+          kycSelfie: playerData.kycSelfie,
+          kycAddress: playerData.kycAddress,
+          addressProofStatus: playerData.addressProofStatus,
         })
       }
     } catch (error) {
