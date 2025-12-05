@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { User } from '@/lib/user-context'
 import { api, UpdateProfileData } from '@/lib/api-client'
 import { toast } from '@/hooks/use-toast'
-import { Upload, FileText, Loader2, AlertCircle } from 'lucide-react'
+import { Upload, FileText, Loader2 } from 'lucide-react'
 
 interface VerificationSectionProps {
   user: User
@@ -17,7 +17,6 @@ export function VerificationSection({ user, onUpdate }: VerificationSectionProps
     kyc_back?: File
     kyc_selfie?: File
     kyc_address?: File
-    kyc_payment?: File
   }>({})
   const [isKycSubmitting, setIsKycSubmitting] = useState(false)
   
@@ -182,15 +181,6 @@ export function VerificationSection({ user, onUpdate }: VerificationSectionProps
     }
   }
   
-  // Payment verification upload handler (mock)
-  const handlePaymentProofUpload = () => {
-    toast({
-      title: 'Demo Feature',
-      description: 'Payment verification document uploaded. This is demo data only.',
-      duration: 3000,
-    })
-    setKycFiles(prev => ({ ...prev, kyc_payment: undefined }))
-  }
   
   return (
     <div className="space-y-6">
@@ -401,69 +391,6 @@ export function VerificationSection({ user, onUpdate }: VerificationSectionProps
         )}
       </div>
       
-      {/* Payment Verification Section (Demo) */}
-      <div className="bg-[#2a1b47] rounded-2xl p-8 border-l-4 border-[rgb(var(--primary))]">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-[rgb(var(--text-primary))]">Payment</h2>
-          <div className="px-4 py-2 bg-[rgb(var(--text-muted))] text-white text-sm font-bold rounded-lg">
-            Not Submitted
-          </div>
-        </div>
-        
-        <div className="p-3 bg-[#3d2b5e] rounded-lg border border-[#5d4b7e] flex items-center gap-2 mb-6">
-          <AlertCircle className="h-4 w-4 text-yellow-500" />
-          <p className="text-xs text-[rgb(var(--text-muted))]">
-            This is demo functionality. Payment verification is not yet implemented.
-          </p>
-        </div>
-        
-        <p className="text-sm text-[rgb(var(--text-muted))] mb-6">
-          Bank statement, or any other official document that confirms the source of your funds.
-        </p>
-        
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-[rgb(var(--text-secondary))] mb-2">
-              Payment Proof Document <span className="text-[rgb(var(--error))]">*</span>
-            </label>
-            <input
-              type="file"
-              accept=".jpg,.jpeg,.png,.pdf"
-              onChange={(e) => handleFileChange('kyc_payment', e.target.files?.[0] || null)}
-              className="hidden"
-              id="kyc_payment"
-            />
-            <label
-              htmlFor="kyc_payment"
-              className="flex items-center justify-center gap-2 w-full h-32 bg-[#3d2b5e] border-2 border-dashed border-[#5d4b7e] rounded-xl cursor-pointer hover:border-[rgb(var(--primary))] transition-colors"
-            >
-              {kycFiles.kyc_payment ? (
-                <div className="text-center">
-                  <FileText className="h-8 w-8 text-[rgb(var(--primary))] mx-auto mb-2" />
-                  <p className="text-sm text-[rgb(var(--text-primary))]">{kycFiles.kyc_payment.name}</p>
-                  <p className="text-xs text-[rgb(var(--text-muted))]">
-                    {(kycFiles.kyc_payment.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-              ) : (
-                <div className="text-center">
-                  <Upload className="h-8 w-8 text-[rgb(var(--text-muted))] mx-auto mb-2" />
-                  <p className="text-sm text-[rgb(var(--text-primary))]">Click to upload or drag and drop</p>
-                  <p className="text-xs text-[rgb(var(--text-muted))]">SVG, PNG, JPG (max 30MB)</p>
-                </div>
-              )}
-            </label>
-          </div>
-          
-          <button
-            onClick={handlePaymentProofUpload}
-            disabled={!kycFiles.kyc_payment}
-            className="w-full px-6 py-3 bg-[rgb(var(--success))] hover:brightness-110 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Submit Payment Proof
-          </button>
-        </div>
-      </div>
     </div>
   )
 }

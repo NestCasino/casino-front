@@ -52,7 +52,7 @@ export function AccountSection({ user, onUpdate }: AccountSectionProps) {
   useEffect(() => {
     const loadCountries = async () => {
       try {
-        const response = await api.countries.getAll()
+        const response = await api.countries.getActive()
         if (response.success && response.data) {
           setCountries(response.data.filter(c => c.isActive))
         }
