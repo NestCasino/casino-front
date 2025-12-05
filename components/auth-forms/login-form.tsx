@@ -53,8 +53,13 @@ export function LoginForm() {
     }
   }
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleSubmit(onSubmit)(e)
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+    <form onSubmit={handleFormSubmit} className="space-y-3">
       {/* Email Field */}
       <div className="space-y-1">
         <Label htmlFor="login-email" className="text-gray-200 text-sm">

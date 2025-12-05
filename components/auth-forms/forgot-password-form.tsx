@@ -49,6 +49,11 @@ export function ForgotPasswordForm({ onBackToLogin }: ForgotPasswordFormProps) {
     }
   }
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleSubmit(onSubmit)(e)
+  }
+
   if (isSuccess) {
     return (
       <div className="space-y-4 text-center">
@@ -80,7 +85,7 @@ export function ForgotPasswordForm({ onBackToLogin }: ForgotPasswordFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleFormSubmit} className="space-y-4">
       {/* Back Button */}
       <button
         type="button"

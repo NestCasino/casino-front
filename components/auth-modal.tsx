@@ -6,15 +6,21 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { LoginForm } from './auth-forms/login-form'
 import { RegisterForm } from './auth-forms/register-form'
 import { ForgotPasswordForm } from './auth-forms/forgot-password-form'
-import { X } from 'lucide-react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 export function AuthModal() {
   const { isAuthModalOpen, closeAuthModal, authModalTab, openAuthModal } = useAuth()
 
+  const handleOpenChange = (open: boolean) => {
+    // Only close the dialog if the user is explicitly closing it (open becomes false)
+    if (!open) {
+      closeAuthModal()
+    }
+  }
+
   return (
-    <Dialog open={isAuthModalOpen} onOpenChange={(open) => !open && closeAuthModal()}>
-      <DialogContent className="!max-w-[900px] w-[95vw] p-0 bg-[#1a0b33] border-gray-800 overflow-hidden h-auto max-h-[95vh]">
+    <Dialog open={isAuthModalOpen} onOpenChange={handleOpenChange}>
+      <DialogContent className="!max-w-[900px] w-[95vw] p-0 bg-[#1a0b33] border-gray-800 overflow-hidden h-auto max-h-[95vh]" onInteractOutside={(e) => e.preventDefault()}>
         <VisuallyHidden>
           <DialogTitle>Authentication</DialogTitle>
         </VisuallyHidden>

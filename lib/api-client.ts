@@ -223,11 +223,13 @@ apiClient.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // If this is a refresh token request that failed, logout user
-    if (originalRequest.url?.includes('/auth/refresh')) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      window.location.href = '/';
+    // Don't attempt token refresh for auth endpoints (login, register, refresh)
+    // These are public endpoints that don't need token refresh logic
+    if (originalRequest.url?.includes('/auth/login') || 
+        originalRequest.url?.includes('/auth/register') ||
+        originalRequest.url?.includes('/auth/refresh') ||
+        originalRequest.url?.includes('/auth/forgot-password') ||
+        originalRequest.url?.includes('/auth/reset-password')) {
       return Promise.reject(error);
     }
 
