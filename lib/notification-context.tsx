@@ -48,6 +48,21 @@ export interface Notification {
   metadata?: Record<string, any> | null
 }
 
+// WebSocket notification structure (from backend WebSocket)
+export interface WebSocketNotification {
+  id: number
+  type: string
+  title: string
+  message: string
+  isRead?: boolean
+  createdAt: Date
+  timestamp?: Date
+  action?: {
+    label: string
+    url: string
+  }
+}
+
 interface NotificationContextType {
   notifications: Notification[]
   isOpen: boolean
@@ -62,6 +77,8 @@ interface NotificationContextType {
   loadMoreNotifications: () => Promise<void>
   refreshNotifications: () => Promise<void>
   addRealtimeNotification: (notification: Notification) => void
+  setInitialNotifications: (notifications: WebSocketNotification[]) => void
+  handleWebSocketNotification: (data: WebSocketNotification | WebSocketNotification[]) => void
 }
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined)
@@ -126,6 +143,23 @@ function transformNotification(backendNotif: BackendNotification): Notification 
     readAt: backendNotif.readAt ? new Date(backendNotif.readAt) : null,
     created_at: new Date(backendNotif.created_at),
     metadata: backendNotif.metadata,
+  }
+}
+
+// Helper function to transform WebSocket notification to frontend notification
+function transformWebSocketNotification(wsNotif: WebSocketNotification): Notification {
+  const type = mapNotificationType(wsNotif.type)
+  const icon = getNotificationIcon(type)
+
+  return {
+    id: wsNotif.id,
+    type,
+    title: wsNotif.title,
+    message: wsNotif.message,
+    timestamp: new Date(wsNotif.createdAt || wsNotif.timestamp || new Date()),
+    read: wsNotif.isRead || false,
+    link: wsNotif.action?.url,
+    icon,
   }
 }
 
@@ -254,6 +288,27 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     setNotifications(prev => [notification, ...prev])
   }, [])
 
+  // Function to set initial notifications from WebSocket (replaces API fetch on connect)
+  const setInitialNotifications = useCallback((wsNotifications: WebSocketNotification[]) => {
+    const transformed = wsNotifications.map(transformWebSocketNotification)
+    setNotifications(transformed)
+    setLoading(false)
+  }, [])
+
+  // Function to handle WebSocket 'notifications' event (array for initial, object for new)
+  const handleWebSocketNotification = useCallback((data: WebSocketNotification | WebSocketNotification[]) => {
+    if (Array.isArray(data)) {
+      // Initial load - array of last 50 notifications
+      console.log(`WebSocket: Loaded ${data.length} initial notifications`)
+      setInitialNotifications(data)
+    } else {
+      // New single notification
+      console.log('WebSocket: New notification received:', data.title)
+      const notification = transformWebSocketNotification(data)
+      addRealtimeNotification(notification)
+    }
+  }, [setInitialNotifications, addRealtimeNotification])
+
   const unreadCount = notifications.filter(n => !n.read).length
 
   return (
@@ -272,6 +327,8 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
         loadMoreNotifications,
         refreshNotifications,
         addRealtimeNotification,
+        setInitialNotifications,
+        handleWebSocketNotification,
       }}
     >
       {children}

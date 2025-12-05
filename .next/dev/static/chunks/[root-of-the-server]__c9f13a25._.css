@@ -2698,10 +2698,6 @@
     background-color: #3d2b5e;
   }
 
-  .bg-\[\#4d3b6e\] {
-    background-color: #4d3b6e;
-  }
-
   .bg-\[\#5d4b7e\] {
     background-color: #5d4b7e;
   }
@@ -4506,10 +4502,6 @@
     overflow-wrap: break-word;
   }
 
-  .break-all {
-    word-break: break-all;
-  }
-
   .whitespace-nowrap {
     white-space: nowrap;
   }
@@ -5749,12 +5741,6 @@
   @media (hover: hover) {
     .hover\:bg-\[rgb\(var\(--bg-elevated\)\)\]:hover {
       background-color: rgb(var(--bg-elevated));
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-\[rgb\(var\(--error\)\)\]:hover {
-      background-color: rgb(var(--error));
     }
   }
 

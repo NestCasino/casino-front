@@ -1,13 +1,29 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { Wallet, WalletSettings, Transaction, mapBackendWalletToFrontend, mapBackendTransactionToFrontend } from './wallet-types'
+import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react'
+import { Wallet, WalletSettings, Transaction, mapBackendWalletToFrontend, mapBackendTransactionToFrontend, getCurrencyByCode, Currency } from './wallet-types'
 import { api } from './api-client'
 import { useAuth } from './auth-context'
+
+// WebSocket balance data structure (from backend WebSocket)
+export interface WebSocketBalanceData {
+  totalBalance: number
+  totalBonusBalance: number
+  wallets: Array<{
+    id: string
+    currencyCode: string
+    walletType: 'crypto' | 'fiat'
+    balance: string
+    bonusBalance: string
+    isDefault: boolean
+  }>
+}
 
 interface WalletContextType {
   wallets: Wallet[]
   activeWallet: Wallet | null
+  totalBalance: number
+  totalBonusBalance: number
   settings: WalletSettings
   transactions: Transaction[]
   isWalletModalOpen: boolean
@@ -22,14 +38,36 @@ interface WalletContextType {
   getWalletByCurrency: (currencyCode: string) => Wallet | undefined
   refreshWallets: () => Promise<void>
   refreshTransactions: () => Promise<void>
+  updateWalletsFromWebSocket: (data: WebSocketBalanceData) => void
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
+
+// Helper function to map WebSocket wallet data to frontend wallet format
+function mapWebSocketWalletToFrontend(wsWallet: WebSocketBalanceData['wallets'][0]): Wallet | null {
+  const currency = getCurrencyByCode(wsWallet.currencyCode)
+  
+  if (!currency) {
+    console.warn(`Unknown currency code from WebSocket: ${wsWallet.currencyCode}`)
+    return null
+  }
+
+  return {
+    id: wsWallet.id,
+    currency,
+    balance: Number(wsWallet.balance),
+    lockedBalance: Number(wsWallet.bonusBalance),
+    isDefault: wsWallet.isDefault,
+    createdAt: new Date().toISOString(), // WebSocket doesn't provide this
+  }
+}
 
 export function WalletProvider({ children }: { children: ReactNode }) {
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
   const [wallets, setWallets] = useState<Wallet[]>([])
   const [activeWallet, setActiveWalletState] = useState<Wallet | null>(null)
+  const [totalBalance, setTotalBalance] = useState<number>(0)
+  const [totalBonusBalance, setTotalBonusBalance] = useState<number>(0)
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
   const [isLoadingWallets, setIsLoadingWallets] = useState(false)
@@ -167,6 +205,41 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     await fetchTransactions()
   }
 
+  // Function to update wallets from WebSocket balance event
+  const updateWalletsFromWebSocket = useCallback((data: WebSocketBalanceData) => {
+    console.log('WebSocket: Balance update received', data)
+    
+    // Update total balances
+    setTotalBalance(data.totalBalance)
+    setTotalBonusBalance(data.totalBonusBalance)
+    
+    // Map WebSocket wallet data to frontend format
+    const mappedWallets = data.wallets
+      .map(mapWebSocketWalletToFrontend)
+      .filter((w): w is Wallet => w !== null)
+    
+    setWallets(mappedWallets)
+    setIsLoadingWallets(false)
+    setError(null)
+    
+    // Update active wallet if it exists in the new data
+    setActiveWalletState(prev => {
+      if (prev) {
+        const updatedWallet = mappedWallets.find(w => w.id === prev.id)
+        if (updatedWallet) {
+          return updatedWallet
+        }
+      }
+      // If no active wallet or previous active wallet not found, use default or first
+      const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
+      if (savedActiveWalletId) {
+        const savedWallet = mappedWallets.find(w => w.id === savedActiveWalletId)
+        if (savedWallet) return savedWallet
+      }
+      return mappedWallets.find(w => w.isDefault) || mappedWallets[0] || null
+    })
+  }, [])
+
   const openWalletModal = () => setIsWalletModalOpen(true)
   const closeWalletModal = () => setIsWalletModalOpen(false)
   const toggleWalletModal = () => setIsWalletModalOpen(!isWalletModalOpen)
@@ -180,6 +253,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       value={{
         wallets,
         activeWallet,
+        totalBalance,
+        totalBonusBalance,
         settings,
         transactions,
         isWalletModalOpen,
@@ -194,6 +269,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         getWalletByCurrency,
         refreshWallets,
         refreshTransactions,
+        updateWalletsFromWebSocket,
       }}
     >
       {children}
