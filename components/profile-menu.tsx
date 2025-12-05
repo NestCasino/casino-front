@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -50,6 +51,7 @@ export function ProfileMenu() {
   const { user, getAvatar, openAvatarModal, clearUser } = useUser()
   const { openWalletModal } = useWallet()
   const { logout } = useAuth()
+  const router = useRouter()
   
   if (!user) return null
   
@@ -200,6 +202,7 @@ export function ProfileMenu() {
               onClick={async () => {
                 await logout()
                 clearUser()
+                router.push('/')
               }}
               className={cn(
                 "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg",

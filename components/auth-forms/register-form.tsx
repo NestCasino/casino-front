@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useAuth } from '@/lib/auth-context'
-import { api, Country, Language } from '@/lib/api-client'
+import { api } from '@/lib/api-client'
 import { SocialLoginButtons } from './social-login-buttons'
 import { PasswordStrengthIndicator } from './password-strength-indicator'
 import { useDebounce } from '@/hooks/use-debounce'
@@ -46,9 +46,7 @@ const registerSchema = z.object({
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number'),
-  currency: z.string().min(1, 'Please select a currency'),
-  country: z.string().optional(),
-  lang: z.string().optional(),
+  currency: z.string(),
   agreeToTerms: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the terms and confirm you are 18+',
   }),
@@ -61,8 +59,6 @@ export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingCurrencies, setIsLoadingCurrencies] = useState(true)
-  const [isLoadingCountries, setIsLoadingCountries] = useState(true)
-  const [isLoadingLanguages, setIsLoadingLanguages] = useState(true)
   
   // Availability states
   const [emailAvailable, setEmailAvailable] = useState<boolean | null>(null)
@@ -72,10 +68,6 @@ export function RegisterForm() {
   
   // Currency states
   const [fiatCurrencies, setFiatCurrencies] = useState<Currency[]>([])
-  
-  // Country and Language states
-  const [countries, setCountries] = useState<Country[]>([])
-  const [languages, setLanguages] = useState<Language[]>([])
 
   const {
     register,
@@ -91,8 +83,6 @@ export function RegisterForm() {
       email: '',
       password: '',
       currency: '',
-      country: '',
-      lang: '',
       agreeToTerms: false,
     },
   })
@@ -128,73 +118,12 @@ export function RegisterForm() {
     loadCurrencies()
   }, [setValue])
 
-  // Load countries on mount
-  useEffect(() => {
-    const loadCountries = async () => {
-      try {
-        const response = await api.countries.getActive()
-        if (response.success && response.data && response.data.length > 0) {
-          setCountries(response.data)
-          
-          // Set United States as default, or first country if US not found
-          const usCountry = response.data.find((c) => c.iso === 'US')
-          const defaultCountry = usCountry || response.data[0]
-          
-          if (defaultCountry) {
-            setValue('country', defaultCountry.iso, { 
-              shouldValidate: false,
-              shouldDirty: false,
-              shouldTouch: false
-            })
-          }
-        }
-      } catch (error) {
-        console.error('Failed to load countries:', error)
-      } finally {
-        setIsLoadingCountries(false)
-      }
-    }
-
-    loadCountries()
-  }, [setValue])
-
-  // Load languages on mount
-  useEffect(() => {
-    const loadLanguages = async () => {
-      try {
-        const response = await api.languages.getActive()
-        if (response.success && response.data && response.data.length > 0) {
-          setLanguages(response.data)
-          
-          // Set English as default, or first language if EN not found
-          const enLanguage = response.data.find((l) => l.iso.toLowerCase() === 'en')
-          const defaultLanguage = enLanguage || response.data[0]
-          
-          if (defaultLanguage) {
-            setValue('lang', defaultLanguage.iso, { 
-              shouldValidate: false,
-              shouldDirty: false,
-              shouldTouch: false
-            })
-          }
-        }
-      } catch (error) {
-        console.error('Failed to load languages:', error)
-      } finally {
-        setIsLoadingLanguages(false)
-      }
-    }
-
-    loadLanguages()
-  }, [setValue])
 
   const agreeToTerms = watch('agreeToTerms')
   const password = watch('password')
   const email = watch('email')
   const username = watch('username')
   const currency = watch('currency')
-  const country = watch('country')
-  const lang = watch('lang')
 
   // Debounce email and username for availability checks
   const debouncedEmail = useDebounce(email, 500)
@@ -258,8 +187,6 @@ export function RegisterForm() {
         email: data.email,
         password: data.password,
         currency: data.currency,
-        country: data.country,
-        lang: data.lang,
       })
     } catch (error) {
       // Error handling is done in the auth context
@@ -409,81 +336,6 @@ export function RegisterForm() {
             ))}
           </SelectContent>
         </Select>
-        {errors.currency && (
-          <p className="text-xs text-red-400">{errors.currency.message}</p>
-        )}
-      </div>
-
-      {/* Country Field */}
-      <div className="space-y-1">
-        <Label htmlFor="register-country" className="text-gray-200 text-sm">
-          Country
-        </Label>
-        <Select
-          value={country || undefined}
-          onValueChange={(value) => setValue('country', value, { shouldValidate: true })}
-          disabled={isLoadingCountries || isLoading}
-        >
-          <SelectTrigger 
-            id="register-country" 
-            className="bg-[#2d1b4e] border-gray-700 text-white h-10 w-full"
-          >
-            <SelectValue 
-              placeholder={isLoadingCountries ? 'Loading countries...' : 'Select country'}
-              className="text-white"
-            />
-          </SelectTrigger>
-          <SelectContent className="bg-[#2d1b4e] border-gray-700">
-            {countries.map((countryItem) => (
-              <SelectItem
-                key={countryItem.id}
-                value={countryItem.iso}
-                className="text-white focus:bg-purple-600/30 focus:text-white"
-              >
-                {countryItem.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        {errors.country && (
-          <p className="text-xs text-red-400">{errors.country.message}</p>
-        )}
-      </div>
-
-      {/* Language Field */}
-      <div className="space-y-1">
-        <Label htmlFor="register-language" className="text-gray-200 text-sm">
-          Language
-        </Label>
-        <Select
-          value={lang || undefined}
-          onValueChange={(value) => setValue('lang', value, { shouldValidate: true })}
-          disabled={isLoadingLanguages || isLoading}
-        >
-          <SelectTrigger 
-            id="register-language" 
-            className="bg-[#2d1b4e] border-gray-700 text-white h-10 w-full"
-          >
-            <SelectValue 
-              placeholder={isLoadingLanguages ? 'Loading languages...' : 'Select language'}
-              className="text-white"
-            />
-          </SelectTrigger>
-          <SelectContent className="bg-[#2d1b4e] border-gray-700">
-            {languages.map((languageItem) => (
-              <SelectItem
-                key={languageItem.id}
-                value={languageItem.iso}
-                className="text-white focus:bg-purple-600/30 focus:text-white"
-              >
-                {languageItem.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        {errors.lang && (
-          <p className="text-xs text-red-400">{errors.lang.message}</p>
-        )}
       </div>
 
       {/* Terms & Age Checkbox */}
@@ -513,7 +365,7 @@ export function RegisterForm() {
       <Button
         type="submit"
         className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold h-10"
-        disabled={isLoading || isLoadingCurrencies || isLoadingCountries || isLoadingLanguages || emailAvailable === false || usernameAvailable === false}
+        disabled={isLoading || isLoadingCurrencies || emailAvailable === false || usernameAvailable === false}
       >
         {isLoading ? (
           <>
