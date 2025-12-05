@@ -1,14 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Copy, QrCode, RefreshCw, AlertTriangle, CheckCircle2, ChevronDown } from 'lucide-react'
 import { useWallet } from '@/lib/wallet-context'
-import { formatBalance, AVAILABLE_CURRENCIES, getCurrencyByCode } from '@/lib/wallet-types'
+import { useCoinNetworks } from '@/lib/coin-networks-context'
+import { formatBalance, AVAILABLE_CURRENCIES, getCurrencyByCode, getNetworkBySlug, getNetworksByNames } from '@/lib/wallet-types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 import { toast } from '@/hooks/use-toast'
+import type { CoinNetwork } from '@/lib/api-client'
 
 // Mock deposit addresses
 const generateDepositAddress = (currencyCode: string) => {
@@ -37,16 +39,37 @@ const fiatPaymentMethods = [
 
 export function WalletDeposit() {
   const { activeWallet, wallets, setActiveWallet } = useWallet()
+  const { networks, isLoading: isLoadingNetworks } = useCoinNetworks()
   const [selectedWallet, setSelectedWallet] = useState(activeWallet)
   const [showWalletSelect, setShowWalletSelect] = useState(false)
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
   const [depositAmount, setDepositAmount] = useState('')
   const [copied, setCopied] = useState(false)
+  const [selectedNetwork, setSelectedNetwork] = useState<CoinNetwork | null>(null)
+  const [showNetworkSelect, setShowNetworkSelect] = useState(false)
 
   if (!selectedWallet) return null
 
   const isCrypto = selectedWallet.currency.type === 'crypto'
   const depositAddress = generateDepositAddress(selectedWallet.currency.code)
+
+  // Get available networks for this currency
+  const availableNetworks = isCrypto && selectedWallet.currency.supportedNetworks
+    ? getNetworksByNames(selectedWallet.currency.supportedNetworks, networks)
+    : selectedWallet.currency.networkSlug
+    ? [getNetworkBySlug(selectedWallet.currency.networkSlug, networks)].filter((n): n is CoinNetwork => n !== null)
+    : []
+
+  // Set initial network selection
+  useEffect(() => {
+    if (availableNetworks.length > 0 && !selectedNetwork) {
+      setSelectedNetwork(availableNetworks[0])
+    }
+  }, [availableNetworks, selectedNetwork])
+
+  // Get network fee and minimum deposit
+  const networkFee = selectedNetwork?.baseFee || 0
+  const minDeposit = networkFee * 2 // Minimum deposit is 2x the network fee
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(depositAddress)
@@ -106,6 +129,16 @@ export function WalletDeposit() {
         </div>
       </div>
 
+      {/* Network Loading State */}
+      {isCrypto && isLoadingNetworks && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <RefreshCw className="h-4 w-4 text-purple-400 animate-spin" />
+            <p className="text-sm text-[rgb(var(--text-muted))]">Loading network information...</p>
+          </div>
+        </div>
+      )}
+
       {/* Currency Selector */}
       <div className="space-y-2">
         <Label>Currency</Label>
@@ -163,15 +196,66 @@ export function WalletDeposit() {
       {isCrypto ? (
         /* Crypto Deposit */
         <>
-          {/* Network Info */}
-          {selectedWallet.currency.network && (
-            <div className="bg-[rgb(var(--bg-base))] rounded-lg p-4 border border-[rgb(var(--surface))]">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-[rgb(var(--text-muted))]">Network</span>
-                <span className="text-sm font-semibold text-[rgb(var(--text-primary))]">
-                  {selectedWallet.currency.network}
-                </span>
-              </div>
+          {/* Network Selection */}
+          {availableNetworks.length > 0 && (
+            <div className="space-y-2">
+              <Label>Network</Label>
+              {availableNetworks.length === 1 ? (
+                <div className="bg-[rgb(var(--bg-base))] rounded-lg p-4 border border-[rgb(var(--surface))]">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-[rgb(var(--text-primary))]">
+                      {selectedNetwork?.name || selectedWallet.currency.network}
+                    </span>
+                    <span className="text-sm text-[rgb(var(--text-muted))]">
+                      Fee: {networkFee} {selectedWallet.currency.code}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowNetworkSelect(!showNetworkSelect)}
+                    className="w-full flex items-center justify-between p-4 bg-[#0f0a1f] border border-purple-800/30 rounded-lg hover:border-purple-600 transition-colors cursor-pointer"
+                  >
+                    <div className="text-left">
+                      <div className="font-semibold text-[rgb(var(--text-primary))]">
+                        {selectedNetwork?.name || 'Select Network'}
+                      </div>
+                      <div className="text-sm text-[rgb(var(--text-muted))]">
+                        Fee: {networkFee} {selectedWallet.currency.code}
+                      </div>
+                    </div>
+                    <ChevronDown className={cn(
+                      "h-4 w-4 text-[rgb(var(--text-muted))] transition-transform",
+                      showNetworkSelect && "rotate-180"
+                    )} />
+                  </button>
+
+                  {showNetworkSelect && (
+                    <div className="absolute top-full mt-2 w-full bg-[#1a1534] border border-purple-800/30 rounded-lg shadow-2xl z-10 max-h-[200px] overflow-y-auto">
+                      {availableNetworks.map((network) => (
+                        <button
+                          key={network.id}
+                          onClick={() => {
+                            setSelectedNetwork(network)
+                            setShowNetworkSelect(false)
+                          }}
+                          className="w-full flex items-center justify-between p-3 hover:bg-purple-800/20 transition-colors cursor-pointer"
+                        >
+                          <div className="text-left">
+                            <div className="text-sm font-semibold text-[rgb(var(--text-primary))]">
+                              {network.name}
+                            </div>
+                            <div className="text-xs text-[rgb(var(--text-muted))]">
+                              Fee: {network.baseFee} {selectedWallet.currency.code}
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -181,7 +265,7 @@ export function WalletDeposit() {
             <div className="text-sm text-orange-300">
               <p className="font-semibold mb-1">Important Notice</p>
               <p>
-                Only deposit {selectedWallet.currency.code} via the {selectedWallet.currency.network} network.
+                Only deposit {selectedWallet.currency.code} via the {selectedNetwork?.name || selectedWallet.currency.network} network.
                 Deposits of other assets or from other networks will be lost.
               </p>
             </div>
@@ -224,9 +308,15 @@ export function WalletDeposit() {
           {/* Confirmation Info */}
           <div className="bg-[rgb(var(--bg-base))] rounded-lg p-4 space-y-2 border border-[rgb(var(--surface))]">
             <div className="flex items-center justify-between text-sm">
+              <span className="text-[rgb(var(--text-muted))]">Network Fee</span>
+              <span className="font-semibold text-[rgb(var(--text-primary))]">
+                {networkFee} {selectedWallet.currency.code}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
               <span className="text-[rgb(var(--text-muted))]">Minimum Deposit</span>
               <span className="font-semibold text-[rgb(var(--text-primary))]">
-                {selectedWallet.currency.code === 'BTC' ? '0.0001 BTC' : '0.01 ' + selectedWallet.currency.code}
+                {formatBalance(minDeposit, selectedWallet.currency.code)}
               </span>
             </div>
             <div className="flex items-center justify-between text-sm">

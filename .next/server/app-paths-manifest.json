@@ -15,11 +15,13 @@
   "/promotions/[id]/page": "app/promotions/[id]/page.js",
   "/promotions/page": "app/promotions/page.js",
   "/recent/page": "app/recent/page.js",
+  "/reset-password/page": "app/reset-password/page.js",
   "/roulette/page": "app/roulette/page.js",
   "/settings/page": "app/settings/page.js",
   "/slots/page": "app/slots/page.js",
   "/sports/page": "app/sports/page.js",
   "/tournaments/[id]/page": "app/tournaments/[id]/page.js",
   "/tournaments/page": "app/tournaments/page.js",
+  "/verify-email/page": "app/verify-email/page.js",
   "/vip/page": "app/vip/page.js"
 }

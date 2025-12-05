@@ -1,4 +1,5 @@
 // Wallet Types and Interfaces
+import { CoinNetwork } from './api-client'
 
 export type CurrencyType = 'crypto' | 'fiat'
 
@@ -9,7 +10,9 @@ export interface Currency {
   icon: string
   type: CurrencyType
   decimals: number
-  network?: string // For crypto currencies
+  network?: string // For crypto currencies - backward compatibility
+  networkSlug?: string // Maps to backend CoinNetwork slug
+  supportedNetworks?: string[] // For multi-network currencies (e.g., USDT)
 }
 
 export interface Wallet {
@@ -135,6 +138,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 8,
     network: 'Bitcoin',
+    networkSlug: 'bitcoin',
   },
   {
     code: 'ETH',
@@ -144,6 +148,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 8,
     network: 'Ethereum',
+    networkSlug: 'ethereum',
   },
   {
     code: 'USDT',
@@ -153,6 +158,8 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 2,
     network: 'ERC-20',
+    networkSlug: 'erc-20',
+    supportedNetworks: ['ERC-20', 'TRC-20', 'BEP-20'], // Multi-network support
   },
   {
     code: 'USDC',
@@ -162,6 +169,8 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 2,
     network: 'ERC-20',
+    networkSlug: 'erc-20',
+    supportedNetworks: ['ERC-20', 'TRC-20', 'BEP-20'], // Multi-network support
   },
   {
     code: 'LTC',
@@ -171,6 +180,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 8,
     network: 'Litecoin',
+    networkSlug: 'litecoin',
   },
   {
     code: 'BCH',
@@ -180,6 +190,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 8,
     network: 'Bitcoin Cash',
+    networkSlug: 'bitcoin-cash',
   },
   {
     code: 'DOGE',
@@ -189,6 +200,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 8,
     network: 'Dogecoin',
+    networkSlug: 'dogecoin',
   },
   {
     code: 'XRP',
@@ -198,6 +210,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 6,
     network: 'XRP Ledger',
+    networkSlug: 'xrp-ledger',
   },
   {
     code: 'TRX',
@@ -207,6 +220,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 6,
     network: 'Tron',
+    networkSlug: 'tron',
   },
   {
     code: 'SOL',
@@ -216,6 +230,7 @@ export const AVAILABLE_CURRENCIES: Currency[] = [
     type: 'crypto',
     decimals: 9,
     network: 'Solana',
+    networkSlug: 'solana',
   },
 ]
 
@@ -232,6 +247,20 @@ export function formatBalance(amount: number, currencyCode: string): string {
   const currency = getCurrencyByCode(currencyCode)
   if (!currency) return `${amount}`
   return formatCurrency(amount, currency)
+}
+
+// Network fee helper functions
+export function getNetworkFee(networkSlug: string, networks: CoinNetwork[]): number | null {
+  const network = networks.find((n) => n.slug === networkSlug)
+  return network ? network.baseFee : null
+}
+
+export function getNetworkBySlug(networkSlug: string, networks: CoinNetwork[]): CoinNetwork | null {
+  return networks.find((n) => n.slug === networkSlug) || null
+}
+
+export function getNetworksByNames(networkNames: string[], networks: CoinNetwork[]): CoinNetwork[] {
+  return networks.filter((n) => networkNames.includes(n.name))
 }
 
 // Backend-to-Frontend Type Mappers

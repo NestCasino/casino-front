@@ -1,50 +1,48 @@
 'use client'
 
-import { useState } from 'react'
-import { AlertTriangle, ChevronDown } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { AlertTriangle, ChevronDown, RefreshCw } from 'lucide-react'
 import { useWallet } from '@/lib/wallet-context'
-import { formatBalance } from '@/lib/wallet-types'
+import { useCoinNetworks } from '@/lib/coin-networks-context'
+import { formatBalance, getNetworkBySlug, getNetworksByNames } from '@/lib/wallet-types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 import { toast } from '@/hooks/use-toast'
-
-// Mock withdrawal fees
-const getWithdrawalFee = (currencyCode: string) => {
-  const fees: Record<string, number> = {
-    BTC: 0.0005,
-    ETH: 0.005,
-    USDT: 1,
-    USDC: 1,
-    LTC: 0.001,
-    BCH: 0.001,
-    DOGE: 1,
-    XRP: 0.2,
-    TRX: 1,
-    SOL: 0.01,
-    USD: 2.5,
-    EUR: 2,
-    CAD: 3,
-    RUB: 50,
-    JPY: 250,
-    GBP: 2,
-  }
-  return fees[currencyCode] || 0
-}
+import type { CoinNetwork } from '@/lib/api-client'
 
 export function WalletWithdraw() {
   const { activeWallet, wallets, setActiveWallet } = useWallet()
+  const { networks, isLoading: isLoadingNetworks } = useCoinNetworks()
   const [selectedWallet, setSelectedWallet] = useState(activeWallet)
   const [showWalletSelect, setShowWalletSelect] = useState(false)
   const [withdrawAmount, setWithdrawAmount] = useState('')
   const [withdrawAddress, setWithdrawAddress] = useState('')
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
+  const [selectedNetwork, setSelectedNetwork] = useState<CoinNetwork | null>(null)
+  const [showNetworkSelect, setShowNetworkSelect] = useState(false)
 
   if (!selectedWallet) return null
 
   const isCrypto = selectedWallet.currency.type === 'crypto'
-  const withdrawalFee = getWithdrawalFee(selectedWallet.currency.code)
+
+  // Get available networks for this currency
+  const availableNetworks = isCrypto && selectedWallet.currency.supportedNetworks
+    ? getNetworksByNames(selectedWallet.currency.supportedNetworks, networks)
+    : selectedWallet.currency.networkSlug
+    ? [getNetworkBySlug(selectedWallet.currency.networkSlug, networks)].filter((n): n is CoinNetwork => n !== null)
+    : []
+
+  // Set initial network selection
+  useEffect(() => {
+    if (availableNetworks.length > 0 && !selectedNetwork) {
+      setSelectedNetwork(availableNetworks[0])
+    }
+  }, [availableNetworks, selectedNetwork])
+
+  // Get network fee and minimum withdrawal using backend data
+  const withdrawalFee = selectedNetwork?.baseFee || 0
   const minWithdrawal = isCrypto ? withdrawalFee * 2 : 10
   const maxWithdrawal = selectedWallet.balance
   const amountAfterFee = withdrawAmount ? parseFloat(withdrawAmount) - withdrawalFee : 0
@@ -131,6 +129,16 @@ export function WalletWithdraw() {
         </div>
       </div>
 
+      {/* Network Loading State */}
+      {isCrypto && isLoadingNetworks && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <RefreshCw className="h-4 w-4 text-purple-400 animate-spin" />
+            <p className="text-sm text-[rgb(var(--text-muted))]">Loading network information...</p>
+          </div>
+        </div>
+      )}
+
       {/* Currency Selector */}
       <div className="space-y-2">
         <Label>Currency</Label>
@@ -196,13 +204,76 @@ export function WalletWithdraw() {
           {isCrypto ? (
             /* Crypto Withdrawal */
             <>
+              {/* Network Selection */}
+              {availableNetworks.length > 0 && (
+                <div className="space-y-2">
+                  <Label>Network</Label>
+                  {availableNetworks.length === 1 ? (
+                    <div className="bg-[rgb(var(--bg-base))] rounded-lg p-4 border border-[rgb(var(--surface))]">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-semibold text-[rgb(var(--text-primary))]">
+                          {selectedNetwork?.name || selectedWallet.currency.network}
+                        </span>
+                        <span className="text-sm text-[rgb(var(--text-muted))]">
+                          Fee: {withdrawalFee} {selectedWallet.currency.code}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowNetworkSelect(!showNetworkSelect)}
+                        className="w-full flex items-center justify-between p-4 bg-[#0f0a1f] border border-purple-800/30 rounded-lg hover:border-purple-600 transition-colors cursor-pointer"
+                      >
+                        <div className="text-left">
+                          <div className="font-semibold text-[rgb(var(--text-primary))]">
+                            {selectedNetwork?.name || 'Select Network'}
+                          </div>
+                          <div className="text-sm text-[rgb(var(--text-muted))]">
+                            Fee: {withdrawalFee} {selectedWallet.currency.code}
+                          </div>
+                        </div>
+                        <ChevronDown className={cn(
+                          "h-4 w-4 text-[rgb(var(--text-muted))] transition-transform",
+                          showNetworkSelect && "rotate-180"
+                        )} />
+                      </button>
+
+                      {showNetworkSelect && (
+                        <div className="absolute top-full mt-2 w-full bg-[#1a1534] border border-purple-800/30 rounded-lg shadow-2xl z-10 max-h-[200px] overflow-y-auto">
+                          {availableNetworks.map((network) => (
+                            <button
+                              key={network.id}
+                              onClick={() => {
+                                setSelectedNetwork(network)
+                                setShowNetworkSelect(false)
+                              }}
+                              className="w-full flex items-center justify-between p-3 hover:bg-purple-800/20 transition-colors cursor-pointer"
+                            >
+                              <div className="text-left">
+                                <div className="text-sm font-semibold text-[rgb(var(--text-primary))]">
+                                  {network.name}
+                                </div>
+                                <div className="text-xs text-[rgb(var(--text-muted))]">
+                                  Fee: {network.baseFee} {selectedWallet.currency.code}
+                                </div>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Warning */}
               <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 flex items-start gap-3">
                 <AlertTriangle className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-orange-300">
                   <p className="font-semibold mb-1">Important Notice</p>
                   <p>
-                    Only withdraw {selectedWallet.currency.code} to a {selectedWallet.currency.network} address.
+                    Only withdraw {selectedWallet.currency.code} to a {selectedNetwork?.name || selectedWallet.currency.network} address.
                     Withdrawing to other networks will result in permanent loss of funds.
                   </p>
                 </div>

@@ -129,6 +129,12 @@
       "namedRegex": "^/recent(?:/)?$"
     },
     {
+      "page": "/reset-password",
+      "regex": "^/reset\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/reset\\-password(?:/)?$"
+    },
+    {
       "page": "/roulette",
       "regex": "^/roulette(?:/)?$",
       "routeKeys": {},
@@ -157,6 +163,12 @@
       "regex": "^/tournaments(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/tournaments(?:/)?$"
+    },
+    {
+      "page": "/verify-email",
+      "regex": "^/verify\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/verify\\-email(?:/)?$"
     },
     {
       "page": "/vip",

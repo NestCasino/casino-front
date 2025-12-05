@@ -14,6 +14,10 @@ export function NotificationDropdown() {
     markAsRead,
     markAllAsRead,
     unreadCount,
+    loading,
+    error,
+    hasMore,
+    loadMoreNotifications,
   } = useNotifications()
   
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -58,6 +62,18 @@ export function NotificationDropdown() {
         return 'from-purple-500/20 to-pink-500/20 border-purple-500/30'
       case 'achievement':
         return 'from-blue-500/20 to-cyan-500/20 border-blue-500/30'
+      case 'financial':
+        return 'from-green-500/20 to-emerald-500/20 border-green-500/30'
+      case 'account':
+        return 'from-blue-500/20 to-cyan-500/20 border-blue-500/30'
+      case 'info':
+        return 'from-blue-500/20 to-cyan-500/20 border-blue-500/30'
+      case 'success':
+        return 'from-green-500/20 to-emerald-500/20 border-green-500/30'
+      case 'warning':
+        return 'from-yellow-500/20 to-orange-500/20 border-yellow-500/30'
+      case 'error':
+        return 'from-red-500/20 to-rose-500/20 border-red-500/30'
       case 'system':
         return 'from-gray-500/20 to-slate-500/20 border-gray-500/30'
       default:
@@ -123,69 +139,100 @@ export function NotificationDropdown() {
 
       {/* Notifications List */}
       <div className="max-h-[500px] overflow-y-auto custom-scrollbar">
-        {notifications.length === 0 ? (
+        {error && (
+          <div className="p-4 bg-red-500/10 border border-red-500/30 m-4 rounded-lg">
+            <p className="text-red-400 text-sm">{error}</p>
+          </div>
+        )}
+        
+        {loading && notifications.length === 0 ? (
+          <div className="py-12 text-center">
+            <div className="text-4xl mb-4 animate-pulse">⏳</div>
+            <div className="text-gray-400 text-sm">Loading notifications...</div>
+          </div>
+        ) : notifications.length === 0 ? (
           <div className="py-12 text-center">
             <div className="text-6xl mb-4">🔔</div>
             <div className="text-gray-400 text-sm">No notifications yet</div>
           </div>
         ) : (
-          <div className="divide-y divide-[#2d1b4e]">
-            {notifications.map((notification) => {
-              const NotificationWrapper = notification.link ? Link : 'div'
-              const wrapperProps = notification.link
-                ? { href: notification.link }
-                : {}
+          <>
+            <div className="divide-y divide-[#2d1b4e]">
+              {notifications.map((notification) => {
+                const NotificationWrapper = notification.link ? Link : 'div'
+                const wrapperProps = notification.link
+                  ? { href: notification.link }
+                  : {}
 
-              return (
-                <NotificationWrapper
-                  key={notification.id}
-                  {...wrapperProps}
-                  onClick={() => handleNotificationClick(notification)}
+                return (
+                  <NotificationWrapper
+                    key={notification.id}
+                    {...wrapperProps}
+                    onClick={() => handleNotificationClick(notification)}
+                    className={cn(
+                      'block p-4 transition-colors cursor-pointer',
+                      !notification.read
+                        ? 'bg-[#1a0b33] hover:bg-[#241842]'
+                        : 'bg-transparent hover:bg-[#1a0b33]'
+                    )}
+                  >
+                    <div className="flex gap-3">
+                      {/* Icon */}
+                      <div
+                        className={cn(
+                          'flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-xl bg-gradient-to-br border',
+                          getNotificationColor(notification.type)
+                        )}
+                      >
+                        {notification.icon}
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2 mb-1">
+                          <h4
+                            className={cn(
+                              'font-semibold text-sm truncate',
+                              !notification.read ? 'text-white' : 'text-gray-300'
+                            )}
+                          >
+                            {notification.title}
+                          </h4>
+                          {!notification.read && (
+                            <div className="flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-1" />
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-400 mb-2 line-clamp-2">
+                          {notification.message}
+                        </p>
+                        <span className="text-xs text-gray-500">
+                          {formatTimestamp(notification.timestamp)}
+                        </span>
+                      </div>
+                    </div>
+                  </NotificationWrapper>
+                )
+              })}
+            </div>
+
+            {/* Load More Button */}
+            {hasMore && (
+              <div className="p-4 border-t border-[#2d1b4e]">
+                <button
+                  onClick={loadMoreNotifications}
+                  disabled={loading}
                   className={cn(
-                    'block p-4 transition-colors cursor-pointer',
-                    !notification.read
-                      ? 'bg-[#1a0b33] hover:bg-[#241842]'
-                      : 'bg-transparent hover:bg-[#1a0b33]'
+                    'w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors',
+                    loading
+                      ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                      : 'bg-purple-600 text-white hover:bg-purple-700'
                   )}
                 >
-                  <div className="flex gap-3">
-                    {/* Icon */}
-                    <div
-                      className={cn(
-                        'flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-xl bg-gradient-to-br border',
-                        getNotificationColor(notification.type)
-                      )}
-                    >
-                      {notification.icon}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <h4
-                          className={cn(
-                            'font-semibold text-sm truncate',
-                            !notification.read ? 'text-white' : 'text-gray-300'
-                          )}
-                        >
-                          {notification.title}
-                        </h4>
-                        {!notification.read && (
-                          <div className="flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-1" />
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-400 mb-2 line-clamp-2">
-                        {notification.message}
-                      </p>
-                      <span className="text-xs text-gray-500">
-                        {formatTimestamp(notification.timestamp)}
-                      </span>
-                    </div>
-                  </div>
-                </NotificationWrapper>
-              )
-            })}
-          </div>
+                  {loading ? 'Loading...' : 'Load More'}
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 

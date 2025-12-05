@@ -1166,7 +1166,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 function NotificationDropdown() {
-    const { notifications, isOpen, closeNotifications, markAsRead, markAllAsRead, unreadCount } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$notification$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useNotifications"])();
+    const { notifications, isOpen, closeNotifications, markAsRead, markAllAsRead, unreadCount, loading, error, hasMore, loadMoreNotifications } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$notification$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useNotifications"])();
     const dropdownRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     // Close dropdown when clicking outside
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
@@ -1209,6 +1209,18 @@ function NotificationDropdown() {
                 return 'from-purple-500/20 to-pink-500/20 border-purple-500/30';
             case 'achievement':
                 return 'from-blue-500/20 to-cyan-500/20 border-blue-500/30';
+            case 'financial':
+                return 'from-green-500/20 to-emerald-500/20 border-green-500/30';
+            case 'account':
+                return 'from-blue-500/20 to-cyan-500/20 border-blue-500/30';
+            case 'info':
+                return 'from-blue-500/20 to-cyan-500/20 border-blue-500/30';
+            case 'success':
+                return 'from-green-500/20 to-emerald-500/20 border-green-500/30';
+            case 'warning':
+                return 'from-yellow-500/20 to-orange-500/20 border-yellow-500/30';
+            case 'error':
+                return 'from-red-500/20 to-rose-500/20 border-red-500/30';
             case 'system':
                 return 'from-gray-500/20 to-slate-500/20 border-gray-500/30';
             default:
@@ -1236,203 +1248,265 @@ function NotificationDropdown() {
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: dropdownRef,
-        className: "jsx-5582a714a0f1c0cd" + " " + "absolute top-full right-0 mt-2 w-[400px] bg-[#0f0420] border border-[#2d1b4e] rounded-xl shadow-2xl z-[100] overflow-hidden animate-in fade-in slide-in-from-top-2",
+        className: "jsx-5a42bae237953721" + " " + "absolute top-full right-0 mt-2 w-[400px] bg-[#0f0420] border border-[#2d1b4e] rounded-xl shadow-2xl z-[100] overflow-hidden animate-in fade-in slide-in-from-top-2",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-5582a714a0f1c0cd" + " " + "flex items-center justify-between p-4 border-b border-[#2d1b4e] bg-[#1a0b33]",
+                className: "jsx-5a42bae237953721" + " " + "flex items-center justify-between p-4 border-b border-[#2d1b4e] bg-[#1a0b33]",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-5582a714a0f1c0cd" + " " + "flex items-center gap-2",
+                        className: "jsx-5a42bae237953721" + " " + "flex items-center gap-2",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "jsx-5582a714a0f1c0cd" + " " + "text-lg font-semibold text-white",
+                                className: "jsx-5a42bae237953721" + " " + "text-lg font-semibold text-white",
                                 children: "Notifications"
                             }, void 0, false, {
                                 fileName: "[project]/components/notification-dropdown.tsx",
-                                lineNumber: 98,
+                                lineNumber: 114,
                                 columnNumber: 11
                             }, this),
                             unreadCount > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "jsx-5582a714a0f1c0cd" + " " + "px-2 py-0.5 bg-purple-600 text-white text-xs font-bold rounded-full",
+                                className: "jsx-5a42bae237953721" + " " + "px-2 py-0.5 bg-purple-600 text-white text-xs font-bold rounded-full",
                                 children: unreadCount
                             }, void 0, false, {
                                 fileName: "[project]/components/notification-dropdown.tsx",
-                                lineNumber: 100,
+                                lineNumber: 116,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/notification-dropdown.tsx",
-                        lineNumber: 97,
+                        lineNumber: 113,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-5582a714a0f1c0cd" + " " + "flex items-center gap-2",
+                        className: "jsx-5a42bae237953721" + " " + "flex items-center gap-2",
                         children: [
                             unreadCount > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: markAllAsRead,
                                 title: "Mark all as read",
-                                className: "jsx-5582a714a0f1c0cd" + " " + "text-xs text-purple-400 hover:text-purple-300 transition-colors cursor-pointer",
+                                className: "jsx-5a42bae237953721" + " " + "text-xs text-purple-400 hover:text-purple-300 transition-colors cursor-pointer",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/components/notification-dropdown.tsx",
-                                    lineNumber: 112,
+                                    lineNumber: 128,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/notification-dropdown.tsx",
-                                lineNumber: 107,
+                                lineNumber: 123,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: closeNotifications,
-                                className: "jsx-5582a714a0f1c0cd" + " " + "text-gray-400 hover:text-white transition-colors cursor-pointer",
+                                className: "jsx-5a42bae237953721" + " " + "text-gray-400 hover:text-white transition-colors cursor-pointer",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
                                     className: "h-5 w-5"
                                 }, void 0, false, {
                                     fileName: "[project]/components/notification-dropdown.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 135,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/notification-dropdown.tsx",
-                                lineNumber: 115,
+                                lineNumber: 131,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/notification-dropdown.tsx",
-                        lineNumber: 105,
+                        lineNumber: 121,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/notification-dropdown.tsx",
-                lineNumber: 96,
+                lineNumber: 112,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-5582a714a0f1c0cd" + " " + "max-h-[500px] overflow-y-auto custom-scrollbar",
-                children: notifications.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "jsx-5582a714a0f1c0cd" + " " + "py-12 text-center",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-5582a714a0f1c0cd" + " " + "text-6xl mb-4",
-                            children: "🔔"
+                className: "jsx-5a42bae237953721" + " " + "max-h-[500px] overflow-y-auto custom-scrollbar",
+                children: [
+                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "jsx-5a42bae237953721" + " " + "p-4 bg-red-500/10 border border-red-500/30 m-4 rounded-lg",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "jsx-5a42bae237953721" + " " + "text-red-400 text-sm",
+                            children: error
                         }, void 0, false, {
                             fileName: "[project]/components/notification-dropdown.tsx",
-                            lineNumber: 128,
-                            columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-5582a714a0f1c0cd" + " " + "text-gray-400 text-sm",
-                            children: "No notifications yet"
-                        }, void 0, false, {
-                            fileName: "[project]/components/notification-dropdown.tsx",
-                            lineNumber: 129,
+                            lineNumber: 144,
                             columnNumber: 13
                         }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/notification-dropdown.tsx",
-                    lineNumber: 127,
-                    columnNumber: 11
-                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "jsx-5582a714a0f1c0cd" + " " + "divide-y divide-[#2d1b4e]",
-                    children: notifications.map((notification)=>{
-                        const NotificationWrapper = notification.link ? __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"] : 'div';
-                        const wrapperProps = notification.link ? {
-                            href: notification.link
-                        } : {};
-                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(NotificationWrapper, {
-                            ...wrapperProps,
-                            onClick: ()=>handleNotificationClick(notification),
-                            className: "jsx-5582a714a0f1c0cd" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('block p-4 transition-colors cursor-pointer', !notification.read ? 'bg-[#1a0b33] hover:bg-[#241842]' : 'bg-transparent hover:bg-[#1a0b33]') || ""),
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-5582a714a0f1c0cd" + " " + "flex gap-3",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-5582a714a0f1c0cd" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-xl bg-gradient-to-br border', getNotificationColor(notification.type)) || ""),
-                                        children: notification.icon
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/notification-dropdown.tsx",
-                                        lineNumber: 153,
-                                        columnNumber: 21
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-5582a714a0f1c0cd" + " " + "flex-1 min-w-0",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-5582a714a0f1c0cd" + " " + "flex items-start justify-between gap-2 mb-1",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                        className: "jsx-5582a714a0f1c0cd" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('font-semibold text-sm truncate', !notification.read ? 'text-white' : 'text-gray-300') || ""),
-                                                        children: notification.title
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/notification-dropdown.tsx",
-                                                        lineNumber: 165,
-                                                        columnNumber: 25
-                                                    }, this),
-                                                    !notification.read && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-5582a714a0f1c0cd" + " " + "flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-1"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/notification-dropdown.tsx",
-                                                        lineNumber: 174,
-                                                        columnNumber: 27
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/notification-dropdown.tsx",
-                                                lineNumber: 164,
-                                                columnNumber: 23
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "jsx-5582a714a0f1c0cd" + " " + "text-sm text-gray-400 mb-2 line-clamp-2",
-                                                children: notification.message
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/notification-dropdown.tsx",
-                                                lineNumber: 177,
-                                                columnNumber: 23
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-5582a714a0f1c0cd" + " " + "text-xs text-gray-500",
-                                                children: formatTimestamp(notification.timestamp)
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/notification-dropdown.tsx",
-                                                lineNumber: 180,
-                                                columnNumber: 23
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/notification-dropdown.tsx",
-                                        lineNumber: 163,
-                                        columnNumber: 21
-                                    }, this)
-                                ]
-                            }, void 0, true, {
+                    }, void 0, false, {
+                        fileName: "[project]/components/notification-dropdown.tsx",
+                        lineNumber: 143,
+                        columnNumber: 11
+                    }, this),
+                    loading && notifications.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "jsx-5a42bae237953721" + " " + "py-12 text-center",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-5a42bae237953721" + " " + "text-4xl mb-4 animate-pulse",
+                                children: "⏳"
+                            }, void 0, false, {
+                                fileName: "[project]/components/notification-dropdown.tsx",
+                                lineNumber: 150,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-5a42bae237953721" + " " + "text-gray-400 text-sm",
+                                children: "Loading notifications..."
+                            }, void 0, false, {
                                 fileName: "[project]/components/notification-dropdown.tsx",
                                 lineNumber: 151,
-                                columnNumber: 19
+                                columnNumber: 13
                             }, this)
-                        }, notification.id, false, {
-                            fileName: "[project]/components/notification-dropdown.tsx",
-                            lineNumber: 140,
-                            columnNumber: 17
-                        }, this);
-                    })
-                }, void 0, false, {
-                    fileName: "[project]/components/notification-dropdown.tsx",
-                    lineNumber: 132,
-                    columnNumber: 11
-                }, this)
-            }, void 0, false, {
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/notification-dropdown.tsx",
+                        lineNumber: 149,
+                        columnNumber: 11
+                    }, this) : notifications.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "jsx-5a42bae237953721" + " " + "py-12 text-center",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-5a42bae237953721" + " " + "text-6xl mb-4",
+                                children: "🔔"
+                            }, void 0, false, {
+                                fileName: "[project]/components/notification-dropdown.tsx",
+                                lineNumber: 155,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-5a42bae237953721" + " " + "text-gray-400 text-sm",
+                                children: "No notifications yet"
+                            }, void 0, false, {
+                                fileName: "[project]/components/notification-dropdown.tsx",
+                                lineNumber: 156,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/notification-dropdown.tsx",
+                        lineNumber: 154,
+                        columnNumber: 11
+                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-5a42bae237953721" + " " + "divide-y divide-[#2d1b4e]",
+                                children: notifications.map((notification)=>{
+                                    const NotificationWrapper = notification.link ? __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"] : 'div';
+                                    const wrapperProps = notification.link ? {
+                                        href: notification.link
+                                    } : {};
+                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(NotificationWrapper, {
+                                        ...wrapperProps,
+                                        onClick: ()=>handleNotificationClick(notification),
+                                        className: "jsx-5a42bae237953721" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('block p-4 transition-colors cursor-pointer', !notification.read ? 'bg-[#1a0b33] hover:bg-[#241842]' : 'bg-transparent hover:bg-[#1a0b33]') || ""),
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "jsx-5a42bae237953721" + " " + "flex gap-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "jsx-5a42bae237953721" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-xl bg-gradient-to-br border', getNotificationColor(notification.type)) || ""),
+                                                    children: notification.icon
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/notification-dropdown.tsx",
+                                                    lineNumber: 181,
+                                                    columnNumber: 23
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "jsx-5a42bae237953721" + " " + "flex-1 min-w-0",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "jsx-5a42bae237953721" + " " + "flex items-start justify-between gap-2 mb-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                                                                    className: "jsx-5a42bae237953721" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('font-semibold text-sm truncate', !notification.read ? 'text-white' : 'text-gray-300') || ""),
+                                                                    children: notification.title
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/notification-dropdown.tsx",
+                                                                    lineNumber: 193,
+                                                                    columnNumber: 27
+                                                                }, this),
+                                                                !notification.read && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "jsx-5a42bae237953721" + " " + "flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-1"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/notification-dropdown.tsx",
+                                                                    lineNumber: 202,
+                                                                    columnNumber: 29
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/components/notification-dropdown.tsx",
+                                                            lineNumber: 192,
+                                                            columnNumber: 25
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                            className: "jsx-5a42bae237953721" + " " + "text-sm text-gray-400 mb-2 line-clamp-2",
+                                                            children: notification.message
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/notification-dropdown.tsx",
+                                                            lineNumber: 205,
+                                                            columnNumber: 25
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "jsx-5a42bae237953721" + " " + "text-xs text-gray-500",
+                                                            children: formatTimestamp(notification.timestamp)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/notification-dropdown.tsx",
+                                                            lineNumber: 208,
+                                                            columnNumber: 25
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/notification-dropdown.tsx",
+                                                    lineNumber: 191,
+                                                    columnNumber: 23
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/notification-dropdown.tsx",
+                                            lineNumber: 179,
+                                            columnNumber: 21
+                                        }, this)
+                                    }, notification.id, false, {
+                                        fileName: "[project]/components/notification-dropdown.tsx",
+                                        lineNumber: 168,
+                                        columnNumber: 19
+                                    }, this);
+                                })
+                            }, void 0, false, {
+                                fileName: "[project]/components/notification-dropdown.tsx",
+                                lineNumber: 160,
+                                columnNumber: 13
+                            }, this),
+                            hasMore && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-5a42bae237953721" + " " + "p-4 border-t border-[#2d1b4e]",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: loadMoreNotifications,
+                                    disabled: loading,
+                                    className: "jsx-5a42bae237953721" + " " + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])('w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors', loading ? 'bg-gray-600 text-gray-400 cursor-not-allowed' : 'bg-purple-600 text-white hover:bg-purple-700') || ""),
+                                    children: loading ? 'Loading...' : 'Load More'
+                                }, void 0, false, {
+                                    fileName: "[project]/components/notification-dropdown.tsx",
+                                    lineNumber: 221,
+                                    columnNumber: 17
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/components/notification-dropdown.tsx",
+                                lineNumber: 220,
+                                columnNumber: 15
+                            }, this)
+                        ]
+                    }, void 0, true)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/notification-dropdown.tsx",
-                lineNumber: 125,
+                lineNumber: 141,
                 columnNumber: 7
             }, this),
             notifications.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-5582a714a0f1c0cd" + " " + "border-t border-[#2d1b4e] bg-[#1a0b33] p-3 text-center",
+                className: "jsx-5a42bae237953721" + " " + "border-t border-[#2d1b4e] bg-[#1a0b33] p-3 text-center",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     href: "/notifications",
                     onClick: closeNotifications,
@@ -1440,22 +1514,22 @@ function NotificationDropdown() {
                     children: "View all notifications"
                 }, void 0, false, {
                     fileName: "[project]/components/notification-dropdown.tsx",
-                    lineNumber: 195,
+                    lineNumber: 242,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/notification-dropdown.tsx",
-                lineNumber: 194,
+                lineNumber: 241,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "5582a714a0f1c0cd",
+                id: "5a42bae237953721",
                 children: ".custom-scrollbar::-webkit-scrollbar{width:8px}.custom-scrollbar::-webkit-scrollbar-track{background:#1a0b33}.custom-scrollbar::-webkit-scrollbar-thumb{background:#2d1b4e;border-radius:4px}.custom-scrollbar::-webkit-scrollbar-thumb:hover{background:#3d2b5e}@keyframes slide-in-from-top-2{0%{transform:translateY(-.5rem)}to{transform:translateY(0)}}@keyframes fade-in{0%{opacity:0}to{opacity:1}}.animate-in{animation:.2s ease-out slide-in-from-top-2,.2s ease-out fade-in}"
             }, void 0, false, void 0, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/notification-dropdown.tsx",
-        lineNumber: 91,
+        lineNumber: 107,
         columnNumber: 5
     }, this);
 }

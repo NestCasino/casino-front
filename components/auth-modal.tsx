@@ -5,11 +5,12 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { LoginForm } from './auth-forms/login-form'
 import { RegisterForm } from './auth-forms/register-form'
+import { ForgotPasswordForm } from './auth-forms/forgot-password-form'
 import { X } from 'lucide-react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 export function AuthModal() {
-  const { isAuthModalOpen, closeAuthModal, authModalTab } = useAuth()
+  const { isAuthModalOpen, closeAuthModal, authModalTab, openAuthModal } = useAuth()
 
   return (
     <Dialog open={isAuthModalOpen} onOpenChange={(open) => !open && closeAuthModal()}>
@@ -62,46 +63,52 @@ export function AuthModal() {
 
           {/* Right Side - Forms */}
           <div className="p-6 md:px-12 md:py-8 flex flex-col overflow-auto">
-            <Tabs defaultValue={authModalTab} className="flex flex-col">
-              <TabsList className="grid w-full grid-cols-2 bg-[#2d1b4e] p-1 mb-4 flex-shrink-0">
-                <TabsTrigger
-                  value="login"
-                  className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400 font-semibold"
-                >
-                  Login
-                </TabsTrigger>
-                <TabsTrigger
-                  value="register"
-                  className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400 font-semibold"
-                >
-                  Sign Up
-                </TabsTrigger>
-              </TabsList>
+            {authModalTab === 'forgot-password' ? (
+              <div className="space-y-4">
+                <ForgotPasswordForm onBackToLogin={() => openAuthModal('login')} />
+              </div>
+            ) : (
+              <Tabs value={authModalTab} onValueChange={(value) => openAuthModal(value as 'login' | 'register')} className="flex flex-col">
+                <TabsList className="grid w-full grid-cols-2 bg-[#2d1b4e] p-1 mb-4 flex-shrink-0">
+                  <TabsTrigger
+                    value="login"
+                    className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400 font-semibold"
+                  >
+                    Login
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="register"
+                    className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400 font-semibold"
+                  >
+                    Sign Up
+                  </TabsTrigger>
+                </TabsList>
 
-              <TabsContent value="login" className="mt-0">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-1">Welcome back!</h3>
-                    <p className="text-gray-400 text-sm">
-                      Login to continue your winning streak
-                    </p>
+                <TabsContent value="login" className="mt-0">
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">Welcome back!</h3>
+                      <p className="text-gray-400 text-sm">
+                        Login to continue your winning streak
+                      </p>
+                    </div>
+                    <LoginForm />
                   </div>
-                  <LoginForm />
-                </div>
-              </TabsContent>
+                </TabsContent>
 
-              <TabsContent value="register" className="mt-0">
-                <div className="space-y-3">
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-1">Create Account</h3>
-                    <p className="text-gray-400 text-sm">
-                      Join now and claim your welcome bonus
-                    </p>
+                <TabsContent value="register" className="mt-0">
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">Create Account</h3>
+                      <p className="text-gray-400 text-sm">
+                        Join now and claim your welcome bonus
+                      </p>
+                    </div>
+                    <RegisterForm />
                   </div>
-                  <RegisterForm />
-                </div>
-              </TabsContent>
-            </Tabs>
+                </TabsContent>
+              </Tabs>
+            )}
           </div>
         </div>
       </DialogContent>

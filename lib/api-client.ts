@@ -60,6 +60,7 @@ export interface UpdateProfileData {
   last_name?: string;
   birthday?: string;
   country?: string;
+  lang?: string;
   gender?: 'Male' | 'Female' | 'Other';
   address?: string;
   city?: string;
@@ -90,6 +91,38 @@ interface Currency {
   name: string;
   type: 'fiat' | 'crypto';
   symbol: string;
+  is_active: boolean;
+}
+
+// Coin Network Types
+export interface CoinNetwork {
+  id: string;
+  name: string;
+  slug: string;
+  baseFee: number;
+  isActive: boolean;
+  createDt: string;
+  modifyDt: string;
+}
+
+// Country Types
+export interface Country {
+  id: number;
+  name: string;
+  iso: string;
+  timeZone: string;
+  utcOffset: string;
+  defaultLanguage: string;
+  isRestricted: boolean;
+  isActive: boolean;
+}
+
+// Language Types
+export interface Language {
+  id: number;
+  name: string;
+  iso: string;
+  flag_iso: string | null;
   is_active: boolean;
 }
 
@@ -334,6 +367,96 @@ export const api = {
       });
       return response.data;
     },
+
+    forgotPassword: async (email: string): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.post('/api/v1/auth/forgot-password', { email });
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to send password reset email',
+          },
+        };
+      }
+    },
+
+    resetPassword: async (data: {
+      email: string;
+      token: string;
+      password: string;
+      password_confirmation: string;
+    }): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.post('/api/v1/auth/reset-password', data);
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to reset password',
+          },
+        };
+      }
+    },
+
+    requestEmailVerification: async (): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.post('/api/v1/auth/email/verify');
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to request email verification',
+          },
+        };
+      }
+    },
+
+    verifyEmailWithToken: async (token: string): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.post(`/api/v1/auth/email/verify/${token}`);
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to verify email',
+          },
+        };
+      }
+    },
+
+    verifyEmailByHash: async (id: string, hash: string): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.get(`/api/v1/auth/email-verification/${id}/${hash}`);
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to verify email',
+          },
+        };
+      }
+    },
   },
 
   // Player endpoints
@@ -563,10 +686,157 @@ export const api = {
       }
     },
   },
+
+  // Coin Networks endpoints
+  coinNetworks: {
+    getActive: async (): Promise<ApiResponse<CoinNetwork[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/coin-networks/active');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load coin networks',
+          },
+        };
+      }
+    },
+  },
+
+  // Countries endpoints
+  countries: {
+    getActive: async (): Promise<ApiResponse<Country[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/countries');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load countries',
+          },
+        };
+      }
+    },
+  },
+
+  // Languages endpoints
+  languages: {
+    getActive: async (): Promise<ApiResponse<Language[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/languages');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load languages',
+          },
+        };
+      }
+    },
+  },
+
+  // Notification endpoints
+  notifications: {
+    getNotifications: async (limit: number = 50, offset: number = 0): Promise<ApiResponse<any[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/notifications', {
+          params: { limit, offset },
+        });
+        // Handle nested data structure and ensure we return an array
+        let notificationsData = response.data.data || response.data;
+        
+        // If the response is a paginated object, extract the notifications array
+        if (notificationsData && typeof notificationsData === 'object' && !Array.isArray(notificationsData)) {
+          notificationsData = notificationsData.notifications || notificationsData.items || notificationsData.data || [];
+        }
+        
+        // Ensure we always return an array
+        if (!Array.isArray(notificationsData)) {
+          notificationsData = [];
+        }
+        
+        return {
+          success: true,
+          data: notificationsData,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load notifications',
+          },
+        };
+      }
+    },
+
+    markAsRead: async (id: number): Promise<ApiResponse<any>> => {
+      try {
+        const response = await apiClient.patch(`/api/v1/notifications/${id}/read`);
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to mark notification as read',
+          },
+        };
+      }
+    },
+
+    markAllAsRead: async (): Promise<ApiResponse<{ message: string; count?: number }>> => {
+      try {
+        const response = await apiClient.patch('/api/v1/notifications/read-all');
+        return {
+          success: true,
+          data: response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to mark all notifications as read',
+          },
+        };
+      }
+    },
+  },
 };
 
 export default apiClient;
 
 // Export types for use in other files
-export type { BackendWallet, BackendTransaction, WalletBalanceResponse };
+export type { BackendWallet, BackendTransaction, WalletBalanceResponse, CoinNetwork, Country, Language };
 

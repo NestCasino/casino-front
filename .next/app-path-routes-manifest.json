@@ -15,11 +15,13 @@
   "/promotions/[id]/page": "/promotions/[id]",
   "/promotions/page": "/promotions",
   "/recent/page": "/recent",
+  "/reset-password/page": "/reset-password",
   "/roulette/page": "/roulette",
   "/settings/page": "/settings",
   "/slots/page": "/slots",
   "/sports/page": "/sports",
   "/tournaments/[id]/page": "/tournaments/[id]",
   "/tournaments/page": "/tournaments",
+  "/verify-email/page": "/verify-email",
   "/vip/page": "/vip"
 }

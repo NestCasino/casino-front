@@ -21,7 +21,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>
 
 export function LoginForm() {
-  const { login } = useAuth()
+  const { login, openAuthModal } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -128,6 +128,7 @@ export function LoginForm() {
         </div>
         <button
           type="button"
+          onClick={() => openAuthModal('forgot-password')}
           className="text-sm text-purple-400 hover:text-purple-300"
           disabled={isLoading}
         >

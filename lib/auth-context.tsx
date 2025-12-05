@@ -37,15 +37,20 @@ type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse
 interface AuthContextType {
   isAuthenticated: boolean
   isLoading: boolean
+  user: Player | null
+  accessToken: string | null
   login: (email: string, password: string, rememberMe?: boolean) => Promise<void>
   register: (data: RegisterData) => Promise<void>
   logout: () => Promise<void>
+  forgotPassword: (email: string) => Promise<void>
+  resetPassword: (email: string, token: string, password: string, passwordConfirmation: string) => Promise<void>
+  requestEmailVerification: () => Promise<void>
   checkEmailAvailability: (email: string) => Promise<boolean>
   checkUsernameAvailability: (username: string) => Promise<boolean>
-  openAuthModal: (tab?: 'login' | 'register') => void
+  openAuthModal: (tab?: 'login' | 'register' | 'forgot-password') => void
   closeAuthModal: () => void
   isAuthModalOpen: boolean
-  authModalTab: 'login' | 'register'
+  authModalTab: 'login' | 'register' | 'forgot-password'
 }
 
 interface RegisterData {
@@ -63,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
-  const [authModalTab, setAuthModalTab] = useState<'login' | 'register'>('login')
+  const [authModalTab, setAuthModalTab] = useState<'login' | 'register' | 'forgot-password'>('login')
 
   // Check if user is authenticated on mount
   useEffect(() => {
@@ -77,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false)
   }, [])
 
-  const openAuthModal = useCallback((tab: 'login' | 'register' = 'login') => {
+  const openAuthModal = useCallback((tab: 'login' | 'register' | 'forgot-password' = 'login') => {
     setAuthModalTab(tab)
     setIsAuthModalOpen(true)
   }, [])
@@ -113,6 +118,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           title: 'Welcome back!',
           description: `Successfully logged in as ${player.username}`,
         })
+
+        // Check for redirect URL (e.g., from email verification)
+        const redirectUrl = sessionStorage.getItem('redirectAfterLogin')
+        if (redirectUrl) {
+          sessionStorage.removeItem('redirectAfterLogin')
+          window.location.href = redirectUrl
+        }
       } else {
         throw new Error(response.error?.message || 'Login failed')
       }
@@ -248,14 +260,103 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const forgotPassword = async (email: string) => {
+    try {
+      const response = await api.auth.forgotPassword(email)
+      
+      if (response.success) {
+        toast({
+          title: 'Email Sent',
+          description: 'Please check your email for password reset instructions',
+        })
+      } else {
+        throw new Error(response.error?.message || 'Failed to send reset email')
+      }
+    } catch (error: any) {
+      console.error('Forgot password error:', error)
+      const errorMessage = 
+        error.response?.data?.error?.message || 
+        error.message || 
+        'Failed to send reset email. Please try again.'
+      
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        variant: 'destructive',
+      })
+      throw error
+    }
+  }
+
+  const resetPassword = async (
+    email: string,
+    token: string,
+    password: string,
+    passwordConfirmation: string
+  ) => {
+    try {
+      const response = await api.auth.resetPassword({
+        email,
+        token,
+        password,
+        password_confirmation: passwordConfirmation,
+      })
+      
+      if (response.success) {
+        toast({
+          title: 'Password Reset Successful',
+          description: 'You can now log in with your new password',
+        })
+      } else {
+        throw new Error(response.error?.message || 'Failed to reset password')
+      }
+    } catch (error: any) {
+      console.error('Reset password error:', error)
+      const errorMessage = 
+        error.response?.data?.error?.message || 
+        error.message || 
+        'Failed to reset password. The link may have expired.'
+      
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        variant: 'destructive',
+      })
+      throw error
+    }
+  }
+
+  const requestEmailVerification = async () => {
+    try {
+      const response = await api.auth.requestEmailVerification()
+      
+      if (!response.success) {
+        throw new Error(response.error?.message || 'Failed to send verification email')
+      }
+    } catch (error: any) {
+      console.error('Request email verification error:', error)
+      const errorMessage = 
+        error.response?.data?.error?.message || 
+        error.message || 
+        'Failed to send verification email. Please try again.'
+      
+      throw new Error(errorMessage)
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         isLoading,
+        user: null, // TODO: Load user data from API
+        accessToken: typeof window !== 'undefined' ? localStorage.getItem('access_token') : null,
         login,
         register,
         logout,
+        forgotPassword,
+        resetPassword,
+        requestEmailVerification,
         checkEmailAvailability,
         checkUsernameAvailability,
         openAuthModal,
