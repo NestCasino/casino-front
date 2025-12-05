@@ -84,6 +84,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     if (!isAuthenticated) {
       setWallets([])
       setActiveWalletState(null)
+      setTotalBalance(0)
+      setTotalBonusBalance(0)
       return
     }
 
@@ -91,20 +93,37 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     setError(null)
 
     try {
-      const response = await api.wallets.getWallets()
+      // Fetch both wallets and total balance
+      const [walletsResponse, balanceResponse] = await Promise.all([
+        api.wallets.getWallets(),
+        api.wallets.getTotalBalance()
+      ])
       
-      if (response.success && response.data) {
-        const mappedWallets = response.data
+      console.log('[WalletContext] Wallets Response:', walletsResponse)
+      console.log('[WalletContext] Balance Response:', balanceResponse)
+      
+      if (walletsResponse.success && walletsResponse.data) {
+        const mappedWallets = walletsResponse.data
           .map(mapBackendWalletToFrontend)
           .filter((w): w is Wallet => w !== null)
         
+        console.log('[WalletContext] Mapped Wallets:', mappedWallets)
         setWallets(mappedWallets)
+        
+        // Update total balance from API response
+        if (balanceResponse.success && balanceResponse.data) {
+          console.log('[WalletContext] Setting total balance:', balanceResponse.data.totalBalance)
+          setTotalBalance(balanceResponse.data.totalBalance || 0)
+          setTotalBonusBalance(balanceResponse.data.totalBonusBalance || 0)
+        }
         
         // Set active wallet: restore from localStorage or use first/default wallet
         const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
+        console.log('[WalletContext] Saved active wallet ID:', savedActiveWalletId)
         if (savedActiveWalletId) {
           const savedWallet = mappedWallets.find(w => w.id === savedActiveWalletId)
           if (savedWallet) {
+            console.log('[WalletContext] Setting saved wallet as active:', savedWallet)
             setActiveWalletState(savedWallet)
             return
           }
@@ -112,12 +131,14 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         
         // Fallback: use default wallet or first wallet
         const defaultWallet = mappedWallets.find(w => w.isDefault) || mappedWallets[0]
+        console.log('[WalletContext] Setting default/first wallet as active:', defaultWallet)
         setActiveWalletState(defaultWallet || null)
       } else {
-        setError(response.error?.message || 'Failed to load wallets')
+        console.error('[WalletContext] Failed to load wallets:', walletsResponse.error)
+        setError(walletsResponse.error?.message || 'Failed to load wallets')
       }
     } catch (err: any) {
-      console.error('Failed to fetch wallets:', err)
+      console.error('[WalletContext] Failed to fetch wallets:', err)
       setError(err.message || 'Failed to load wallets')
     } finally {
       setIsLoadingWallets(false)

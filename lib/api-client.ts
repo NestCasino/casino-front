@@ -631,11 +631,46 @@ export const api = {
     getWallets: async (): Promise<ApiResponse<BackendWallet[]>> => {
       try {
         const response = await apiClient.get('/api/v1/wallets');
+        console.log('[API] Raw wallets response:', response);
+        console.log('[API] response.data:', response.data);
+        console.log('[API] response.data.data:', response.data.data);
+        
+        // Handle different response structures
+        let walletData: BackendWallet[];
+        
+        // If response.data has a 'data' property (standardized response)
+        if (response.data && typeof response.data === 'object' && 'data' in response.data) {
+          walletData = response.data.data;
+        } 
+        // If response.data is directly an array
+        else if (Array.isArray(response.data)) {
+          walletData = response.data;
+        }
+        // If response.data is an object with success flag
+        else if (response.data && response.data.success && response.data.data) {
+          walletData = response.data.data;
+        }
+        // Fallback
+        else {
+          walletData = response.data || [];
+        }
+        
+        console.log('[API] Final wallet data:', walletData);
+        console.log('[API] Wallet data type:', typeof walletData, 'Is array?', Array.isArray(walletData));
+        
+        // Ensure it's an array
+        if (!Array.isArray(walletData)) {
+          console.error('[API] Wallet data is not an array!', walletData);
+          walletData = [];
+        }
+        
         return {
           success: true,
-          data: response.data.data || response.data,
+          data: walletData,
         };
       } catch (error: any) {
+        console.error('[API] Failed to fetch wallets:', error);
+        console.error('[API] Error response:', error.response);
         if (error.response?.data) {
           return error.response.data;
         }

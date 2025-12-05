@@ -3,14 +3,24 @@
 import { useState, useRef, useEffect } from 'react'
 import { ChevronDown, Search, Settings } from 'lucide-react'
 import { useWallet } from '@/lib/wallet-context'
+import { useUser } from '@/lib/user-context'
 import { formatBalance } from '@/lib/wallet-types'
 import { cn } from '@/lib/utils'
 
 export function WalletSelector() {
-  const { wallets, activeWallet, setActiveWallet, settings, openWalletModal } = useWallet()
+  const { wallets, activeWallet, setActiveWallet, settings, openWalletModal, totalBalance } = useWallet()
+  const { user } = useUser()
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Debug logging
+  useEffect(() => {
+    console.log('[WalletSelector] Wallets:', wallets)
+    console.log('[WalletSelector] Active Wallet:', activeWallet)
+    console.log('[WalletSelector] Total Balance:', totalBalance)
+    console.log('[WalletSelector] User:', user)
+  }, [wallets, activeWallet, totalBalance, user])
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -42,6 +52,10 @@ export function WalletSelector() {
     setSearchQuery('')
   }
 
+  // Use user data as the source of truth (same as profile menu)
+  const displayCurrency = user?.currency || 'USD'
+  const displayBalance = user?.balance || 0
+
   return (
     <div ref={dropdownRef} className="relative">
       {/* Selector Button */}
@@ -50,9 +64,9 @@ export function WalletSelector() {
         className="flex items-center gap-2 bg-[rgb(var(--bg-elevated))] px-5 py-2.5 rounded-xl hover:bg-[rgb(var(--surface))] transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-2">
-          <span className="text-base font-semibold text-[rgb(var(--text-muted))]">{activeWallet?.currency.code}</span>
+          <span className="text-base font-semibold text-[rgb(var(--text-muted))]">{displayCurrency}</span>
           <span className="text-base font-semibold">
-            {activeWallet ? formatBalance(activeWallet.balance, activeWallet.currency.code) : '$0.00'}
+            {formatBalance(displayBalance, displayCurrency)}
           </span>
         </div>
         <ChevronDown className={cn(
