@@ -10,6 +10,7 @@ import { NotificationProvider } from '@/lib/notification-context'
 import { WebSocketProvider } from '@/lib/websocket-context'
 import { BonusProvider } from '@/lib/bonus-context'
 import { CoinNetworksProvider } from '@/lib/coin-networks-context'
+import { GameDataProvider } from '@/lib/game-data-context'
 import { WalletModal } from '@/components/wallet-modal'
 import { AuthModal } from '@/components/auth-modal'
 import { Toaster } from '@/components/ui/toaster'
@@ -56,20 +57,22 @@ export default function RootLayout({
           <SearchProvider>
             <AuthProvider>
               <CoinNetworksProvider>
-                <WalletProvider>
-                  <UserProvider>
-                    <NotificationProvider>
-                      <WebSocketProvider>
-                        <BonusProvider>
-                          {children}
-                          <WalletModal />
-                          <AuthModal />
-                          <Toaster />
-                        </BonusProvider>
-                      </WebSocketProvider>
-                    </NotificationProvider>
-                  </UserProvider>
-                </WalletProvider>
+                <GameDataProvider>
+                  <WalletProvider>
+                    <UserProvider>
+                      <NotificationProvider>
+                        <WebSocketProvider>
+                          <BonusProvider>
+                            {children}
+                            <WalletModal />
+                            <AuthModal />
+                            <Toaster />
+                          </BonusProvider>
+                        </WebSocketProvider>
+                      </NotificationProvider>
+                    </UserProvider>
+                  </WalletProvider>
+                </GameDataProvider>
               </CoinNetworksProvider>
             </AuthProvider>
           </SearchProvider>

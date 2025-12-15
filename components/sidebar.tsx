@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { Star, Clock, Trophy, CheckSquare, Sparkles, Cherry, Video, Mic, Bomb, LayoutGrid, CircleDot, Spade, Diamond, Gift, Users, Crown, FileText, MessageCircle, Handshake, Shield, Headphones, Globe } from 'lucide-react'
+import { Star, Clock, Trophy, CheckSquare, Sparkles, Cherry, Video, Mic, Bomb, LayoutGrid, CircleDot, Spade, Diamond, Gift, Users, Crown, FileText, MessageCircle, Handshake, Shield, Headphones, Globe, Building2, Zap, TableProperties, Gamepad2, Ticket, Film } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useSidebar } from '@/lib/sidebar-context'
+import { useGameData } from '@/lib/game-data-context'
 
 interface SidebarItemProps {
   icon: React.ReactNode
@@ -60,9 +61,29 @@ function SidebarLabel({ children, collapsed }: { children: React.ReactNode; coll
   )
 }
 
+// Icon mapping for categories
+const getCategoryIcon = (slug: string): React.ReactNode => {
+  const iconMap: Record<string, React.ReactNode> = {
+    slots: <Cherry className="h-5 w-5" />,
+    instant: <Zap className="h-5 w-5" />,
+    table: <TableProperties className="h-5 w-5" />,
+    arcade: <Gamepad2 className="h-5 w-5" />,
+    lottery: <Ticket className="h-5 w-5" />,
+    game_show: <Film className="h-5 w-5" />,
+    other: <LayoutGrid className="h-5 w-5" />,
+  }
+  return iconMap[slug] || <LayoutGrid className="h-5 w-5" />
+}
+
 export function Sidebar() {
   const pathname = usePathname()
   const { isCollapsed } = useSidebar()
+  const { categories } = useGameData()
+  
+  // Filter and sort categories
+  const activeCategories = categories
+    .filter(cat => cat.isActive)
+    .sort((a, b) => a.sortOrder - b.sortOrder)
   
   return (
     <aside className={cn(
@@ -81,14 +102,19 @@ export function Sidebar() {
 
         {/* Games Categories */}
         <SidebarItem icon={<LayoutGrid className="h-5 w-5" />} label="All Games" href="/all-games" active={pathname === '/all-games'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Sparkles className="h-5 w-5" />} label="New Releases" href="/new-releases" active={pathname === '/new-releases'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Cherry className="h-5 w-5" />} label="Slots" href="/slots" active={pathname === '/slots'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Video className="h-5 w-5" />} label="Live Casino" href="/live-casino" active={pathname === '/live-casino'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Mic className="h-5 w-5" />} label="Game Shows" href="/game-shows" active={pathname === '/game-shows'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Bomb className="h-5 w-5" />} label="Burst Games" href="/burst" active={pathname === '/burst'} collapsed={isCollapsed} />
-        <SidebarItem icon={<CircleDot className="h-5 w-5" />} label="Roulette" href="/roulette" active={pathname === '/roulette'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Spade className="h-5 w-5" />} label="Blackjack" href="/blackjack" active={pathname === '/blackjack'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Diamond className="h-5 w-5" />} label="Baccarat" href="/baccarat" active={pathname === '/baccarat'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Building2 className="h-5 w-5" />} label="Providers" href="/providers" active={pathname === '/providers' || pathname.startsWith('/providers/')} collapsed={isCollapsed} />
+        
+        {/* Dynamic Categories from Backend */}
+        {activeCategories.map((category) => (
+          <SidebarItem 
+            key={category.id}
+            icon={getCategoryIcon(category.slug)} 
+            label={category.title} 
+            href={`/category/${category.slug}`} 
+            active={pathname === `/category/${category.slug}`} 
+            collapsed={isCollapsed} 
+          />
+        ))}
 
         <SidebarDivider collapsed={isCollapsed} />
 

@@ -3,44 +3,82 @@
 import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import { Footer } from '@/components/footer'
+import { ScrollToTop } from '@/components/scroll-to-top'
 import { GameCard } from '@/components/game-card'
 import { useSidebar } from '@/lib/sidebar-context'
 import { cn } from '@/lib/utils'
 import { Heart } from 'lucide-react'
+import type { Game } from '@/lib/types'
 
-// Mock favorite games data
-const favoriteGames = [
+// Mock favorite games data - TODO: Replace with real favorites from backend
+const favoriteGames: Game[] = [
   {
-    id: 'dice',
-    name: 'DICE',
-    provider: 'Nest Originals',
-    thumbnail: '/purple-neon-dice-game.jpg',
-    playerCount: 2604,
-    category: ['originals']
+    id: 1,
+    gameId: 'dice',
+    gameTitle: 'DICE',
+    slug: 'dice',
+    image: '/purple-neon-dice-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: null,
+    categorySlug: 'instant',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
   },
   {
-    id: 'space-dice',
-    name: 'Space DICE',
-    provider: 'Nest Originals',
-    thumbnail: '/purple-neon-dice-game.jpg',
-    playerCount: 1823,
-    category: ['originals']
+    id: 2,
+    gameId: 'space-dice',
+    gameTitle: 'Space DICE',
+    slug: 'space-dice',
+    image: '/purple-neon-dice-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: null,
+    categorySlug: 'instant',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
   },
   {
-    id: 'aztec-magic',
-    name: 'Aztec Magic Bonanza',
-    provider: 'BGaming',
-    thumbnail: '/egypt-book-of-dead-slot.jpg',
-    playerCount: 4521,
-    category: ['slots']
+    id: 3,
+    gameId: 'aztec-magic',
+    gameTitle: 'Aztec Magic Bonanza',
+    slug: 'aztec-magic-bonanza',
+    image: '/egypt-book-of-dead-slot.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'bgaming',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
   },
   {
-    id: 'jokers',
-    name: 'Jokers Jewels',
-    provider: 'Pragmatic Play',
-    thumbnail: '/slot-characters-multicolor-gradient.jpg',
-    playerCount: 3287,
-    category: ['slots']
+    id: 4,
+    gameId: 'jokers',
+    gameTitle: 'Jokers Jewels',
+    slug: 'jokers-jewels',
+    image: '/slot-characters-multicolor-gradient.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'pragmatic-play',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
   }
 ]
 
@@ -69,11 +107,7 @@ export default function FavoritesPage() {
             {favoriteGames.map((game) => (
               <GameCard
                 key={game.id}
-                id={game.id}
-                name={game.name}
-                provider={game.provider}
-                thumbnail={game.thumbnail}
-                playerCount={game.playerCount}
+                game={game}
               />
             ))}
           </div>
@@ -86,6 +120,8 @@ export default function FavoritesPage() {
         </div>
         <Footer />
       </main>
+
+      <ScrollToTop />
     </div>
   )
 }

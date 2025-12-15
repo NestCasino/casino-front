@@ -4,31 +4,21 @@ import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import { Footer } from '@/components/footer'
 import { PromoCarousel } from '@/components/promo-carousel'
-import { ProviderFilter } from '@/components/provider-filter'
 import { LiveBetsTable } from '@/components/live-bets-table'
 import { SearchBar } from '@/components/search-bar'
-import { CategoryTabs } from '@/components/category-tabs'
-import { GameSection } from '@/components/game-section'
-import { mockGames } from '@/lib/mock-data'
+import { CategoryGameSection } from '@/components/category-game-section'
+import { useGameData } from '@/lib/game-data-context'
 import { useSidebar } from '@/lib/sidebar-context'
 import { cn } from '@/lib/utils'
-import {
-  filterOriginalsGames,
-  filterSlotsGames,
-  filterTrendingGames,
-  filterLiveCasinoGames,
-  filterBurstGames,
-} from '@/lib/game-filters'
 
 export default function CasinoPage() {
   const { isCollapsed } = useSidebar()
+  const { categories } = useGameData()
 
-  // Filter games by category (delegated to reusable helpers for testability)
-  const originalsGames = filterOriginalsGames(mockGames)
-  const slotsGames = filterSlotsGames(mockGames)
-  const trendingGames = filterTrendingGames(mockGames)
-  const liveCasinoGames = filterLiveCasinoGames(mockGames)
-  const burstGames = filterBurstGames(mockGames)
+  // Filter and sort categories
+  const activeCategories = categories
+    .filter(cat => cat.isActive)
+    .sort((a, b) => a.sortOrder - b.sortOrder)
 
   return (
     <div className="min-h-screen">
@@ -43,49 +33,20 @@ export default function CasinoPage() {
           {/* Promotional Carousel */}
           <PromoCarousel />
 
-          {/* Provider Filter Bar */}
-          <ProviderFilter />
-
           {/* Live Bets Section */}
           <LiveBetsTable />
 
           {/* Search Bar */}
           <SearchBar />
 
-          {/* Category Tabs */}
-          <CategoryTabs />
-
-          {/* Game Sections */}
-          <div className="space-y-12">
-            <GameSection
-              title="Nest Originals"
-              icon="🔥"
-              games={originalsGames}
-            />
-
-            <GameSection
-              title="Burst Games"
-              icon="💥"
-              games={burstGames}
-            />
-
-            <GameSection
-              title="Trending Slots"
-              icon="📈"
-              games={trendingGames}
-            />
-
-            <GameSection
-              title="All Slots"
-              icon="🎰"
-              games={slotsGames}
-            />
-
-            <GameSection
-              title="Live Casino"
-              icon="🎥"
-              games={liveCasinoGames}
-            />
+          {/* Game Sections - Dynamically render all categories from backend */}
+          <div className="space-y-12 mt-8">
+            {activeCategories.map((category) => (
+              <CategoryGameSection
+                key={category.id}
+                category={category}
+              />
+            ))}
           </div>
         </div>
 

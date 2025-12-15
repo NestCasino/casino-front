@@ -10,6 +10,7 @@ import { Trophy, Clock, Coins, ChevronLeft, ChevronRight, DollarSign } from 'luc
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import type { Game } from '@/lib/types'
 
 // Mock tournament data
 const tournamentData: Record<string, any> = {
@@ -57,14 +58,59 @@ const leaderboardData = [
   { rank: 10, player: 'Player_69****', bets: '29.0...', multiplier: 16, prize: '💎' }
 ]
 
-// Mock tournament games
-const tournamentGames = [
-  { id: '1', name: 'GEMHALLA', provider: 'BGaming', thumbnail: '/purple-balls-plinko-game.jpg', playerCount: 2341 },
-  { id: '2', name: 'ELVIS FROG TRUEWAYS', provider: 'BGaming', thumbnail: '/slot-characters-multicolor-gradient.jpg', playerCount: 3456 },
-  { id: '3', name: 'WILD TIGER', provider: 'BGaming', thumbnail: '/purple-rocket-crash-game.jpg', playerCount: 4567 },
-  { id: '4', name: 'BONANZA BILLION', provider: 'BGaming', thumbnail: '/sweet-candy-slot-game.jpg', playerCount: 5678 },
-  { id: '5', name: 'AZTEC MAGIC BONANZA', provider: 'BGaming', thumbnail: '/egypt-book-of-dead-slot.jpg', playerCount: 6789 },
-  { id: '6', name: 'AZTEC CLUSTERS', provider: 'BGaming', thumbnail: '/zeus-olympus-slot-game.png', playerCount: 3210 }
+// Mock tournament games - TODO: Replace with real tournament games from backend
+const tournamentGames: Game[] = [
+  {
+    id: 1,
+    gameId: 'gemhalla',
+    gameTitle: 'GEMHALLA',
+    slug: 'gemhalla',
+    image: '/purple-balls-plinko-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'bgaming',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
+  },
+  {
+    id: 2,
+    gameId: 'elvis-frog',
+    gameTitle: 'ELVIS FROG TRUEWAYS',
+    slug: 'elvis-frog-trueways',
+    image: '/slot-characters-multicolor-gradient.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'bgaming',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
+  },
+  {
+    id: 3,
+    gameId: 'wild-tiger',
+    gameTitle: 'WILD TIGER',
+    slug: 'wild-tiger',
+    image: '/purple-rocket-crash-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'bgaming',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
+  },
 ]
 
 export default function TournamentDetailPage() {
@@ -261,14 +307,8 @@ export default function TournamentDetailPage() {
             <div className="relative">
               <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
                 {tournamentGames.map((game) => (
-                  <div key={game.id} className="flex-shrink-0">
-                    <GameCard
-                      id={game.id}
-                      name={game.name}
-                      provider={game.provider}
-                      thumbnail={game.thumbnail}
-                      playerCount={game.playerCount}
-                    />
+                  <div key={game.id} className="flex-shrink-0 w-[200px]">
+                    <GameCard game={game} />
                   </div>
                 ))}
               </div>

@@ -2,16 +2,22 @@
 
 import { Search, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
-import { mockGames, type Game } from '@/lib/mock-data'
+import type { Game } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useSearch } from '@/lib/search-context'
 import { GameCard } from './game-card'
+import { useGames } from '@/hooks/use-games'
 
 export function SearchBar() {
   const { isSearchOpen, openSearch, closeSearch } = useSearch()
   const [searchQuery, setSearchQuery] = useState('')
-  const [filteredGames, setFilteredGames] = useState<Game[]>([])
   const scrollRef = useRef<HTMLDivElement>(null)
+
+  // Fetch games with search query
+  const { games, loading } = useGames({
+    search: searchQuery || undefined,
+    perPage: 50,
+  })
 
   // Scroll function for horizontal navigation
   const scroll = (direction: 'left' | 'right') => {
@@ -23,22 +29,6 @@ export function SearchBar() {
       })
     }
   }
-
-  // Filter games based on search query
-  useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredGames(mockGames)
-    } else {
-      const query = searchQuery.toLowerCase()
-      const filtered = mockGames.filter(
-        game =>
-          game.name.toLowerCase().includes(query) ||
-          game.provider.toLowerCase().includes(query) ||
-          game.category.some(cat => cat.toLowerCase().includes(query))
-      )
-      setFilteredGames(filtered)
-    }
-  }, [searchQuery])
 
   // Handle escape key
   useEffect(() => {
@@ -68,8 +58,10 @@ export function SearchBar() {
     console.log('Selected game:', game)
     closeSearch()
     setSearchQuery('')
-    // Here you can add navigation or other actions
+    // TODO: Navigate to game page or launch game
   }
+
+  const filteredGames = games || []
 
   return (
     <>
@@ -127,7 +119,11 @@ export function SearchBar() {
 
             {/* Results Section */}
             <div className="p-6">
-              {filteredGames.length === 0 ? (
+              {loading ? (
+                <div className="py-16 text-center">
+                  <div className="text-gray-500 text-lg mb-2">Searching...</div>
+                </div>
+              ) : filteredGames.length === 0 ? (
                 <div className="py-16 text-center">
                   <div className="text-gray-500 text-lg mb-2">No games found</div>
                   <div className="text-gray-600 text-sm">Try searching with different keywords</div>
@@ -173,13 +169,7 @@ export function SearchBar() {
                   >
                     {filteredGames.map((game) => (
                       <div key={game.id} onClick={() => handleGameClick(game)}>
-                        <GameCard
-                          id={game.id}
-                          name={game.name}
-                          provider={game.provider}
-                          thumbnail={game.thumbnail}
-                          playerCount={game.playerCount}
-                        />
+                        <GameCard game={game} />
                       </div>
                     ))}
                   </div>

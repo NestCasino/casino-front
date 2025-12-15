@@ -3,67 +3,87 @@
 import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import { Footer } from '@/components/footer'
+import { ScrollToTop } from '@/components/scroll-to-top'
 import { GameCard } from '@/components/game-card'
 import { useSidebar } from '@/lib/sidebar-context'
 import { cn } from '@/lib/utils'
 import { Clock } from 'lucide-react'
+import type { Game } from '@/lib/types'
 
-// Mock recent games data
-const recentGames = [
+// Mock recent games data - TODO: Replace with real recent games from backend
+const recentGames: Array<Game & { lastPlayed: string }> = [
   {
-    id: 'sweet-bonanza',
-    name: 'Sweet Bonanza',
-    provider: 'Pragmatic Play',
-    thumbnail: '/sweet-candy-slot-game.jpg',
-    playerCount: 8932,
-    category: ['slots'],
+    id: 1,
+    gameId: 'sweet-bonanza',
+    gameTitle: 'Sweet Bonanza',
+    slug: 'sweet-bonanza',
+    image: '/sweet-candy-slot-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'pragmatic-play',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
     lastPlayed: '2 hours ago'
   },
   {
-    id: 'gates-olympus',
-    name: 'Gates of Olympus',
-    provider: 'Pragmatic Play',
-    thumbnail: '/zeus-olympus-slot-game.png',
-    playerCount: 7654,
-    category: ['slots'],
+    id: 2,
+    gameId: 'gates-olympus',
+    gameTitle: 'Gates of Olympus',
+    slug: 'gates-of-olympus',
+    image: '/zeus-olympus-slot-game.png',
+    providerId: null,
+    categoryId: null,
+    providerSlug: 'pragmatic-play',
+    categorySlug: 'slots',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
     lastPlayed: '5 hours ago'
   },
   {
-    id: 'crash',
-    name: 'CRASH',
-    provider: 'Nest Originals',
-    thumbnail: '/purple-rocket-crash-game.jpg',
-    playerCount: 5234,
-    category: ['originals'],
+    id: 3,
+    gameId: 'crash',
+    gameTitle: 'CRASH',
+    slug: 'crash',
+    image: '/purple-rocket-crash-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: null,
+    categorySlug: 'instant',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
     lastPlayed: 'Yesterday'
   },
   {
-    id: 'plinko',
-    name: 'PLINKO',
-    provider: 'Nest Originals',
-    thumbnail: '/purple-balls-plinko-game.jpg',
-    playerCount: 3421,
-    category: ['originals'],
+    id: 4,
+    gameId: 'plinko',
+    gameTitle: 'PLINKO',
+    slug: 'plinko',
+    image: '/purple-balls-plinko-game.jpg',
+    providerId: null,
+    categoryId: null,
+    providerSlug: null,
+    categorySlug: 'arcade',
+    isMobile: true,
+    isDesktop: true,
+    isLive: false,
+    isTrending: false,
+    hasDemo: true,
+    isRestricted: false,
     lastPlayed: '2 days ago'
   },
-  {
-    id: 'mines',
-    name: 'MINES',
-    provider: 'Nest Originals',
-    thumbnail: '/purple-grid-mines-game.jpg',
-    playerCount: 1823,
-    category: ['originals'],
-    lastPlayed: '3 days ago'
-  },
-  {
-    id: 'blackjack',
-    name: 'Blackjack',
-    provider: 'Evolution Gaming',
-    thumbnail: '/blackjack-casino-dealer.jpg',
-    playerCount: 2156,
-    category: ['live-casino'],
-    lastPlayed: '1 week ago'
-  }
 ]
 
 export default function RecentPage() {
@@ -95,13 +115,7 @@ export default function RecentPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-8">
             {recentGames.map((game) => (
               <div key={game.id} className="relative group">
-                <GameCard
-                  id={game.id}
-                  name={game.name}
-                  provider={game.provider}
-                  thumbnail={game.thumbnail}
-                  playerCount={game.playerCount}
-                />
+                <GameCard game={game} />
                 {/* Last Played Badge */}
                 <div className="absolute top-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                   {game.lastPlayed}
@@ -118,6 +132,8 @@ export default function RecentPage() {
         </div>
         <Footer />
       </main>
+
+      <ScrollToTop />
     </div>
   )
 }

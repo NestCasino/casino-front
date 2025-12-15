@@ -870,10 +870,201 @@ export const api = {
       }
     },
   },
+
+  // Session endpoints
+  sessions: {
+    getSessions: async (): Promise<ApiResponse<Session[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/sessions');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load sessions',
+          },
+        };
+      }
+    },
+
+    revokeSession: async (sessionId: string): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.delete(`/api/v1/sessions/${sessionId}`);
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to revoke session',
+          },
+        };
+      }
+    },
+
+    revokeAllOtherSessions: async (): Promise<ApiResponse<{ message: string }>> => {
+      try {
+        const response = await apiClient.delete('/api/v1/sessions');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to revoke sessions',
+          },
+        };
+      }
+    },
+  },
+
+  // Games endpoints
+  games: {
+    getGames: async (params?: {
+      page?: number;
+      perPage?: number;
+      device?: 'mobile' | 'desktop';
+      providerId?: number;
+      categoryId?: number;
+      search?: string;
+      isLive?: boolean;
+      isTrending?: boolean;
+      showAvailablesOnly?: boolean;
+      sortBy?: 'sortOrder' | 'gameTitle' | 'launched' | 'popularity';
+      sortOrder?: 'ASC' | 'DESC';
+    }): Promise<ApiResponse<{
+      data: any[];
+      meta: {
+        total: number;
+        page: number;
+        perPage: number;
+        totalPages: number;
+      };
+    }>> => {
+      try {
+        const response = await apiClient.get('/api/v1/games', { params });
+        
+        return {
+          success: true,
+          data: response.data.data 
+            ? { data: response.data.data, meta: response.data.meta }
+            : response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load games',
+          },
+        };
+      }
+    },
+
+    getGameBySlug: async (slug: string): Promise<ApiResponse<any>> => {
+      try {
+        const response = await apiClient.get(`/api/v1/games/${slug}`);
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load game',
+          },
+        };
+      }
+    },
+  },
+
+  // Categories endpoints
+  categories: {
+    getActive: async (): Promise<ApiResponse<any[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/categories');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load categories',
+          },
+        };
+      }
+    },
+  },
+
+  // Providers endpoints
+  providers: {
+    getActive: async (): Promise<ApiResponse<any[]>> => {
+      try {
+        const response = await apiClient.get('/api/v1/providers');
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to load providers',
+          },
+        };
+      }
+    },
+  },
 };
 
 export default apiClient;
 
+// Session Types
+export interface Session {
+  id: string;
+  playerId: string;
+  ipAddress: string;
+  userAgent: string;
+  deviceType?: string;
+  browser?: string;
+  os?: string;
+  country?: string;
+  city?: string;
+  lastActivityAt: string;
+  createdAt: string;
+  expiresAt: string;
+  isCurrent?: boolean;
+}
+
 // Export types for use in other files
 export type { BackendWallet, BackendTransaction, WalletBalanceResponse, CoinNetwork, Country, Language };
-

@@ -5,26 +5,19 @@ import { Sidebar } from '@/components/sidebar'
 import { Footer } from '@/components/footer'
 import { PromoCarousel } from '@/components/promo-carousel'
 import { SearchBar } from '@/components/search-bar'
-import { CategoryTabs } from '@/components/category-tabs'
-import { GameSection } from '@/components/game-section'
-import { mockGames } from '@/lib/mock-data'
+import { CategoryGameSection } from '@/components/category-game-section'
+import { useGameData } from '@/lib/game-data-context'
 import { useSidebar } from '@/lib/sidebar-context'
 import { cn } from '@/lib/utils'
-import {
-  filterOriginalsGames,
-  filterSlotsGames,
-  filterTrendingGames,
-  filterLiveCasinoGames,
-} from '@/lib/game-filters'
 
 export default function HomePage() {
   const { isCollapsed } = useSidebar()
+  const { categories } = useGameData()
 
-  // Filter games by category (delegated to reusable helpers for testability)
-  const originalsGames = filterOriginalsGames(mockGames)
-  const slotsGames = filterSlotsGames(mockGames)
-  const trendingGames = filterTrendingGames(mockGames)
-  const liveCasinoGames = filterLiveCasinoGames(mockGames)
+  // Filter and sort categories
+  const activeCategories = categories
+    .filter(cat => cat.isActive)
+    .sort((a, b) => a.sortOrder - b.sortOrder)
 
   return (
     <div className="min-h-screen">
@@ -42,34 +35,14 @@ export default function HomePage() {
           {/* Search Bar */}
           <SearchBar />
 
-          {/* Category Tabs */}
-          <CategoryTabs />
-
-          {/* Game Sections */}
-          <div className="space-y-12">
-            <GameSection
-              title="Nest Originals"
-              icon="🔥"
-              games={originalsGames}
-            />
-
-            <GameSection
-              title="Slots"
-              icon="🎰"
-              games={slotsGames}
-            />
-
-            <GameSection
-              title="Trending Games"
-              icon="📈"
-              games={trendingGames}
-            />
-
-            <GameSection
-              title="Live Casino"
-              icon="🎥"
-              games={liveCasinoGames}
-            />
+          {/* Game Sections - Dynamically render all categories from backend */}
+          <div className="space-y-12 mt-8">
+            {activeCategories.map((category) => (
+              <CategoryGameSection
+                key={category.id}
+                category={category}
+              />
+            ))}
           </div>
         </div>
 
