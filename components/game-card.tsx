@@ -2,8 +2,10 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import type { Game } from '@/lib/types'
 import { useGameData } from '@/lib/game-data-context'
+import { useToast } from '@/hooks/use-toast'
 
 interface GameCardProps {
   game: Game
@@ -13,6 +15,8 @@ interface GameCardProps {
 export function GameCard({ game, playerCount = 0 }: GameCardProps) {
   const [imgError, setImgError] = useState(false)
   const { getProviderById } = useGameData()
+  const { toast } = useToast()
+  const router = useRouter()
   
   // Get provider name from context
   const provider = game.providerId ? getProviderById(game.providerId) : null
@@ -21,6 +25,23 @@ export function GameCard({ game, playerCount = 0 }: GameCardProps) {
   // Check if game has a valid image - if not, don't even try to load it
   const hasValidImage = game.image && game.image.trim() !== ''
   const shouldShowPlaceholder = !hasValidImage || imgError
+
+  const handlePlayNow = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    
+    // Check if game is restricted
+    if (game.isRestricted) {
+      toast({
+        title: 'Game Restricted',
+        description: 'This game is not available in your region.',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    // Navigate to play page
+    router.push(`/play/${game.slug}`)
+  }
   
   return (
     <div className="group relative flex-shrink-0 w-full h-[260px] rounded-2xl overflow-hidden cursor-pointer transition-all duration-250 hover:scale-105 hover:shadow-[0_12px_32px_rgba(139,92,246,0.4)]">
@@ -76,7 +97,10 @@ export function GameCard({ game, playerCount = 0 }: GameCardProps) {
 
         {/* Play Now Overlay */}
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-250">
-          <button className="px-6 py-2.5 bg-red-500 text-white font-semibold rounded-xl hover:brightness-110 transition-all cursor-pointer">
+          <button 
+            onClick={handlePlayNow}
+            className="px-6 py-2.5 bg-red-500 text-white font-semibold rounded-xl hover:brightness-110 transition-all cursor-pointer"
+          >
             Play Now
           </button>
         </div>

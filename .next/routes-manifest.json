@@ -21,12 +21,28 @@
   },
   "dynamicRoutes": [
     {
+      "page": "/category/[slug]",
+      "regex": "^/category/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/category/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
       "page": "/promotions/[id]",
       "regex": "^/promotions/([^/]+?)(?:/)?$",
       "routeKeys": {
         "nxtPid": "nxtPid"
       },
       "namedRegex": "^/promotions/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/providers/[slug]",
+      "regex": "^/providers/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/providers/(?<nxtPslug>[^/]+?)(?:/)?$"
     },
     {
       "page": "/tournaments/[id]",
@@ -121,6 +137,12 @@
       "regex": "^/promotions(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/promotions(?:/)?$"
+    },
+    {
+      "page": "/providers",
+      "regex": "^/providers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/providers(?:/)?$"
     },
     {
       "page": "/recent",

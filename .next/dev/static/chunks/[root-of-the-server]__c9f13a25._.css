@@ -2774,6 +2774,10 @@
     background-color: rgb(var(--bg-elevated));
   }
 
+  .bg-\[rgb\(var\(--bg-primary\)\)\] {
+    background-color: rgb(var(--bg-primary));
+  }
+
   .bg-\[rgb\(var\(--error\)\)\] {
     background-color: rgb(var(--error));
   }
@@ -2860,6 +2864,10 @@
 
   .bg-background {
     background-color: #0f0420;
+  }
+
+  .bg-black {
+    background-color: var(--color-black);
   }
 
   .bg-black\/40 {
@@ -3194,6 +3202,21 @@
     .bg-yellow-500\/10 {
       background-color: color-mix(in oklab, var(--color-yellow-500) 10%, transparent);
     }
+  }
+
+  .bg-yellow-500\/80 {
+    background-color: #edb200cc;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-yellow-500\/80 {
+      background-color: color-mix(in oklab, var(--color-yellow-500) 80%, transparent);
+    }
+  }
+
+  .bg-gradient-to-b {
+    --tw-gradient-position: to bottom in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
   .bg-gradient-to-br {
@@ -6024,6 +6047,18 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-black\/70:hover {
+      background-color: #000000b3;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-black\/70:hover {
+        background-color: color-mix(in oklab, var(--color-black) 70%, transparent);
+      }
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-blue-500\/10:hover {
       background-color: #3080ff1a;
     }
@@ -6333,6 +6368,12 @@
   @media (hover: hover) {
     .hover\:text-purple-300:hover {
       color: var(--color-purple-300);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:text-red-500:hover {
+      color: var(--color-red-500);
     }
   }
 

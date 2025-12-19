@@ -11,6 +11,10 @@ This document describes all API endpoints implemented in the frontend, the featu
 5. [Coin Network Endpoints](#coin-network-endpoints)
 6. [Country & Language Endpoints](#country--language-endpoints)
 7. [Notification Endpoints](#notification-endpoints)
+8. [Session Management Endpoints](#session-management-endpoints)
+9. [Game Endpoints](#game-endpoints)
+10. [Category Endpoints](#category-endpoints)
+11. [Provider Endpoints](#provider-endpoints)
 
 ---
 
@@ -1218,6 +1222,621 @@ Bulk notification management:
 
 ---
 
+## Session Management Endpoints
+
+### 26. GET `/api/v1/sessions`
+
+**Purpose:** Get all active sessions for the authenticated user
+
+**Used In:**
+- `lib/api-client.ts` - `sessions.getSessions()` function
+- `components/settings/security-section.tsx` - Active sessions list
+- Called when Security settings tab is opened
+
+**Feature Description:**
+The session management feature provides visibility and control over all active login sessions:
+- Lists all active sessions across devices
+- Shows session details:
+  - Device type and browser information
+  - Operating system
+  - IP address and location (country, city)
+  - Last activity timestamp
+  - Session creation and expiration times
+- Identifies current session
+- Enables security auditing
+- Helps detect unauthorized access
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: [
+    {
+      id: string;
+      playerId: string;
+      ipAddress: string;
+      userAgent: string;
+      deviceType?: string;
+      browser?: string;
+      os?: string;
+      country?: string;
+      city?: string;
+      lastActivityAt: string;
+      createdAt: string;
+      expiresAt: string;
+      isCurrent?: boolean;
+    }
+  ]
+}
+```
+
+**How to Test:**
+1. Log in to the application
+2. Navigate to Settings > Security tab
+3. Scroll to "Active Sessions" section
+4. Verify:
+   - List of all active sessions appears
+   - Each session shows:
+     - Device information (Desktop/Mobile, browser, OS)
+     - Location (country, city)
+     - IP address
+     - Last activity timestamp
+     - "Current Session" badge for active session
+5. Open app on another device or browser
+6. Refresh sessions list
+7. Verify new session appears
+
+---
+
+### 27. DELETE `/api/v1/sessions/{sessionId}`
+
+**Purpose:** Revoke/logout a specific session by ID
+
+**Used In:**
+- `lib/api-client.ts` - `sessions.revokeSession()` function
+- `components/settings/security-section.tsx` - Individual session logout
+- Triggered when user clicks "Log Out" on a specific session
+
+**Feature Description:**
+Individual session revocation allows users to:
+- Log out specific devices/browsers remotely
+- Remove suspicious or unauthorized sessions
+- Maintain security when device is lost/stolen
+- Keep track of active sessions
+- Each session (except current) has a revoke button
+- Current session cannot be revoked (use regular logout instead)
+
+**Request Parameters:**
+- `sessionId` (URL parameter): The ID of the session to revoke
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: {
+    message: string;
+  }
+}
+```
+
+**How to Test:**
+1. Have multiple active sessions (login from different devices/browsers)
+2. Go to Settings > Security > Active Sessions
+3. Find a non-current session
+4. Click "Log Out" button on that session
+5. Verify:
+   - Success toast appears
+   - Session is removed from list
+   - That device/browser is logged out
+   - Current session remains active
+   - Can still use the application normally
+
+**Security Note:**
+- Cannot revoke current session (must use regular logout)
+- Revoked sessions are immediately invalidated
+- User must log in again on revoked device
+
+---
+
+### 28. DELETE `/api/v1/sessions`
+
+**Purpose:** Revoke all sessions except the current one
+
+**Used In:**
+- `lib/api-client.ts` - `sessions.revokeAllOtherSessions()` function
+- `components/settings/security-section.tsx` - "End All Other Sessions" button
+- Used for bulk session management
+
+**Feature Description:**
+Bulk session revocation provides:
+- Quick way to log out all other devices
+- Security measure if account compromise suspected
+- Convenient session cleanup
+- Logs out all sessions except current one
+- Useful after password change
+- One-click security action
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: {
+    message: string;
+    count?: number;  // Number of sessions revoked
+  }
+}
+```
+
+**How to Test:**
+1. Have multiple active sessions (3+ sessions ideal)
+2. Go to Settings > Security > Active Sessions
+3. Click "End All Other Sessions" button
+4. Confirm the action
+5. Verify:
+   - Success toast shows "All other sessions have been logged out"
+   - Only current session remains in list
+   - All other devices/browsers are logged out
+   - Current session/device remains active
+   - Can continue using application normally
+
+**Use Cases:**
+- Suspected unauthorized access
+- After password change
+- Periodic security cleanup
+- Lost or stolen device
+- Sharing account temporarily (not recommended)
+
+---
+
+## Game Endpoints
+
+### 29. GET `/api/v1/games`
+
+**Purpose:** Get paginated list of games with advanced filtering and sorting
+
+**Used In:**
+- `lib/api-client.ts` - `games.getGames()` function
+- `hooks/use-games.ts` - Game data fetching hook
+- Used across all game listing pages:
+  - `app/all-games/page.tsx` - All games page
+  - `app/casino/page.tsx` - Casino games
+  - `app/slots/page.tsx` - Slots page
+  - `app/live-casino/page.tsx` - Live casino
+  - `app/blackjack/page.tsx` - Blackjack games
+  - `app/roulette/page.tsx` - Roulette games
+  - `app/baccarat/page.tsx` - Baccarat games
+  - `app/new-releases/page.tsx` - New releases
+  - `app/category/[slug]/page.tsx` - Category pages
+  - `app/providers/[slug]/page.tsx` - Provider pages
+
+**Feature Description:**
+The games endpoint is the core of the casino platform, providing:
+- **Pagination:** Efficient loading of large game catalogs
+- **Search:** Real-time game search by title
+- **Filtering:**
+  - By provider (game studio)
+  - By category (slots, live, table games, etc.)
+  - By device support (mobile/desktop)
+  - Live games only
+  - Trending/popular games
+  - Available games only (operational)
+- **Sorting:**
+  - By sort order (custom admin ordering)
+  - By game title (alphabetical)
+  - By launch date (newest first)
+  - By popularity (most played)
+- **Performance:** Optimized queries with indexes
+- **Caching:** Results cached for better performance
+
+**Query Parameters:**
+```typescript
+{
+  page?: number;           // Page number (default: 1)
+  perPage?: number;        // Items per page (default: 24)
+  device?: 'mobile' | 'desktop';  // Device filter
+  providerId?: number;     // Filter by provider ID
+  categoryId?: number;     // Filter by category ID
+  search?: string;         // Search by game title
+  isLive?: boolean;        // Live games only
+  isTrending?: boolean;    // Trending games only
+  showAvailablesOnly?: boolean;  // Hide unavailable games
+  sortBy?: 'sortOrder' | 'gameTitle' | 'launched' | 'popularity';
+  sortOrder?: 'ASC' | 'DESC';  // Sort direction
+}
+```
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: {
+    data: Game[];  // Array of game objects
+    meta: {
+      total: number;      // Total number of games
+      page: number;       // Current page
+      perPage: number;    // Items per page
+      totalPages: number; // Total pages
+    };
+  }
+}
+```
+
+**Game Object Structure:**
+```typescript
+{
+  id: number;
+  gameId: string;
+  slug: string;
+  gameTitle: string;
+  gameThumbnail: string;
+  provider: {
+    id: number;
+    name: string;
+    slug: string;
+  };
+  category: {
+    id: number;
+    name: string;
+    slug: string;
+  };
+  isLive: boolean;
+  isTrending: boolean;
+  isAvailable: boolean;
+  devices: string[];  // ['mobile', 'desktop']
+  launched: string;   // ISO date
+  sortOrder: number;
+}
+```
+
+**How to Test - Basic Pagination:**
+1. Navigate to "All Games" page
+2. Scroll to bottom
+3. Click "Show More" button
+4. Verify:
+   - More games load below
+   - Loading indicator appears briefly
+   - No duplicate games
+   - Counter shows "Showing X of Y games"
+
+**How to Test - Search:**
+1. Go to any games page
+2. Type in search box (e.g., "Book of")
+3. Wait 400ms (debounce delay)
+4. Verify:
+   - Games filter to match search
+   - Results update in real-time
+   - Empty state if no matches
+   - Search is case-insensitive
+
+**How to Test - Provider Filter:**
+1. Go to All Games
+2. Select a provider from dropdown
+3. Verify:
+   - Only games from that provider show
+   - Page resets to 1
+   - Total count updates
+   - Can clear filter to show all
+
+**How to Test - Category Pages:**
+1. Navigate to "Slots" or "Live Casino"
+2. Verify page loads with category-filtered games
+3. Check URL has correct category
+4. Verify filtering works within category
+
+**How to Test - Sorting:**
+1. Add sort parameter to URL or implement UI
+2. Test different sort options:
+   - sortBy=gameTitle - Alphabetical order
+   - sortBy=launched&sortOrder=DESC - Newest first
+   - sortBy=popularity - Most popular first
+3. Verify games reorder correctly
+
+**Performance Notes:**
+- Queries are optimized with database indexes
+- Results cached on backend
+- Frontend implements debouncing for search
+- Pagination prevents loading all games at once
+
+---
+
+### 30. GET `/api/v1/games/{slug}`
+
+**Purpose:** Get detailed information for a specific game by slug
+
+**Used In:**
+- `lib/api-client.ts` - `games.getGameBySlug()` function
+- Available for future game detail pages
+- Can be used for:
+  - Game detail modal
+  - Game information page
+  - Deep linking to specific games
+  - SEO-optimized game pages
+
+**Feature Description:**
+Retrieve complete details for a single game including:
+- Full game information
+- Provider details
+- Category classification
+- Device compatibility
+- Availability status
+- Game URL for launching
+- Additional metadata
+
+**URL Parameters:**
+- `slug`: Game slug (URL-friendly identifier)
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: {
+    id: number;
+    gameId: string;
+    slug: string;
+    gameTitle: string;
+    gameThumbnail: string;
+    gameUrl: string;
+    provider: {
+      id: number;
+      name: string;
+      slug: string;
+      logo?: string;
+    };
+    category: {
+      id: number;
+      name: string;
+      slug: string;
+      icon?: string;
+    };
+    description?: string;
+    isLive: boolean;
+    isTrending: boolean;
+    isAvailable: boolean;
+    devices: string[];
+    launched: string;
+    rtp?: number;  // Return to player percentage
+    volatility?: string;
+    minBet?: number;
+    maxBet?: number;
+    features?: string[];
+  }
+}
+```
+
+**How to Test:**
+1. Get a game slug from any game listing
+2. Make API call: `GET /api/v1/games/{slug}`
+3. Or in code:
+```typescript
+const response = await api.games.getGameBySlug('book-of-dead');
+```
+4. Verify:
+   - Returns complete game details
+   - Provider information included
+   - Category information included
+   - All metadata present
+
+**Use Cases:**
+- Game detail pages
+- SEO-optimized URLs
+- Social media sharing
+- Deep linking from external sources
+- Game information modals
+
+---
+
+## Category Endpoints
+
+### 31. GET `/api/v1/categories`
+
+**Purpose:** Get all active game categories
+
+**Used In:**
+- `lib/api-client.ts` - `categories.getActive()` function
+- `hooks/use-categories.ts` - Category data fetching
+- `lib/game-data-context.tsx` - Global game data provider
+- Used for:
+  - Navigation menu (category links)
+  - Game filtering dropdowns
+  - Category pages
+  - Game organization
+
+**Feature Description:**
+Categories organize games into logical groups:
+- **Pre-defined Categories:**
+  - Slots
+  - Live Casino
+  - Table Games
+  - Blackjack
+  - Roulette
+  - Baccarat
+  - Game Shows
+  - New Releases
+  - And more...
+
+Features include:
+- Category metadata (name, slug, icon)
+- Game count per category
+- Category ordering for navigation
+- Active/inactive status
+- Category-specific page routes
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: [
+    {
+      id: number;
+      name: string;
+      slug: string;
+      icon?: string;
+      description?: string;
+      sortOrder: number;
+      isActive: boolean;
+      gameCount?: number;  // Number of games in category
+      createdAt: string;
+      updatedAt: string;
+    }
+  ]
+}
+```
+
+**How to Test:**
+1. Open the application
+2. Check browser DevTools > Network tab
+3. Look for `/api/v1/categories` request on app load
+4. Verify:
+   - List of categories loads
+   - Categories appear in sidebar navigation
+   - Each category has name, slug, and icon
+   - Clicking category navigates to category page
+   - Category pages show filtered games
+
+**Test Category Navigation:**
+1. Click "Slots" in sidebar
+2. Verify navigates to `/slots`
+3. Verify only slot games display
+4. Try other categories (Live Casino, Blackjack, etc.)
+5. Verify each shows appropriate games
+
+**Test in Code:**
+```typescript
+import { useCategories } from '@/hooks/use-categories';
+
+function MyComponent() {
+  const { categories, loading, error } = useCategories();
+  
+  // Categories are available here
+  return (
+    <div>
+      {categories?.map(cat => (
+        <div key={cat.id}>{cat.name}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+---
+
+## Provider Endpoints
+
+### 32. GET `/api/v1/providers`
+
+**Purpose:** Get all active game providers (game studios)
+
+**Used In:**
+- `lib/api-client.ts` - `providers.getActive()` function
+- `hooks/use-providers.ts` - Provider data fetching
+- `lib/game-data-context.tsx` - Global game data provider
+- `app/providers/page.tsx` - Providers listing page
+- `app/providers/[slug]/page.tsx` - Individual provider pages
+- Game filter dropdowns across the site
+
+**Feature Description:**
+Game providers are the studios/companies that create casino games:
+- **Major Providers:**
+  - Evolution Gaming (live casino leader)
+  - Pragmatic Play
+  - NetEnt
+  - Play'n GO
+  - Microgaming
+  - Red Tiger
+  - Yggdrasil
+  - And many more...
+
+Features include:
+- Provider metadata (name, logo, slug)
+- Game count per provider
+- Provider detail pages
+- Filter games by provider
+- Provider branding and logos
+- Active/inactive status
+
+**Response:**
+```typescript
+{
+  success: true;
+  data: [
+    {
+      id: number;
+      name: string;
+      slug: string;
+      logo?: string;
+      description?: string;
+      website?: string;
+      sortOrder: number;
+      isActive: boolean;
+      gameCount?: number;  // Number of games from provider
+      isFeatured?: boolean;
+      createdAt: string;
+      updatedAt: string;
+    }
+  ]
+}
+```
+
+**How to Test - Providers Page:**
+1. Navigate to "Providers" page (link in menu or `/providers`)
+2. Verify:
+   - Grid of provider cards displays
+   - Each card shows:
+     - Provider logo/name
+     - Game count
+     - Click to view games
+   - Providers are sorted by importance/game count
+   - All active providers display
+
+**How to Test - Provider Filtering:**
+1. Go to "All Games" page
+2. Open provider filter dropdown
+3. Verify:
+   - List of all providers appears
+   - Can search providers
+   - Selecting provider filters games
+   - Can clear filter
+
+**How to Test - Provider Pages:**
+1. Click on any provider card
+2. Should navigate to `/providers/{slug}`
+3. Verify:
+   - Shows all games from that provider
+   - Provider branding/logo at top
+   - Can filter/search within provider games
+   - Shows game count
+
+**Test in Code:**
+```typescript
+import { useProviders } from '@/hooks/use-providers';
+
+function MyComponent() {
+  const { providers, loading, error } = useProviders();
+  
+  return (
+    <select>
+      {providers?.map(provider => (
+        <option key={provider.id} value={provider.id}>
+          {provider.name} ({provider.gameCount} games)
+        </option>
+      ))}
+    </select>
+  );
+}
+```
+
+**Provider Context Usage:**
+```typescript
+import { useGameData } from '@/lib/game-data-context';
+
+function MyComponent() {
+  const { providers, loading } = useGameData();
+  // Providers loaded globally, cached, and shared
+}
+```
+
+---
+
 ## Token Management & Security
 
 ### Automatic Token Refresh
@@ -1357,6 +1976,7 @@ All API endpoints implement consistent error handling:
 - [ ] Request email verification
 - [ ] Verify email with token
 - [ ] Token auto-refresh on expiry
+- [ ] Email verification via hash (alternative method)
 
 ### Profile Management
 - [ ] Load user profile on login
@@ -1382,6 +2002,37 @@ All API endpoints implement consistent error handling:
 - [ ] Mark all notifications as read
 - [ ] Load more notifications (pagination)
 
+### Session Management
+- [ ] View all active sessions
+- [ ] Session details display correctly (device, location, IP)
+- [ ] Current session is identified
+- [ ] Revoke specific session
+- [ ] Revoke all other sessions
+- [ ] Verify logged out device can't access
+- [ ] Multiple sessions from different devices/browsers
+
+### Game Features
+- [ ] Browse all games with pagination
+- [ ] Search games by title
+- [ ] Filter games by provider
+- [ ] Filter games by category
+- [ ] Load more games (pagination)
+- [ ] View game details by slug
+- [ ] Category pages display correct games
+- [ ] Provider pages display correct games
+- [ ] Trending games filter
+- [ ] Live games filter
+- [ ] Device-specific filtering (mobile/desktop)
+
+### Categories & Providers
+- [ ] Load all active categories
+- [ ] Category navigation works
+- [ ] Category pages load filtered games
+- [ ] Load all active providers
+- [ ] Provider cards display correctly
+- [ ] Provider filtering works
+- [ ] Provider pages load correctly
+
 ### Data Loading
 - [ ] Load currencies for registration
 - [ ] Load countries for settings
@@ -1389,6 +2040,8 @@ All API endpoints implement consistent error handling:
 - [ ] Load coin networks
 - [ ] Check email availability (real-time)
 - [ ] Check username availability (real-time)
+- [ ] Load categories on app start
+- [ ] Load providers on app start
 
 ### Error Scenarios
 - [ ] Invalid login credentials
@@ -1397,6 +2050,10 @@ All API endpoints implement consistent error handling:
 - [ ] Expired reset token
 - [ ] Network timeout handling
 - [ ] Token expiration and refresh
+- [ ] No games found state
+- [ ] Invalid game slug
+- [ ] Empty category handling
+- [ ] Session revocation errors
 
 ---
 
@@ -1455,13 +2112,19 @@ The application includes a WebSocket context for real-time features:
 
 This frontend application implements a comprehensive API integration covering:
 
-- **8 Authentication Endpoints** - Complete auth flow including registration, login, logout, password reset, and email verification
+- **9 Authentication Endpoints** - Complete auth flow including registration, login, logout, password reset, and email verification
 - **5 Player Management Endpoints** - Profile management, availability checks, and updates
 - **2 Currency Endpoints** - Currency listing for wallets and registration
 - **3 Wallet Endpoints** - Wallet management, balance tracking, and transaction history
 - **1 Coin Network Endpoint** - Cryptocurrency network information
 - **2 Country/Language Endpoints** - Localization and regional settings
 - **3 Notification Endpoints** - Notification management with real-time updates
+- **3 Session Management Endpoints** - Active session tracking and remote logout capabilities
+- **2 Game Endpoints** - Paginated game listing with advanced filtering and individual game details
+- **1 Category Endpoint** - Game category organization and navigation
+- **1 Provider Endpoint** - Game provider (studio) management and filtering
+
+**Total: 32 API Endpoints**
 
 All endpoints include:
 - ✅ Proper error handling

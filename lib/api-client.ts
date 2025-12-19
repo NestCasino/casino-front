@@ -959,7 +959,6 @@ export const api = {
     }>> => {
       try {
         const response = await apiClient.get('/api/v1/games', { params });
-        
         return {
           success: true,
           data: response.data.data 
@@ -994,6 +993,90 @@ export const api = {
           success: false,
           error: {
             message: error.message || 'Failed to load game',
+          },
+        };
+      }
+    },
+
+    generateGameUrl: async (params: {
+      id?: number;
+      slug?: string;
+      gameId?: string;
+      device?: 'desktop' | 'mobile';
+      lang?: string;
+      lobbyData?: string;
+    }): Promise<ApiResponse<{ url: string; sessionId: string }>> => {
+      try {
+        console.log('[API] generateGameUrl called with params:', params);
+        const response = await apiClient.get('/api/v1/games/url', { params });
+        console.log('[API] generateGameUrl response:', response.data);
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        console.error('[API] generateGameUrl error:', error);
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to generate game URL',
+          },
+        };
+      }
+    },
+
+    generateDemoUrl: async (params: {
+      id?: number;
+      slug?: string;
+      gameId?: string;
+      device?: 'desktop' | 'mobile';
+      lang?: string;
+    }): Promise<ApiResponse<{ url: string; sessionId: string }>> => {
+      try {
+        console.log('[API] generateDemoUrl called with params:', params);
+        const response = await apiClient.get('/api/v1/games/demo-url', { params });
+        console.log('[API] generateDemoUrl response:', response.data);
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        console.error('[API] generateDemoUrl error:', error);
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to generate demo URL',
+          },
+        };
+      }
+    },
+
+    getLobbyData: async (params: {
+      id?: number;
+      slug?: string;
+      gameId?: string;
+      currency?: string;
+    }): Promise<ApiResponse<any>> => {
+      try {
+        const response = await apiClient.get('/api/v1/games/lobby', { params });
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || 'Failed to get lobby data',
           },
         };
       }
