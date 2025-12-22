@@ -8,7 +8,7 @@ import { formatBalance } from '@/lib/wallet-types'
 import { cn } from '@/lib/utils'
 
 export function WalletSelector() {
-  const { wallets, activeWallet, setActiveWallet, settings, openWalletModal, totalBalance } = useWallet()
+  const { wallets, activeWallet, setActiveWallet, settings, openWalletModal, totalBalance, isLoadingWallets, error, refreshWallets } = useWallet()
   const { user } = useUser()
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -16,10 +16,7 @@ export function WalletSelector() {
 
   // Debug logging
   useEffect(() => {
-    console.log('[WalletSelector] Wallets:', wallets)
-    console.log('[WalletSelector] Active Wallet:', activeWallet)
-    console.log('[WalletSelector] Total Balance:', totalBalance)
-    console.log('[WalletSelector] User:', user)
+    // console.log('[WalletSelector] Wallets:', wallets)
   }, [wallets, activeWallet, totalBalance, user])
 
   useEffect(() => {
@@ -63,12 +60,19 @@ export function WalletSelector() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 bg-[rgb(var(--bg-elevated))] px-5 py-2.5 rounded-xl hover:bg-[rgb(var(--surface))] transition-colors cursor-pointer"
+        disabled={isLoadingWallets && wallets.length === 0}
       >
         <div className="flex items-center gap-2">
-          <span className="text-base font-semibold text-[rgb(var(--text-muted))]">{displayCurrency}</span>
-          <span className="text-base font-semibold">
-            {formatBalance(displayBalance, displayCurrency)}
-          </span>
+            {isLoadingWallets && wallets.length === 0 ? (
+                <div className="h-5 w-20 bg-white/10 animate-pulse rounded" />
+            ) : (
+                <>
+                <span className="text-base font-semibold text-[rgb(var(--text-muted))]">{displayCurrency}</span>
+                <span className="text-base font-semibold">
+                    {formatBalance(displayBalance, displayCurrency)}
+                </span>
+                </>
+            )}
         </div>
         <ChevronDown className={cn(
           "h-4 w-4 text-[rgb(var(--text-muted))] transition-transform",
@@ -95,7 +99,26 @@ export function WalletSelector() {
 
           {/* Wallets List */}
           <div className="max-h-[400px] overflow-y-auto bg-[#1a1534]">
-            {filteredWallets.length > 0 ? (
+            {isLoadingWallets ? (
+                <div className="px-4 py-8 space-y-3">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="flex justify-between items-center">
+                            <div className="h-4 w-12 bg-white/10 animate-pulse rounded" />
+                            <div className="h-4 w-16 bg-white/10 animate-pulse rounded" />
+                        </div>
+                    ))}
+                </div>
+            ) : error ? (
+                <div className="px-4 py-6 text-center text-red-400">
+                    <p className="text-sm mb-2">Failed to load wallets</p>
+                    <button 
+                        onClick={() => refreshWallets()}
+                        className="text-xs bg-red-500/10 hover:bg-red-500/20 text-red-400 px-3 py-1 rounded-full transition-colors"
+                    >
+                        Retry
+                    </button>
+                </div>
+            ) : filteredWallets.length > 0 ? (
               filteredWallets.map((wallet) => (
                 <button
                   key={wallet.id}

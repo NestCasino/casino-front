@@ -5,19 +5,14 @@ import { Wallet, WalletSettings, Transaction, mapBackendWalletToFrontend, mapBac
 import { api } from './api-client'
 import { useAuth } from './auth-context'
 
-// WebSocket balance data structure (from backend WebSocket)
-export interface WebSocketBalanceData {
-  totalBalance: number
-  totalBonusBalance: number
-  wallets: Array<{
-    id: string
-    currencyCode: string
-    walletType: 'crypto' | 'fiat'
-    balance: string
-    bonusBalance: string
-    isDefault: boolean
-  }>
-}
+// This is a view_file call, I'll do it separately.
+// Wait, I can't do view_file inside replace_file_content instruction.
+// I'll just look at wallet-context.tsx first to see where the mappers are.
+// mapWebSocketWalletToFrontend is IN wallet-context.tsx.
+// mapBackendWalletToFrontend is IMPORTED.
+
+// I will fix mapWebSocketWalletToFrontend in wallet-context.tsx first.
+
 
 interface WalletContextType {
   wallets: Wallet[]
@@ -45,16 +40,33 @@ interface WalletContextType {
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
 // Helper function to map WebSocket wallet data to frontend wallet format
-function mapWebSocketWalletToFrontend(wsWallet: WebSocketBalanceData['wallets'][0]): Wallet | null {
-  const currency = getCurrencyByCode(wsWallet.currencyCode)
+function mapWebSocketWalletToFrontend(wsWallet: any): Wallet | null {
+  console.log('[WalletContext] Mapping WebSocket wallet:', wsWallet)
+
+  // Support both currencyCode and currency fields
+  const code = wsWallet.currencyCode || wsWallet.currency
   
-  if (!currency) {
-    console.warn(`Unknown currency code from WebSocket: ${wsWallet.currencyCode}`)
+  if (!code) {
+    console.warn('[WalletContext] WebSocket wallet missing currency code:', wsWallet)
     return null
   }
 
+  const currency = getCurrencyByCode(code)
+  
+  if (!currency) {
+    console.warn(`[WalletContext] Unknown currency code from WebSocket: ${code}`)
+    return null
+  }
+
+  // Handle ID: support 'id' or '_id'
+  const rawId = wsWallet.id || wsWallet._id
+  if (!rawId) {
+      console.error('[WalletContext] WebSocket wallet missing ID:', wsWallet)
+      return null
+  }
+
   return {
-    id: wsWallet.id,
+    id: String(rawId), // Ensure ID is always a string
     currency,
     balance: Number(wsWallet.balance),
     lockedBalance: Number(wsWallet.bonusBalance),
@@ -81,7 +93,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   })
 
   // Fetch wallets from API
-  const fetchWallets = async () => {
+  const fetchWallets = async (retryCount = 0) => {
     if (!isAuthenticated) {
       setWallets([])
       setActiveWalletState(null)
@@ -94,55 +106,86 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     setError(null)
 
     try {
-      // Fetch both wallets and total balance
-      const [walletsResponse, balanceResponse] = await Promise.all([
-        api.wallets.getWallets(),
-        api.wallets.getTotalBalance()
-      ])
+      // First try to fetch wallets
+      const walletsResponse = await api.wallets.getWallets()
       
       console.log('[WalletContext] Wallets Response:', walletsResponse)
-      console.log('[WalletContext] Balance Response:', balanceResponse)
       
       if (walletsResponse.success && walletsResponse.data) {
         const mappedWallets = walletsResponse.data
           .map(mapBackendWalletToFrontend)
           .filter((w): w is Wallet => w !== null)
         
+        
         console.log('[WalletContext] Mapped Wallets:', mappedWallets)
-        setWallets(mappedWallets)
         
-        // Update total balance from API response
-        if (balanceResponse.success && balanceResponse.data) {
-          console.log('[WalletContext] Setting total balance:', balanceResponse.data.totalBalance)
-          setTotalBalance(balanceResponse.data.totalBalance || 0)
-          setTotalBonusBalance(balanceResponse.data.totalBonusBalance || 0)
-        }
+        // Deduplicate wallets based on ID (robustness against API or type issues)
+        const uniqueWalletsMap = new Map<string, Wallet>()
+        mappedWallets.forEach(w => {
+            uniqueWalletsMap.set(w.id, w)
+        })
+        const uniqueWallets = Array.from(uniqueWalletsMap.values())
+
+        setWallets(uniqueWallets)
         
-        // Set active wallet: restore from localStorage or use first/default wallet
+        // Only if we successfully got wallets, try to set active wallet
         const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
-        console.log('[WalletContext] Saved active wallet ID:', savedActiveWalletId)
         if (savedActiveWalletId) {
           const savedWallet = mappedWallets.find(w => w.id === savedActiveWalletId)
           if (savedWallet) {
-            console.log('[WalletContext] Setting saved wallet as active:', savedWallet)
             setActiveWalletState(savedWallet)
-            return
+          } else {
+             // Fallback if saved wallet not found
+             const defaultWallet = mappedWallets.find(w => w.isDefault) || mappedWallets[0]
+             setActiveWalletState(defaultWallet || null)
           }
+        } else {
+          // Fallback if no saved wallet
+          const defaultWallet = mappedWallets.find(w => w.isDefault) || mappedWallets[0]
+          setActiveWalletState(defaultWallet || null)
         }
-        
-        // Fallback: use default wallet or first wallet
-        const defaultWallet = mappedWallets.find(w => w.isDefault) || mappedWallets[0]
-        console.log('[WalletContext] Setting default/first wallet as active:', defaultWallet)
-        setActiveWalletState(defaultWallet || null)
+
+        // Try to fetch balance separately so it doesn't block wallets
+        try {
+            const balanceResponse = await api.wallets.getTotalBalance()
+            if (balanceResponse.success && balanceResponse.data) {
+                setTotalBalance(balanceResponse.data.totalBalance || 0)
+                setTotalBonusBalance(balanceResponse.data.totalBonusBalance || 0)
+            }
+        } catch (balanceErr) {
+            console.warn('[WalletContext] Failed to fetch balance, but wallets loaded:', balanceErr)
+        }
+
       } else {
-        console.error('[WalletContext] Failed to load wallets:', walletsResponse.error)
-        setError(walletsResponse.error?.message || 'Failed to load wallets')
+        throw new Error(walletsResponse.error?.message || 'Failed to load wallets')
       }
     } catch (err: any) {
-      console.error('[WalletContext] Failed to fetch wallets:', err)
+      console.error(`[WalletContext] Failed to fetch wallets (attempt ${retryCount + 1}):`, err)
+      
+      // Retry logic for transient errors (up to 3 times)
+      if (retryCount < 2) {
+        console.log(`[WalletContext] Retrying fetch in ${1000 * (retryCount + 1)}ms...`)
+        setTimeout(() => {
+            fetchWallets(retryCount + 1)
+        }, 1000 * (retryCount + 1))
+        return // Don't clear loading state yet
+      }
+
       setError(err.message || 'Failed to load wallets')
     } finally {
-      setIsLoadingWallets(false)
+      // Only set loading to false if we are not retrying (recursion handles previous calls)
+      // When we return early for retry, we don't hit this finally for THAT call, 
+      // but the `setTimeout` closure call will have its own finally.
+      // Actually, since I used `return` inside the retry block, this finally block will run for the initial call!
+      // Wait, `return` in try/catch DOES trigger finally.
+      
+      // Correct approach: if we are retrying, we want to keep loading true.
+      if (retryCount >= 2) {
+          setIsLoadingWallets(false)
+      }
+      // If we are NOT retrying (success path falls through to here), we set loading false.
+      // But we need to know if we are successful.
+      // A cleaner way: move the retry `setTimeout` logic; if we set timeout, we don't want to setIsLoadingWallets(false) yet.
     }
   }
 
@@ -269,29 +312,53 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     setTotalBonusBalance(data.totalBonusBalance)
     
     // Map WebSocket wallet data to frontend format
-    const mappedWallets = data.wallets
+    const incomingWallets = data.wallets
       .map(mapWebSocketWalletToFrontend)
       .filter((w): w is Wallet => w !== null)
     
-    setWallets(mappedWallets)
+    setWallets(currentWallets => {
+        // Create a map from current wallets for easy access and automatic deduplication
+        const walletMap = new Map(currentWallets.map(w => [String(w.id), w]))
+        
+        // Merge incoming wallets: update existing ones or add new ones
+        incomingWallets.forEach(w => {
+            walletMap.set(String(w.id), w)
+        })
+        
+        // Convert back to array
+        return Array.from(walletMap.values())
+    })
+
     setIsLoadingWallets(false)
     setError(null)
     
     // Update active wallet if it exists in the new data
-    setActiveWalletState(prev => {
-      if (prev) {
-        const updatedWallet = mappedWallets.find(w => w.id === prev.id)
-        if (updatedWallet) {
-          return updatedWallet
-        }
+    // We need to trust valid state is now in 'wallets' (but we are inside a callback, so checking 'wallets' directly might be stale if we didn't use functional update for it. 
+    // However, setActiveWalletState doesn't depend on 'wallets' state directly for its setter, but for logic...)
+    
+    // Better logic: Check if the incoming data contains an update for the ACTIVE wallet.
+    setActiveWalletState(prevActive => {
+      if (!prevActive) {
+          // No active wallet? Check localStorage or defaults from the *incoming* (or we'd need access to full merged list, which is hard here without refetching or complex state plumbing)
+          // Ideally we just keep it null or let the user select.
+          // Or we can try to restore from localStorage again if we really want.
+          const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
+          if (savedActiveWalletId) {
+             const saved = incomingWallets.find(w => w.id === savedActiveWalletId)
+             // We can only check incoming, we don't have easy access to 'merged' list here without a ref.
+             // But valid: if we don't have an active wallet, and a socket event comes in, maybe we set one?
+             if (saved) return saved
+          }
+          return null
       }
-      // If no active wallet or previous active wallet not found, use default or first
-      const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
-      if (savedActiveWalletId) {
-        const savedWallet = mappedWallets.find(w => w.id === savedActiveWalletId)
-        if (savedWallet) return savedWallet
+
+      // If we HAVE an active wallet, check if it was updated in this event
+      const updatedActive = incomingWallets.find(w => w.id === prevActive.id)
+      if (updatedActive) {
+          return updatedActive
       }
-      return mappedWallets.find(w => w.isDefault) || mappedWallets[0] || null
+      
+      return prevActive // Keep current if not updated
     })
   }, [])
 

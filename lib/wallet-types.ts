@@ -308,7 +308,7 @@ export function mapBackendWalletToFrontend(backendWallet: BackendWallet): Wallet
   }
 
   return {
-    id: backendWallet.id,
+    id: String(backendWallet.id), // Ensure ID is always a string
     currency,
     balance: Number(backendWallet.balance),
     lockedBalance: Number(backendWallet.bonusBalance),
