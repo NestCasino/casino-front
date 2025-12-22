@@ -52,8 +52,10 @@ export interface Notification {
 export interface WebSocketNotification {
   id: number
   type: string
-  title: string
-  message: string
+  title?: string
+  message?: string
+  subject?: string
+  text?: string
   isRead?: boolean
   createdAt: Date
   timestamp?: Date
@@ -151,11 +153,24 @@ function transformWebSocketNotification(wsNotif: WebSocketNotification): Notific
   const type = mapNotificationType(wsNotif.type)
   const icon = getNotificationIcon(type)
 
+  // Determine title and message with fallbacks
+  // Prioritize direct title/message if present, otherwise map from subject/text
+  let title = wsNotif.title
+  let message = wsNotif.message
+
+  if (!title && !message) {
+    const subject = wsNotif.subject
+    const text = wsNotif.text || ''
+    
+    title = subject || text.substring(0, 50) + (text.length > 50 ? '...' : '')
+    message = subject ? text : text.substring(50)
+  }
+
   return {
     id: wsNotif.id,
     type,
-    title: wsNotif.title,
-    message: wsNotif.message,
+    title: title || '',
+    message: message || '',
     timestamp: new Date(wsNotif.createdAt || wsNotif.timestamp || new Date()),
     read: wsNotif.isRead || false,
     link: wsNotif.action?.url,
