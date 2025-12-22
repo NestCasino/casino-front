@@ -5,14 +5,21 @@ import { Wallet, WalletSettings, Transaction, mapBackendWalletToFrontend, mapBac
 import { api } from './api-client'
 import { useAuth } from './auth-context'
 
-// This is a view_file call, I'll do it separately.
-// Wait, I can't do view_file inside replace_file_content instruction.
-// I'll just look at wallet-context.tsx first to see where the mappers are.
-// mapWebSocketWalletToFrontend is IN wallet-context.tsx.
-// mapBackendWalletToFrontend is IMPORTED.
-
-// I will fix mapWebSocketWalletToFrontend in wallet-context.tsx first.
-
+// WebSocket balance data structure (from backend WebSocket)
+export interface WebSocketBalanceData {
+  totalBalance: number
+  totalBonusBalance: number
+  wallets: Array<{
+    id?: string | number // ID might be missing or number
+    _id?: string | number // Alternative ID field
+    currencyCode?: string
+    currency?: string
+    walletType: 'crypto' | 'fiat'
+    balance: string
+    bonusBalance: string
+    isDefault: boolean
+  }>
+}
 
 interface WalletContextType {
   wallets: Wallet[]
@@ -40,38 +47,26 @@ interface WalletContextType {
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
 // Helper function to map WebSocket wallet data to frontend wallet format
+// (Kept for reference but mostly handled inline now for robustness)
 function mapWebSocketWalletToFrontend(wsWallet: any): Wallet | null {
-  console.log('[WalletContext] Mapping WebSocket wallet:', wsWallet)
-
   // Support both currencyCode and currency fields
   const code = wsWallet.currencyCode || wsWallet.currency
-  
-  if (!code) {
-    console.warn('[WalletContext] WebSocket wallet missing currency code:', wsWallet)
-    return null
-  }
+  if (!code) return null
 
   const currency = getCurrencyByCode(code)
-  
-  if (!currency) {
-    console.warn(`[WalletContext] Unknown currency code from WebSocket: ${code}`)
-    return null
-  }
+  if (!currency) return null
 
   // Handle ID: support 'id' or '_id'
   const rawId = wsWallet.id || wsWallet._id
-  if (!rawId) {
-      console.error('[WalletContext] WebSocket wallet missing ID:', wsWallet)
-      return null
-  }
+  if (!rawId) return null // Silently fail if no ID (handled better in bulk update)
 
   return {
-    id: String(rawId), // Ensure ID is always a string
+    id: String(rawId),
     currency,
     balance: Number(wsWallet.balance),
     lockedBalance: Number(wsWallet.bonusBalance),
     isDefault: wsWallet.isDefault,
-    createdAt: new Date().toISOString(), // WebSocket doesn't provide this
+    createdAt: new Date().toISOString(),
   }
 }
 
@@ -305,60 +300,94 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   // Function to update wallets from WebSocket balance event
   const updateWalletsFromWebSocket = useCallback((data: WebSocketBalanceData) => {
-    console.log('WebSocket: Balance update received', data)
-    
     // Update total balances
     setTotalBalance(data.totalBalance)
     setTotalBonusBalance(data.totalBonusBalance)
     
-    // Map WebSocket wallet data to frontend format
-    const incomingWallets = data.wallets
-      .map(mapWebSocketWalletToFrontend)
-      .filter((w): w is Wallet => w !== null)
-    
     setWallets(currentWallets => {
-        // Create a map from current wallets for easy access and automatic deduplication
-        const walletMap = new Map(currentWallets.map(w => [String(w.id), w]))
+        // Create a map from current wallets for easy access
+        const walletMap = new Map(currentWallets.map(w => [w.id, w]))
         
-        // Merge incoming wallets: update existing ones or add new ones
-        incomingWallets.forEach(w => {
-            walletMap.set(String(w.id), w)
+        data.wallets.forEach(wsWallet => {
+            // Support both currencyCode and currency fields
+            const code = wsWallet.currencyCode || wsWallet.currency
+            if (!code) return
+
+            // 1. Try to find match by ID (if WS provides it)
+            // 2. OR Try to find match by Currency Code
+            const wsId = wsWallet.id || wsWallet._id
+            
+            let match: Wallet | undefined
+            
+            if (wsId) {
+                match = walletMap.get(String(wsId))
+            }
+            
+            if (!match) {
+                // Fallback: search by currency code
+                match = Array.from(walletMap.values()).find(w => w.currency.code === code)
+            }
+
+            if (match) {
+                 // Update existing wallet
+                 // We preserve the existing ID and Currency object, just update balances
+                 const updated: Wallet = {
+                     ...match,
+                     balance: Number(wsWallet.balance),
+                     lockedBalance: Number(wsWallet.bonusBalance),
+                     // Update defaults/active if provided
+                     isDefault: wsWallet.isDefault !== undefined ? wsWallet.isDefault : match.isDefault
+                 }
+                 walletMap.set(match.id, updated)
+            } else {
+                 // No match found. Create new wallet ONLY if we have a valid ID.
+                 if (wsId) {
+                     const currency = getCurrencyByCode(code)
+                     if (currency) {
+                         const newWallet: Wallet = {
+                             id: String(wsId),
+                             currency,
+                             balance: Number(wsWallet.balance),
+                             lockedBalance: Number(wsWallet.bonusBalance),
+                             isDefault: wsWallet.isDefault || false,
+                             createdAt: new Date().toISOString()
+                         }
+                         walletMap.set(newWallet.id, newWallet)
+                     }
+                 }
+                 // If no ID and no match, we skip it (avoids duplication/undefined IDs)
+            }
         })
         
-        // Convert back to array
         return Array.from(walletMap.values())
     })
 
     setIsLoadingWallets(false)
     setError(null)
     
-    // Update active wallet if it exists in the new data
-    // We need to trust valid state is now in 'wallets' (but we are inside a callback, so checking 'wallets' directly might be stale if we didn't use functional update for it. 
-    // However, setActiveWalletState doesn't depend on 'wallets' state directly for its setter, but for logic...)
-    
-    // Better logic: Check if the incoming data contains an update for the ACTIVE wallet.
+    // Update active wallet logic
+    // We trust that 'wallets' state update will eventually trigger a re-render
+    // But we should update the 'activeWallet' state reference if it was modified
     setActiveWalletState(prevActive => {
-      if (!prevActive) {
-          // No active wallet? Check localStorage or defaults from the *incoming* (or we'd need access to full merged list, which is hard here without refetching or complex state plumbing)
-          // Ideally we just keep it null or let the user select.
-          // Or we can try to restore from localStorage again if we really want.
-          const savedActiveWalletId = localStorage.getItem('casino-active-wallet')
-          if (savedActiveWalletId) {
-             const saved = incomingWallets.find(w => w.id === savedActiveWalletId)
-             // We can only check incoming, we don't have easy access to 'merged' list here without a ref.
-             // But valid: if we don't have an active wallet, and a socket event comes in, maybe we set one?
-             if (saved) return saved
-          }
-          return null
-      }
+        if (!prevActive) return null
+        
+        // Find if our active wallet was in the update payload (by ID or Currency)
+        const updatedInData = data.wallets.find(w => {
+            const code = w.currencyCode || w.currency
+            const wsId = w.id || w._id
+            return (wsId && String(wsId) === prevActive.id) || (code === prevActive.currency.code)
+        })
 
-      // If we HAVE an active wallet, check if it was updated in this event
-      const updatedActive = incomingWallets.find(w => w.id === prevActive.id)
-      if (updatedActive) {
-          return updatedActive
-      }
-      
-      return prevActive // Keep current if not updated
+        if (updatedInData) {
+            // Construct the updated active wallet using the new balance
+            return {
+                ...prevActive,
+                balance: Number(updatedInData.balance),
+                lockedBalance: Number(updatedInData.bonusBalance),
+                isDefault: updatedInData.isDefault !== undefined ? updatedInData.isDefault : prevActive.isDefault
+            }
+        }
+        return prevActive
     })
   }, [])
 
