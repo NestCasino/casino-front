@@ -49,7 +49,7 @@ const getCurrencySymbol = (currency: string): string => {
 
 export function ProfileMenu() {
   const { user, getAvatar, openAvatarModal, clearUser } = useUser()
-  const { openWalletModal } = useWallet()
+  const { openWalletModal, activeWallet } = useWallet()
   const { logout } = useAuth()
   const router = useRouter()
   
@@ -131,12 +131,12 @@ export function ProfileMenu() {
                 )}
               </div>
 
-              {/* Balance */}
+            {/* Balances */}
               <div className="text-right">
                 <div className="text-2xl font-bold text-white">
-                  {getCurrencySymbol(user.currency)}{user.balance.toFixed(2)}
+                  {getCurrencySymbol(activeWallet?.currency.code || user.currency)}{((activeWallet?.balance ?? user.balance) || 0).toFixed(2)}
                 </div>
-                <div className="text-xs text-purple-200">{user.currency}</div>
+                <div className="text-xs text-purple-200">{activeWallet?.currency.code || user.currency}</div>
               </div>
             </div>
 

@@ -53,8 +53,9 @@ export function WalletSelector() {
   }
 
   // Use user data as the source of truth (same as profile menu)
-  const displayCurrency = user?.currency || 'USD'
-  const displayBalance = user?.balance || 0
+  // Use active wallet as source of truth, fallback to user data (though activeWallet should be present)
+  const displayCurrency = activeWallet?.currency.code || user?.currency || 'USD'
+  const displayBalance = activeWallet?.balance ?? user?.balance ?? 0
 
   return (
     <div ref={dropdownRef} className="relative">
