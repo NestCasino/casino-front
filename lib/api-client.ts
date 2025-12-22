@@ -1,6 +1,10 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios';
+import axios, {
+  AxiosInstance,
+  InternalAxiosRequestConfig,
+  AxiosError,
+} from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 // API Response Types
 interface ApiSuccessResponse<T> {
@@ -52,7 +56,7 @@ export interface UpdateProfileData {
   password?: string;
   new_password?: string;
   repeat_password?: string;
-  
+
   // Personal info
   email?: string;
   phone?: string;
@@ -61,11 +65,11 @@ export interface UpdateProfileData {
   birthday?: string;
   country?: string;
   lang?: string;
-  gender?: 'Male' | 'Female' | 'Other';
+  gender?: "Male" | "Female" | "Other";
   address?: string;
   city?: string;
   postal_code?: string;
-  
+
   // Files
   avatar?: File;
   kyc_front?: File;
@@ -89,7 +93,7 @@ interface Currency {
   id: string;
   code: string;
   name: string;
-  type: 'fiat' | 'crypto';
+  type: "fiat" | "crypto";
   symbol: string;
   is_active: boolean;
 }
@@ -131,7 +135,7 @@ interface BackendWallet {
   id: string;
   playerId: string;
   currency: string;
-  walletType: 'crypto' | 'fiat';
+  walletType: "crypto" | "fiat";
   balance: number;
   bonusBalance: number;
   isDefault: boolean;
@@ -168,7 +172,7 @@ interface WalletBalanceResponse {
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   timeout: 10000,
 });
@@ -195,12 +199,12 @@ const processQueue = (error: Error | null, token: string | null = null) => {
 // Request interceptor - attach access token to headers
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = localStorage.getItem('access_token');
-    
+    const accessToken = localStorage.getItem("access_token");
+
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
-    
+
     return config;
   },
   (error) => {
@@ -225,11 +229,13 @@ apiClient.interceptors.response.use(
 
     // Don't attempt token refresh for auth endpoints (login, register, refresh)
     // These are public endpoints that don't need token refresh logic
-    if (originalRequest.url?.includes('/auth/login') || 
-        originalRequest.url?.includes('/auth/register') ||
-        originalRequest.url?.includes('/auth/refresh') ||
-        originalRequest.url?.includes('/auth/forgot-password') ||
-        originalRequest.url?.includes('/auth/reset-password')) {
+    if (
+      originalRequest.url?.includes("/auth/login") ||
+      originalRequest.url?.includes("/auth/register") ||
+      originalRequest.url?.includes("/auth/refresh") ||
+      originalRequest.url?.includes("/auth/forgot-password") ||
+      originalRequest.url?.includes("/auth/reset-password")
+    ) {
       return Promise.reject(error);
     }
 
@@ -252,13 +258,13 @@ apiClient.interceptors.response.use(
     originalRequest._retry = true;
     isRefreshing = true;
 
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = localStorage.getItem("refresh_token");
 
     if (!refreshToken) {
       isRefreshing = false;
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      window.location.href = '/';
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      window.location.href = "/";
       return Promise.reject(error);
     }
 
@@ -271,7 +277,7 @@ apiClient.interceptors.response.use(
       const { access_token } = response.data.data;
 
       // Store new access token
-      localStorage.setItem('access_token', access_token);
+      localStorage.setItem("access_token", access_token);
 
       // Update authorization header
       if (originalRequest.headers) {
@@ -290,9 +296,9 @@ apiClient.interceptors.response.use(
       isRefreshing = false;
 
       // Clear tokens and redirect to home
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      window.location.href = '/';
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      window.location.href = "/";
 
       return Promise.reject(refreshError);
     }
@@ -312,7 +318,7 @@ export const api = {
       lang?: string;
     }): Promise<ApiResponse<AuthResponse>> => {
       try {
-        const response = await apiClient.post('/api/v1/auth/register', data);
+        const response = await apiClient.post("/api/v1/auth/register", data);
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -321,15 +327,18 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Registration failed',
+            message: error.message || "Registration failed",
           },
         };
       }
     },
 
-    login: async (data: { email: string; password: string }): Promise<ApiResponse<AuthResponse>> => {
+    login: async (data: {
+      email: string;
+      password: string;
+    }): Promise<ApiResponse<AuthResponse>> => {
       try {
-        const response = await apiClient.post('/api/v1/auth/login', data);
+        const response = await apiClient.post("/api/v1/auth/login", data);
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -338,7 +347,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Login failed',
+            message: error.message || "Login failed",
           },
         };
       }
@@ -346,7 +355,7 @@ export const api = {
 
     logout: async (accessToken: string): Promise<ApiResponse<void>> => {
       try {
-        const response = await apiClient.post('/api/v1/auth/logout', {
+        const response = await apiClient.post("/api/v1/auth/logout", {
           access_token: accessToken,
         });
         return response.data;
@@ -357,22 +366,28 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Logout failed',
+            message: error.message || "Logout failed",
           },
         };
       }
     },
 
-    refresh: async (refreshToken: string): Promise<ApiResponse<{ access_token: string }>> => {
-      const response = await apiClient.post('/api/v1/auth/refresh', {
+    refresh: async (
+      refreshToken: string
+    ): Promise<ApiResponse<{ access_token: string }>> => {
+      const response = await apiClient.post("/api/v1/auth/refresh", {
         refresh_token: refreshToken,
       });
       return response.data;
     },
 
-    forgotPassword: async (email: string): Promise<ApiResponse<{ message: string }>> => {
+    forgotPassword: async (
+      email: string
+    ): Promise<ApiResponse<{ message: string }>> => {
       try {
-        const response = await apiClient.post('/api/v1/auth/forgot-password', { email });
+        const response = await apiClient.post("/api/v1/auth/forgot-password", {
+          email,
+        });
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -381,7 +396,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to send password reset email',
+            message: error.message || "Failed to send password reset email",
           },
         };
       }
@@ -394,7 +409,10 @@ export const api = {
       password_confirmation: string;
     }): Promise<ApiResponse<{ message: string }>> => {
       try {
-        const response = await apiClient.post('/api/v1/auth/reset-password', data);
+        const response = await apiClient.post(
+          "/api/v1/auth/reset-password",
+          data
+        );
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -403,15 +421,17 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to reset password',
+            message: error.message || "Failed to reset password",
           },
         };
       }
     },
 
-    requestEmailVerification: async (): Promise<ApiResponse<{ message: string }>> => {
+    requestEmailVerification: async (): Promise<
+      ApiResponse<{ message: string }>
+    > => {
       try {
-        const response = await apiClient.post('/api/v1/auth/email/verify');
+        const response = await apiClient.post("/api/v1/auth/email/verify");
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -420,15 +440,19 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to request email verification',
+            message: error.message || "Failed to request email verification",
           },
         };
       }
     },
 
-    verifyEmailWithToken: async (token: string): Promise<ApiResponse<{ message: string }>> => {
+    verifyEmailWithToken: async (
+      token: string
+    ): Promise<ApiResponse<{ message: string }>> => {
       try {
-        const response = await apiClient.post(`/api/v1/auth/email/verify/${token}`);
+        const response = await apiClient.post(
+          `/api/v1/auth/email/verify/${token}`
+        );
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -437,15 +461,20 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to verify email',
+            message: error.message || "Failed to verify email",
           },
         };
       }
     },
 
-    verifyEmailByHash: async (id: string, hash: string): Promise<ApiResponse<{ message: string }>> => {
+    verifyEmailByHash: async (
+      id: string,
+      hash: string
+    ): Promise<ApiResponse<{ message: string }>> => {
       try {
-        const response = await apiClient.get(`/api/v1/auth/email-verification/${id}/${hash}`);
+        const response = await apiClient.get(
+          `/api/v1/auth/email-verification/${id}/${hash}`
+        );
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -454,7 +483,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to verify email',
+            message: error.message || "Failed to verify email",
           },
         };
       }
@@ -463,9 +492,11 @@ export const api = {
 
   // Player endpoints
   players: {
-    checkEmail: async (email: string): Promise<ApiResponse<CheckAvailabilityResponse>> => {
+    checkEmail: async (
+      email: string
+    ): Promise<ApiResponse<CheckAvailabilityResponse>> => {
       try {
-        const response = await apiClient.post('/api/v1/players/check-email', {
+        const response = await apiClient.post("/api/v1/players/check-email", {
           email,
         });
         return response.data;
@@ -476,17 +507,22 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to check email availability',
+            message: error.message || "Failed to check email availability",
           },
         };
       }
     },
 
-    checkUsername: async (username: string): Promise<ApiResponse<CheckAvailabilityResponse>> => {
+    checkUsername: async (
+      username: string
+    ): Promise<ApiResponse<CheckAvailabilityResponse>> => {
       try {
-        const response = await apiClient.post('/api/v1/players/check-username', {
-          username,
-        });
+        const response = await apiClient.post(
+          "/api/v1/players/check-username",
+          {
+            username,
+          }
+        );
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -495,7 +531,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to check username availability',
+            message: error.message || "Failed to check username availability",
           },
         };
       }
@@ -512,7 +548,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to get profile',
+            message: error.message || "Failed to get profile",
           },
         };
       }
@@ -521,7 +557,7 @@ export const api = {
     // Get current authenticated user's profile
     getMe: async (): Promise<ApiResponse<Player>> => {
       try {
-        const response = await apiClient.get('/api/v1/players/me');
+        const response = await apiClient.get("/api/v1/players/me");
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -530,50 +566,52 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to get profile',
+            message: error.message || "Failed to get profile",
           },
         };
       }
     },
 
     // Update current user's profile with multipart/form-data support
-    updateProfile: async (data: UpdateProfileData): Promise<ApiResponse<{ message: string; data: Player }>> => {
+    updateProfile: async (
+      data: UpdateProfileData
+    ): Promise<ApiResponse<{ message: string; data: Player }>> => {
       try {
         const formData = new FormData();
-        
+
         // Add text fields to FormData
         Object.entries(data).forEach(([key, value]) => {
-          if (value !== undefined && value !== null && value !== '') {
+          if (value !== undefined && value !== null && value !== "") {
             // Skip file objects for now, handle them separately
             if (!(value instanceof File)) {
               formData.append(key, String(value));
             }
           }
         });
-        
+
         // Add files to FormData
         if (data.avatar instanceof File) {
-          formData.append('avatar', data.avatar);
+          formData.append("avatar", data.avatar);
         }
         if (data.kyc_front instanceof File) {
-          formData.append('kyc_front', data.kyc_front);
+          formData.append("kyc_front", data.kyc_front);
         }
         if (data.kyc_back instanceof File) {
-          formData.append('kyc_back', data.kyc_back);
+          formData.append("kyc_back", data.kyc_back);
         }
         if (data.kyc_selfie instanceof File) {
-          formData.append('kyc_selfie', data.kyc_selfie);
+          formData.append("kyc_selfie", data.kyc_selfie);
         }
         if (data.kyc_address instanceof File) {
-          formData.append('kyc_address', data.kyc_address);
+          formData.append("kyc_address", data.kyc_address);
         }
-        
-        const response = await apiClient.post('/api/v1/players', formData, {
+
+        const response = await apiClient.post("/api/v1/players", formData, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         });
-        
+
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -582,7 +620,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to update profile',
+            message: error.message || "Failed to update profile",
           },
         };
       }
@@ -593,7 +631,7 @@ export const api = {
   currencies: {
     getActive: async (): Promise<ApiResponse<Currency[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/currencies/active');
+        const response = await apiClient.get("/api/v1/currencies/active");
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -602,15 +640,19 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load currencies',
+            message: error.message || "Failed to load currencies",
           },
         };
       }
     },
 
-    getByType: async (type: 'fiat' | 'crypto'): Promise<ApiResponse<Currency[]>> => {
+    getByType: async (
+      type: "fiat" | "crypto"
+    ): Promise<ApiResponse<Currency[]>> => {
       try {
-        const response = await apiClient.get(`/api/v1/currencies/by-type/${type}`);
+        const response = await apiClient.get(
+          `/api/v1/currencies/by-type/${type}`
+        );
         return response.data;
       } catch (error: any) {
         if (error.response?.data) {
@@ -619,7 +661,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load currencies',
+            message: error.message || "Failed to load currencies",
           },
         };
       }
@@ -630,18 +672,22 @@ export const api = {
   wallets: {
     getWallets: async (): Promise<ApiResponse<BackendWallet[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/wallets');
-        console.log('[API] Raw wallets response:', response);
-        console.log('[API] response.data:', response.data);
-        console.log('[API] response.data.data:', response.data.data);
-        
+        const response = await apiClient.get("/api/v1/wallets");
+        console.log("[API] Raw wallets response:", response);
+        console.log("[API] response.data:", response.data);
+        console.log("[API] response.data.data:", response.data.data);
+
         // Handle different response structures
         let walletData: BackendWallet[];
-        
+
         // If response.data has a 'data' property (standardized response)
-        if (response.data && typeof response.data === 'object' && 'data' in response.data) {
+        if (
+          response.data &&
+          typeof response.data === "object" &&
+          "data" in response.data
+        ) {
           walletData = response.data.data;
-        } 
+        }
         // If response.data is directly an array
         else if (Array.isArray(response.data)) {
           walletData = response.data;
@@ -654,30 +700,35 @@ export const api = {
         else {
           walletData = response.data || [];
         }
-        
-        console.log('[API] Final wallet data:', walletData);
-        console.log('[API] Wallet data type:', typeof walletData, 'Is array?', Array.isArray(walletData));
-        
+
+        console.log("[API] Final wallet data:", walletData);
+        console.log(
+          "[API] Wallet data type:",
+          typeof walletData,
+          "Is array?",
+          Array.isArray(walletData)
+        );
+
         // Ensure it's an array
         if (!Array.isArray(walletData)) {
-          console.error('[API] Wallet data is not an array!', walletData);
+          console.error("[API] Wallet data is not an array!", walletData);
           walletData = [];
         }
-        
+
         return {
           success: true,
           data: walletData,
         };
       } catch (error: any) {
-        console.error('[API] Failed to fetch wallets:', error);
-        console.error('[API] Error response:', error.response);
+        console.error("[API] Failed to fetch wallets:", error);
+        console.error("[API] Error response:", error.response);
         if (error.response?.data) {
           return error.response.data;
         }
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load wallets',
+            message: error.message || "Failed to load wallets",
           },
         };
       }
@@ -685,7 +736,7 @@ export const api = {
 
     getTotalBalance: async (): Promise<ApiResponse<WalletBalanceResponse>> => {
       try {
-        const response = await apiClient.get('/api/v1/wallets/balance');
+        const response = await apiClient.get("/api/v1/wallets/balance");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -697,7 +748,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load balance',
+            message: error.message || "Failed to load balance",
           },
         };
       }
@@ -705,7 +756,7 @@ export const api = {
 
     getTransactions: async (): Promise<ApiResponse<BackendTransaction[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/wallets/transactions');
+        const response = await apiClient.get("/api/v1/wallets/transactions");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -717,7 +768,31 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load transactions',
+            message: error.message || "Failed to load transactions",
+          },
+        };
+      }
+    },
+
+    setDefaultWallet: async (
+      walletId: string
+    ): Promise<ApiResponse<BackendWallet>> => {
+      try {
+        const response = await apiClient.patch(
+          `/api/v1/wallets/${walletId}/default`
+        );
+        return {
+          success: true,
+          data: response.data.data || response.data,
+        };
+      } catch (error: any) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        return {
+          success: false,
+          error: {
+            message: error.message || "Failed to set default wallet",
           },
         };
       }
@@ -728,7 +803,7 @@ export const api = {
   coinNetworks: {
     getActive: async (): Promise<ApiResponse<CoinNetwork[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/coin-networks/active');
+        const response = await apiClient.get("/api/v1/coin-networks/active");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -740,7 +815,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load coin networks',
+            message: error.message || "Failed to load coin networks",
           },
         };
       }
@@ -751,7 +826,7 @@ export const api = {
   countries: {
     getActive: async (): Promise<ApiResponse<Country[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/countries');
+        const response = await apiClient.get("/api/v1/countries");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -763,7 +838,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load countries',
+            message: error.message || "Failed to load countries",
           },
         };
       }
@@ -774,7 +849,7 @@ export const api = {
   languages: {
     getActive: async (): Promise<ApiResponse<Language[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/languages');
+        const response = await apiClient.get("/api/v1/languages");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -786,7 +861,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load languages',
+            message: error.message || "Failed to load languages",
           },
         };
       }
@@ -795,24 +870,35 @@ export const api = {
 
   // Notification endpoints
   notifications: {
-    getNotifications: async (limit: number = 50, offset: number = 0): Promise<ApiResponse<any[]>> => {
+    getNotifications: async (
+      limit: number = 50,
+      offset: number = 0
+    ): Promise<ApiResponse<any[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/notifications', {
+        const response = await apiClient.get("/api/v1/notifications", {
           params: { limit, offset },
         });
         // Handle nested data structure and ensure we return an array
         let notificationsData = response.data.data || response.data;
-        
+
         // If the response is a paginated object, extract the notifications array
-        if (notificationsData && typeof notificationsData === 'object' && !Array.isArray(notificationsData)) {
-          notificationsData = notificationsData.notifications || notificationsData.items || notificationsData.data || [];
+        if (
+          notificationsData &&
+          typeof notificationsData === "object" &&
+          !Array.isArray(notificationsData)
+        ) {
+          notificationsData =
+            notificationsData.notifications ||
+            notificationsData.items ||
+            notificationsData.data ||
+            [];
         }
-        
+
         // Ensure we always return an array
         if (!Array.isArray(notificationsData)) {
           notificationsData = [];
         }
-        
+
         return {
           success: true,
           data: notificationsData,
@@ -824,7 +910,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load notifications',
+            message: error.message || "Failed to load notifications",
           },
         };
       }
@@ -832,7 +918,9 @@ export const api = {
 
     markAsRead: async (id: number): Promise<ApiResponse<any>> => {
       try {
-        const response = await apiClient.patch(`/api/v1/notifications/${id}/read`);
+        const response = await apiClient.patch(
+          `/api/v1/notifications/${id}/read`
+        );
         return {
           success: true,
           data: response.data.data || response.data,
@@ -844,15 +932,19 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to mark notification as read',
+            message: error.message || "Failed to mark notification as read",
           },
         };
       }
     },
 
-    markAllAsRead: async (): Promise<ApiResponse<{ message: string; count?: number }>> => {
+    markAllAsRead: async (): Promise<
+      ApiResponse<{ message: string; count?: number }>
+    > => {
       try {
-        const response = await apiClient.patch('/api/v1/notifications/read-all');
+        const response = await apiClient.patch(
+          "/api/v1/notifications/read-all"
+        );
         return {
           success: true,
           data: response.data,
@@ -864,7 +956,8 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to mark all notifications as read',
+            message:
+              error.message || "Failed to mark all notifications as read",
           },
         };
       }
@@ -875,7 +968,7 @@ export const api = {
   sessions: {
     getSessions: async (): Promise<ApiResponse<Session[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/sessions');
+        const response = await apiClient.get("/api/v1/sessions");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -887,15 +980,19 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load sessions',
+            message: error.message || "Failed to load sessions",
           },
         };
       }
     },
 
-    revokeSession: async (sessionId: string): Promise<ApiResponse<{ message: string }>> => {
+    revokeSession: async (
+      sessionId: string
+    ): Promise<ApiResponse<{ message: string }>> => {
       try {
-        const response = await apiClient.delete(`/api/v1/sessions/${sessionId}`);
+        const response = await apiClient.delete(
+          `/api/v1/sessions/${sessionId}`
+        );
         return {
           success: true,
           data: response.data.data || response.data,
@@ -907,15 +1004,17 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to revoke session',
+            message: error.message || "Failed to revoke session",
           },
         };
       }
     },
 
-    revokeAllOtherSessions: async (): Promise<ApiResponse<{ message: string }>> => {
+    revokeAllOtherSessions: async (): Promise<
+      ApiResponse<{ message: string }>
+    > => {
       try {
-        const response = await apiClient.delete('/api/v1/sessions');
+        const response = await apiClient.delete("/api/v1/sessions");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -927,7 +1026,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to revoke sessions',
+            message: error.message || "Failed to revoke sessions",
           },
         };
       }
@@ -939,29 +1038,31 @@ export const api = {
     getGames: async (params?: {
       page?: number;
       perPage?: number;
-      device?: 'mobile' | 'desktop';
+      device?: "mobile" | "desktop";
       providerId?: number;
       categoryId?: number;
       search?: string;
       isLive?: boolean;
       isTrending?: boolean;
       showAvailablesOnly?: boolean;
-      sortBy?: 'sortOrder' | 'gameTitle' | 'launched' | 'popularity';
-      sortOrder?: 'ASC' | 'DESC';
-    }): Promise<ApiResponse<{
-      data: any[];
-      meta: {
-        total: number;
-        page: number;
-        perPage: number;
-        totalPages: number;
-      };
-    }>> => {
+      sortBy?: "sortOrder" | "gameTitle" | "launched" | "popularity";
+      sortOrder?: "ASC" | "DESC";
+    }): Promise<
+      ApiResponse<{
+        data: any[];
+        meta: {
+          total: number;
+          page: number;
+          perPage: number;
+          totalPages: number;
+        };
+      }>
+    > => {
       try {
-        const response = await apiClient.get('/api/v1/games', { params });
+        const response = await apiClient.get("/api/v1/games", { params });
         return {
           success: true,
-          data: response.data.data 
+          data: response.data.data
             ? { data: response.data.data, meta: response.data.meta }
             : response.data,
         };
@@ -972,7 +1073,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load games',
+            message: error.message || "Failed to load games",
           },
         };
       }
@@ -992,7 +1093,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load game',
+            message: error.message || "Failed to load game",
           },
         };
       }
@@ -1002,27 +1103,27 @@ export const api = {
       id?: number;
       slug?: string;
       gameId?: string;
-      device?: 'desktop' | 'mobile';
+      device?: "desktop" | "mobile";
       lang?: string;
       lobbyData?: string;
     }): Promise<ApiResponse<{ url: string; sessionId: string }>> => {
       try {
-        console.log('[API] generateGameUrl called with params:', params);
-        const response = await apiClient.get('/api/v1/games/url', { params });
-        console.log('[API] generateGameUrl response:', response.data);
+        console.log("[API] generateGameUrl called with params:", params);
+        const response = await apiClient.get("/api/v1/games/url", { params });
+        console.log("[API] generateGameUrl response:", response.data);
         return {
           success: true,
           data: response.data.data || response.data,
         };
       } catch (error: any) {
-        console.error('[API] generateGameUrl error:', error);
+        console.error("[API] generateGameUrl error:", error);
         if (error.response?.data) {
           return error.response.data;
         }
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to generate game URL',
+            message: error.message || "Failed to generate game URL",
           },
         };
       }
@@ -1032,26 +1133,28 @@ export const api = {
       id?: number;
       slug?: string;
       gameId?: string;
-      device?: 'desktop' | 'mobile';
+      device?: "desktop" | "mobile";
       lang?: string;
     }): Promise<ApiResponse<{ url: string; sessionId: string }>> => {
       try {
-        console.log('[API] generateDemoUrl called with params:', params);
-        const response = await apiClient.get('/api/v1/games/demo-url', { params });
-        console.log('[API] generateDemoUrl response:', response.data);
+        console.log("[API] generateDemoUrl called with params:", params);
+        const response = await apiClient.get("/api/v1/games/demo-url", {
+          params,
+        });
+        console.log("[API] generateDemoUrl response:", response.data);
         return {
           success: true,
           data: response.data.data || response.data,
         };
       } catch (error: any) {
-        console.error('[API] generateDemoUrl error:', error);
+        console.error("[API] generateDemoUrl error:", error);
         if (error.response?.data) {
           return error.response.data;
         }
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to generate demo URL',
+            message: error.message || "Failed to generate demo URL",
           },
         };
       }
@@ -1064,7 +1167,7 @@ export const api = {
       currency?: string;
     }): Promise<ApiResponse<any>> => {
       try {
-        const response = await apiClient.get('/api/v1/games/lobby', { params });
+        const response = await apiClient.get("/api/v1/games/lobby", { params });
         return {
           success: true,
           data: response.data.data || response.data,
@@ -1076,7 +1179,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to get lobby data',
+            message: error.message || "Failed to get lobby data",
           },
         };
       }
@@ -1087,7 +1190,7 @@ export const api = {
   categories: {
     getActive: async (): Promise<ApiResponse<any[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/categories');
+        const response = await apiClient.get("/api/v1/categories");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -1099,7 +1202,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load categories',
+            message: error.message || "Failed to load categories",
           },
         };
       }
@@ -1110,7 +1213,7 @@ export const api = {
   providers: {
     getActive: async (): Promise<ApiResponse<any[]>> => {
       try {
-        const response = await apiClient.get('/api/v1/providers');
+        const response = await apiClient.get("/api/v1/providers");
         return {
           success: true,
           data: response.data.data || response.data,
@@ -1122,7 +1225,7 @@ export const api = {
         return {
           success: false,
           error: {
-            message: error.message || 'Failed to load providers',
+            message: error.message || "Failed to load providers",
           },
         };
       }
@@ -1150,4 +1253,8 @@ export interface Session {
 }
 
 // Export types for use in other files
-export type { BackendWallet, BackendTransaction, WalletBalanceResponse, CoinNetwork, Country, Language };
+export type {
+  BackendWallet,
+  BackendTransaction,
+  WalletBalanceResponse,
+};

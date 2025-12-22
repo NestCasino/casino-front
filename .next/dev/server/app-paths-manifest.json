@@ -2,5 +2,5 @@
   "/all-games/page": "app/all-games/page.js",
   "/page": "app/page.js",
   "/play/[slug]/page": "app/play/[slug]/page.js",
-  "/tournaments/page": "app/tournaments/page.js"
+  "/settings/page": "app/settings/page.js"
 }

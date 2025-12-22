@@ -39,6 +39,7 @@ interface WalletContextType {
   refreshWallets: () => Promise<void>
   refreshTransactions: () => Promise<void>
   updateWalletsFromWebSocket: (data: WebSocketBalanceData) => void
+  setDefaultWallet: (walletId: string) => Promise<void>
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
@@ -226,6 +227,39 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     await fetchTransactions()
   }
 
+  const setDefaultWalletApi = async (walletId: string) => {
+    try {
+      setError(null)
+      
+      // Call API to set default wallet
+      const response = await api.wallets.setDefaultWallet(walletId)
+      
+      if (response.success && response.data) {
+        // Update local state optimistically
+        setWallets(prevWallets => 
+          prevWallets.map(w => ({
+            ...w,
+            isDefault: w.id === walletId
+          }))
+        )
+        
+        // Set as active wallet
+        const wallet = wallets.find(w => w.id === walletId)
+        if (wallet) {
+          setActiveWalletState({ ...wallet, isDefault: true })
+        }
+        
+        // Refresh wallets to get server state
+        await refreshWallets()
+      } else {
+        setError(response.error?.message || 'Failed to set default wallet')
+      }
+    } catch (err: any) {
+      console.error('Failed to set default wallet:', err)
+      setError(err.message || 'Failed to set default wallet')
+    }
+  }
+
   // Function to update wallets from WebSocket balance event
   const updateWalletsFromWebSocket = useCallback((data: WebSocketBalanceData) => {
     console.log('WebSocket: Balance update received', data)
@@ -291,6 +325,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         refreshWallets,
         refreshTransactions,
         updateWalletsFromWebSocket,
+        setDefaultWallet: setDefaultWalletApi,
       }}
     >
       {children}
