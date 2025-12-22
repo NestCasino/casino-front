@@ -1,6 +1,4 @@
 {
   "/all-games/page": "app/all-games/page.js",
-  "/page": "app/page.js",
-  "/play/[slug]/page": "app/play/[slug]/page.js",
-  "/settings/page": "app/settings/page.js"
+  "/page": "app/page.js"
 }

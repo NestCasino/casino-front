@@ -21,9 +21,24 @@ export function GameCard({ game, playerCount = 0 }: GameCardProps) {
   // Get provider name from context
   const provider = game.providerId ? getProviderById(game.providerId) : null
   const providerName = provider?.title || game.providerSlug || 'Unknown'
+
+  // Construct image URL
+  const getImageUrl = (imagePath: string | null) => {
+    if (!imagePath) return null
+    if (imagePath.startsWith('http')) return imagePath
+    
+    // Remove leading slash if present to avoid double slashes if API_URL ends with one
+    // But usually better to just handle it safely. 
+    // Assuming API_URL might not have trailing slash.
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+    const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`
+    return `${apiUrl}${cleanPath}`
+  }
+  
+  const imageUrl = getImageUrl(game.image)
   
   // Check if game has a valid image - if not, don't even try to load it
-  const hasValidImage = game.image && game.image.trim() !== ''
+  const hasValidImage = !!imageUrl
   const shouldShowPlaceholder = !hasValidImage || imgError
 
   const handlePlayNow = (e: React.MouseEvent) => {
@@ -59,7 +74,7 @@ export function GameCard({ game, playerCount = 0 }: GameCardProps) {
           </div>
         ) : (
           <Image
-            src={game.image!}
+            src={imageUrl!}
             alt={game.gameTitle}
             fill
             className="object-cover transition-all duration-250 group-hover:brightness-110"
