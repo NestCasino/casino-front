@@ -6,6 +6,22 @@ import { api, UpdateProfileData, Country } from '@/lib/api-client'
 import { toast } from '@/hooks/use-toast'
 import { Loader2, Check } from 'lucide-react'
 import { generateAccountNumber } from '@/lib/settings-mock-data'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { format } from "date-fns"
+import { cn } from "@/lib/utils"
+import { CalendarIcon } from "lucide-react"
 
 interface AccountSectionProps {
   user: User
@@ -290,27 +306,52 @@ export function AccountSection({ user, onUpdate }: AccountSectionProps) {
             {/* Gender */}
             <div>
               <label className="block text-sm font-medium text-[rgb(var(--text-secondary))] mb-2">Gender</label>
-              <select
+              <Select
                 value={gender}
-                onChange={(e) => setGender(e.target.value as 'Male' | 'Female' | 'Other')}
-                className="w-full h-12 px-4 bg-[#3d2b5e] border border-[#5d4b7e] rounded-xl text-sm text-[rgb(var(--text-primary))] focus:outline-none focus:border-[rgb(var(--primary))] transition-colors"
+                onValueChange={(value) => setGender(value as 'Male' | 'Female' | 'Other')}
               >
-                <option value="">Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
+                <SelectTrigger className="w-full h-12 px-4 !bg-[#3d2b5e] !border-[#5d4b7e] rounded-xl text-sm text-[rgb(var(--text-primary))] focus:!ring-0 focus:!ring-offset-0 focus:!border-[rgb(var(--primary))] [&>span]:text-[rgb(var(--text-primary))] data-[placeholder]:[&>span]:text-[rgb(var(--text-disabled))]">
+                  <SelectValue placeholder="Select gender" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#3d2b5e] border-[#5d4b7e] text-[rgb(var(--text-primary))]">
+                  <SelectItem value="Male" className="focus:bg-[#4a3570] focus:text-white">Male</SelectItem>
+                  <SelectItem value="Female" className="focus:bg-[#4a3570] focus:text-white">Female</SelectItem>
+                  <SelectItem value="Other" className="focus:bg-[#4a3570] focus:text-white">Other</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             
             {/* Date of Birth */}
             <div>
               <label className="block text-sm font-medium text-[rgb(var(--text-secondary))] mb-2">Date of Birth</label>
-              <input
-                type="date"
-                value={birthDate}
-                onChange={(e) => setBirthDate(e.target.value)}
-                className="w-full h-12 px-4 bg-[#3d2b5e] border border-[#5d4b7e] rounded-xl text-sm text-[rgb(var(--text-primary))] focus:outline-none focus:border-[rgb(var(--primary))] transition-colors"
-              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button
+                    className={cn(
+                      "w-full h-12 px-4 flex items-center justify-between bg-[#3d2b5e] border border-[#5d4b7e] rounded-xl text-sm text-[rgb(var(--text-primary))] transition-colors hover:bg-[#4a3570] focus:outline-none focus:border-[rgb(var(--primary))]",
+                      !birthDate && "text-[rgb(var(--text-disabled))]"
+                    )}
+                  >
+                    {birthDate ? format(new Date(birthDate), "PPP") : "mm/dd/yyyy"}
+                    <CalendarIcon className="h-4 w-4 opacity-50" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0 bg-[#2a1b47] border-[#5d4b7e] text-[rgb(var(--text-primary))]" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={birthDate ? new Date(birthDate) : undefined}
+                    onSelect={(date) => setBirthDate(date ? format(date, "yyyy-MM-dd") : "")}
+                    disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                    initialFocus
+                    className="bg-[#2a1b47] text-[rgb(var(--text-primary))]"
+                    classNames={{
+                      day_selected: "bg-[rgb(var(--primary))] text-white hover:bg-[rgb(var(--primary))] hover:text-white focus:bg-[rgb(var(--primary))] focus:text-white",
+                      day_today: "bg-[#3d2b5e] text-[rgb(var(--text-primary))]",
+                      day: "hover:bg-[#3d2b5e] hover:text-white focus:bg-[#3d2b5e] focus:text-white rounded-md",
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
           
@@ -336,19 +377,22 @@ export function AccountSection({ user, onUpdate }: AccountSectionProps) {
             {/* Country */}
             <div>
               <label className="block text-sm font-medium text-[rgb(var(--text-secondary))] mb-2">Country</label>
-              <select
+              <Select
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onValueChange={setCountry}
                 disabled={isLoadingCountries}
-                className="w-full h-12 px-4 bg-[#3d2b5e] border border-[#5d4b7e] rounded-xl text-sm text-[rgb(var(--text-primary))] focus:outline-none focus:border-[rgb(var(--primary))] transition-colors disabled:opacity-50"
               >
-                <option value="">Select country</option>
-                {countries.map((c) => (
-                  <option key={c.id} value={c.iso}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger className="w-full h-12 px-4 !bg-[#3d2b5e] !border-[#5d4b7e] rounded-xl text-sm text-[rgb(var(--text-primary))] focus:!ring-0 focus:!ring-offset-0 focus:!border-[rgb(var(--primary))] [&>span]:text-[rgb(var(--text-primary))] data-[placeholder]:[&>span]:text-[rgb(var(--text-disabled))] disabled:opacity-50">
+                  <SelectValue placeholder="Select country" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#3d2b5e] border-[#5d4b7e] text-[rgb(var(--text-primary))] max-h-[300px]">
+                  {countries.map((c) => (
+                    <SelectItem key={c.id} value={c.iso} className="focus:bg-[#4a3570] focus:text-white">
+                      {c.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             
             {/* City */}
