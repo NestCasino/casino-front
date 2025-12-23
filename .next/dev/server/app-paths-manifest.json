@@ -1,7 +1,13 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/all-games/page": "app/all-games/page.js",
+  "/category/[slug]/page": "app/category/[slug]/page.js",
+  "/favorites/page": "app/favorites/page.js",
+  "/live/page": "app/live/page.js",
   "/page": "app/page.js",
+  "/play/[slug]/page": "app/play/[slug]/page.js",
+  "/providers/[slug]/page": "app/providers/[slug]/page.js",
+  "/providers/page": "app/providers/page.js",
   "/reset-password/page": "app/reset-password/page.js",
   "/settings/page": "app/settings/page.js",
   "/verify-email/page": "app/verify-email/page.js"

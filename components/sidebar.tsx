@@ -102,6 +102,7 @@ export function Sidebar() {
 
         {/* Games Categories */}
         <SidebarItem icon={<LayoutGrid className="h-5 w-5" />} label="All Games" href="/all-games" active={pathname === '/all-games'} collapsed={isCollapsed} />
+        <SidebarItem icon={<Video className="h-5 w-5" />} label="Live Games" href="/live" active={pathname === '/live'} collapsed={isCollapsed} />
         <SidebarItem icon={<Building2 className="h-5 w-5" />} label="Providers" href="/providers" active={pathname === '/providers' || pathname.startsWith('/providers/')} collapsed={isCollapsed} />
         
         {/* Dynamic Categories from Backend */}
