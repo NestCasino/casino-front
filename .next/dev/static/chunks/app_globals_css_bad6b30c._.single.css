@@ -2377,6 +2377,10 @@
     border-color: rgb(var(--surface-hover));
   }
 
+  .border-\[rgb\(var\(--text-secondary\)\)\] {
+    border-color: rgb(var(--text-secondary));
+  }
+
   .border-amber-500\/30 {
     border-color: #f99c004d;
   }
@@ -2574,6 +2578,10 @@
 
   .border-transparent {
     border-color: #0000;
+  }
+
+  .border-white {
+    border-color: var(--color-white);
   }
 
   .border-yellow-500\/20 {
@@ -5306,6 +5314,12 @@
   @media (hover: hover) {
     .group-hover\:text-purple-400:is(:where(.group):hover *) {
       color: var(--color-purple-400);
+    }
+  }
+
+  @media (hover: hover) {
+    .group-hover\:text-purple-500:is(:where(.group):hover *) {
+      color: var(--color-purple-500);
     }
   }
 

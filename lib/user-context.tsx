@@ -116,7 +116,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
           currency: playerData.currency,
           level: 1, // TODO: Get from player stats
           levelProgress: 0, // TODO: Get from player stats
-          avatarId: '2', // TODO: Get from player settings or use avatar field
+          avatarId: '2', // Fallback ID, will be overridden by avatar URL if present
           country: playerData.country,
           lang: playerData.lang || 'EN',
           phone: playerData.phone,
@@ -125,7 +125,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
           address: playerData.address,
           city: playerData.city,
           postalCode: playerData.postalCode,
-          avatar: playerData.avatar,
+          avatar: playerData.avatar ? 
+            (playerData.avatar.startsWith('http') ? playerData.avatar : `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/${playerData.avatar}`) 
+            : undefined,
           kycStatus: playerData.kycStatus,
           kycFront: playerData.kycFront,
           kycBack: playerData.kycBack,
@@ -150,7 +152,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }
 
   const selectAvatar = (avatarId: string) => {
-    setUser(prev => prev ? ({ ...prev, avatarId }) : null)
+    setUser(prev => prev ? ({ ...prev, avatarId, avatar: undefined }) : null)
     setIsAvatarModalOpen(false)
   }
 

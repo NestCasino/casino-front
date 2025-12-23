@@ -75,11 +75,19 @@ export function ProfileMenu() {
           >
             {/* Avatar Circle */}
             <div className={cn(
-              "w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center shadow-md",
+              "w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center shadow-md overflow-hidden",
               "group-hover:shadow-lg group-hover:shadow-purple-500/30 transition-all",
-              currentAvatar?.bgColor
+              !user.avatar && currentAvatar?.bgColor
             )}>
-              <span className="text-2xl">{currentAvatar?.emoji}</span>
+              {user.avatar ? (
+                <img 
+                  src={user.avatar} 
+                  alt={user.username} 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-2xl">{currentAvatar?.emoji}</span>
+              )}
             </div>
           </button>
         </DropdownMenuTrigger>
@@ -94,10 +102,18 @@ export function ProfileMenu() {
               {/* Avatar with Edit Button */}
               <div className="relative group/avatar">
                 <div className={cn(
-                  "w-16 h-16 rounded-full bg-gradient-to-br flex items-center justify-center shadow-lg",
-                  currentAvatar?.bgColor
+                  "w-16 h-16 rounded-full bg-gradient-to-br flex items-center justify-center shadow-lg overflow-hidden",
+                  !user.avatar && currentAvatar?.bgColor
                 )}>
-                  <span className="text-3xl">{currentAvatar?.emoji}</span>
+                  {user.avatar ? (
+                    <img 
+                      src={user.avatar} 
+                      alt={user.username} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-3xl">{currentAvatar?.emoji}</span>
+                  )}
                 </div>
                 <button
                   onClick={(e) => {
