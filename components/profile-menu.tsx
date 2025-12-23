@@ -18,6 +18,7 @@ import {
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -26,6 +27,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { AvatarSelectorModal } from './avatar-selector-modal'
 
 // Helper function to get currency symbol
@@ -48,6 +59,7 @@ const getCurrencySymbol = (currency: string): string => {
 }
 
 export function ProfileMenu() {
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false)
   const { user, getAvatar, openAvatarModal, clearUser } = useUser()
   const { openWalletModal, activeWallet } = useWallet()
   const { logout } = useAuth()
@@ -215,11 +227,7 @@ export function ProfileMenu() {
           {/* Logout Button */}
           <div className="p-2">
             <button
-              onClick={async () => {
-                await logout()
-                clearUser()
-                router.push('/')
-              }}
+              onClick={() => setShowLogoutDialog(true)}
               className={cn(
                 "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg",
                 "text-red-400 hover:bg-red-500/10 transition-colors font-medium"
@@ -233,6 +241,33 @@ export function ProfileMenu() {
       </DropdownMenu>
 
       <AvatarSelectorModal />
+
+      <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+        <AlertDialogContent className="bg-[#1a0b33] border-surface text-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to log out?</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-400">
+              You will be returned to the home page.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-transparent border-gray-600 text-white hover:bg-white/10 hover:text-white">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                await logout()
+                clearUser()
+                router.push('/')
+                setShowLogoutDialog(false)
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white border-none"
+            >
+              Log Out
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }
