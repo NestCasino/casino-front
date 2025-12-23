@@ -103,7 +103,7 @@ export function Sidebar() {
         {/* Games Categories */}
         <SidebarItem icon={<LayoutGrid className="h-5 w-5" />} label="All Games" href="/all-games" active={pathname === '/all-games'} collapsed={isCollapsed} />
         <SidebarItem icon={<Video className="h-5 w-5" />} label="Live Games" href="/live" active={pathname === '/live'} collapsed={isCollapsed} />
-        <SidebarItem icon={<Building2 className="h-5 w-5" />} label="Providers" href="/providers" active={pathname === '/providers' || pathname.startsWith('/providers/')} collapsed={isCollapsed} />
+
         
         {/* Dynamic Categories from Backend */}
         {activeCategories.map((category) => (
@@ -120,16 +120,16 @@ export function Sidebar() {
         <SidebarDivider collapsed={isCollapsed} />
 
         {/* Utility Links */}
+        <SidebarItem icon={<Building2 className="h-5 w-5" />} label="Providers" href="/providers" active={pathname === '/providers' || pathname.startsWith('/providers/')} collapsed={isCollapsed} />
         <SidebarItem icon={<Gift className="h-5 w-5" />} label="Promotions" href="/promotions" active={pathname === '/promotions'} collapsed={isCollapsed} />
         <SidebarItem icon={<Users className="h-5 w-5" />} label="Affiliate" href="/affiliate" active={pathname === '/affiliate'} collapsed={isCollapsed} />
         <SidebarItem icon={<Crown className="h-5 w-5" />} label="VIP Club" href="/vip" active={pathname === '/vip'} collapsed={isCollapsed} />
         <SidebarItem icon={<FileText className="h-5 w-5" />} label="Blog" href="/blog" active={pathname === '/blog'} collapsed={isCollapsed} />
-        <SidebarItem icon={<MessageCircle className="h-5 w-5" />} label="Forum" href="/forum" active={pathname === '/forum'} collapsed={isCollapsed} />
 
         <SidebarDivider collapsed={isCollapsed} />
 
         {/* Support & Settings */}
-        <SidebarItem icon={<Handshake className="h-5 w-5" />} label="Sponsorships" href="/sponsorships" active={pathname === '/sponsorships'} collapsed={isCollapsed} />
+
         <SidebarItem icon={<Shield className="h-5 w-5" />} label="Responsible Gambling" href="/responsible" active={pathname === '/responsible'} collapsed={isCollapsed} />
         <SidebarItem icon={<Headphones className="h-5 w-5" />} label="Live Support" href="/support" active={pathname === '/support'} collapsed={isCollapsed} />
         <SidebarItem icon={<Globe className="h-5 w-5" />} label="Language: English" href="/language" active={pathname === '/language'} collapsed={isCollapsed} />

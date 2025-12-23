@@ -73,7 +73,6 @@ export function ProfileMenu() {
     { icon: Wallet, label: 'Wallet', action: openWalletModal },
     { icon: Crown, label: 'Vip Club', href: '/vip' },
     { icon: Gift, label: 'Bonuses', href: '/bonuses' },
-    { icon: Zap, label: 'Wild Points', href: '/wild-points' },
     { icon: Settings, label: 'Settings', href: '/settings' },
     { icon: MessageCircle, label: 'Live Support', href: '/support' },
   ]
