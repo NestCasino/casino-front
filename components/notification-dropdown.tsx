@@ -2,7 +2,7 @@
 
 import { useNotifications } from '@/lib/notification-context'
 import { X, Check } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -21,6 +21,11 @@ export function NotificationDropdown() {
   } = useNotifications()
   
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const [activeTab, setActiveTab] = useState<'all' | 'unread'>('all')
+
+  const displayedNotifications = activeTab === 'all' 
+    ? notifications 
+    : notifications.filter(n => !n.read)
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -108,31 +113,66 @@ export function NotificationDropdown() {
       ref={dropdownRef}
       className="absolute top-full right-0 mt-2 w-[400px] bg-[#0f0420] border border-[#2d1b4e] rounded-xl shadow-2xl z-[100] overflow-hidden animate-in fade-in slide-in-from-top-2"
     >
+
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-[#2d1b4e] bg-[#1a0b33]">
-        <div className="flex items-center gap-2">
-          <h3 className="text-lg font-semibold text-white">Notifications</h3>
-          {unreadCount > 0 && (
-            <span className="px-2 py-0.5 bg-purple-600 text-white text-xs font-bold rounded-full">
-              {unreadCount}
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-2">
-          {unreadCount > 0 && (
+      <div className="flex flex-col border-b border-[#2d1b4e] bg-[#1a0b33]">
+        <div className="flex items-center justify-between p-4 pb-2">
+          <div className="flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-white">Notifications</h3>
+            {unreadCount > 0 && (
+              <span className="px-2 py-0.5 bg-purple-600 text-white text-xs font-bold rounded-full">
+                {unreadCount}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            {unreadCount > 0 && (
+              <button
+                onClick={markAllAsRead}
+                className="text-xs text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
+                title="Mark all as read"
+              >
+                <Check className="h-4 w-4" />
+              </button>
+            )}
             <button
-              onClick={markAllAsRead}
-              className="text-xs text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
-              title="Mark all as read"
+              onClick={closeNotifications}
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
-              <Check className="h-4 w-4" />
+              <X className="h-5 w-5" />
             </button>
-          )}
+          </div>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="flex items-center px-4 pb-3 gap-4">
           <button
-            onClick={closeNotifications}
-            className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            onClick={() => setActiveTab('all')}
+            className={cn(
+              'text-sm font-medium transition-colors relative py-1',
+              activeTab === 'all' 
+                ? 'text-white' 
+                : 'text-gray-400 hover:text-white'
+            )}
           >
-            <X className="h-5 w-5" />
+            All
+            {activeTab === 'all' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-500 rounded-full" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab('unread')}
+            className={cn(
+              'text-sm font-medium transition-colors relative py-1',
+              activeTab === 'unread' 
+                ? 'text-white' 
+                : 'text-gray-400 hover:text-white'
+            )}
+          >
+            Unread
+            {activeTab === 'unread' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-500 rounded-full" />
+            )}
           </button>
         </div>
       </div>
@@ -150,24 +190,75 @@ export function NotificationDropdown() {
             <div className="text-4xl mb-4 animate-pulse">⏳</div>
             <div className="text-gray-400 text-sm">Loading notifications...</div>
           </div>
-        ) : notifications.length === 0 ? (
+        ) : displayedNotifications.length === 0 ? (
           <div className="py-12 text-center">
             <div className="text-6xl mb-4">🔔</div>
-            <div className="text-gray-400 text-sm">No notifications yet</div>
+            <div className="text-gray-400 text-sm">
+              {activeTab === 'unread' ? 'No unread notifications' : 'No notifications yet'}
+            </div>
           </div>
         ) : (
           <>
             <div className="divide-y divide-[#2d1b4e]">
-              {notifications.map((notification) => {
-                const NotificationWrapper = notification.link ? Link : 'div'
-                const wrapperProps = notification.link
-                  ? { href: notification.link }
-                  : {}
+              {displayedNotifications.map((notification) => {
+                const innerContent = (
+                  <div className="flex gap-3">
+                    {/* Icon */}
+                    <div
+                      className={cn(
+                        'flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-xl bg-gradient-to-br border',
+                        getNotificationColor(notification.type)
+                      )}
+                    >
+                      {notification.icon}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <h4
+                          className={cn(
+                            'font-semibold text-sm truncate',
+                            !notification.read ? 'text-white' : 'text-gray-300'
+                          )}
+                        >
+                          {notification.title}
+                        </h4>
+                        {!notification.read && (
+                          <div className="flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-1" />
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-400 mb-2 line-clamp-2">
+                        {notification.message}
+                      </p>
+                      <span className="text-xs text-gray-500">
+                        {formatTimestamp(notification.timestamp)}
+                      </span>
+                    </div>
+                  </div>
+                )
+
+                if (notification.link) {
+                  return (
+                    <Link
+                      key={notification.id}
+                      href={notification.link}
+                      onClick={() => handleNotificationClick(notification)}
+                      className={cn(
+                        'block p-4 transition-colors cursor-pointer',
+                        !notification.read
+                          ? 'bg-[#1a0b33] hover:bg-[#241842]'
+                          : 'bg-transparent hover:bg-[#1a0b33]'
+                      )}
+                    >
+                      {innerContent}
+                    </Link>
+                  )
+                }
 
                 return (
-                  <NotificationWrapper
+                  <div
                     key={notification.id}
-                    {...wrapperProps}
                     onClick={() => handleNotificationClick(notification)}
                     className={cn(
                       'block p-4 transition-colors cursor-pointer',
@@ -176,78 +267,14 @@ export function NotificationDropdown() {
                         : 'bg-transparent hover:bg-[#1a0b33]'
                     )}
                   >
-                    <div className="flex gap-3">
-                      {/* Icon */}
-                      <div
-                        className={cn(
-                          'flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-xl bg-gradient-to-br border',
-                          getNotificationColor(notification.type)
-                        )}
-                      >
-                        {notification.icon}
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2 mb-1">
-                          <h4
-                            className={cn(
-                              'font-semibold text-sm truncate',
-                              !notification.read ? 'text-white' : 'text-gray-300'
-                            )}
-                          >
-                            {notification.title}
-                          </h4>
-                          {!notification.read && (
-                            <div className="flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-1" />
-                          )}
-                        </div>
-                        <p className="text-sm text-gray-400 mb-2 line-clamp-2">
-                          {notification.message}
-                        </p>
-                        <span className="text-xs text-gray-500">
-                          {formatTimestamp(notification.timestamp)}
-                        </span>
-                      </div>
-                    </div>
-                  </NotificationWrapper>
+                    {innerContent}
+                  </div>
                 )
               })}
             </div>
-
-            {/* Load More Button */}
-            {hasMore && (
-              <div className="p-4 border-t border-[#2d1b4e]">
-                <button
-                  onClick={loadMoreNotifications}
-                  disabled={loading}
-                  className={cn(
-                    'w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors',
-                    loading
-                      ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                      : 'bg-purple-600 text-white hover:bg-purple-700'
-                  )}
-                >
-                  {loading ? 'Loading...' : 'Load More'}
-                </button>
-              </div>
-            )}
           </>
         )}
       </div>
-
-      {/* Footer */}
-      {notifications.length > 0 && (
-        <div className="border-t border-[#2d1b4e] bg-[#1a0b33] p-3 text-center">
-          <Link
-            href="/notifications"
-            onClick={closeNotifications}
-            className="text-sm text-purple-400 hover:text-purple-300 transition-colors cursor-pointer font-medium"
-          >
-            View all notifications
-          </Link>
-        </div>
-      )}
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {

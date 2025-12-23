@@ -24,9 +24,11 @@ export interface BackendNotification {
   sentAt: Date | null
   readAt: Date | null
   failedAt: Date | null
-  created_at: Date
-  updated_at: Date
+  createdAt: Date
+  updatedAt: Date
   metadata?: Record<string, any> | null
+  created_at?: Date // Legacy/fallback
+  updated_at?: Date // Legacy/fallback
 }
 
 // Frontend notification interface (transformed from backend)
@@ -57,6 +59,8 @@ export interface WebSocketNotification {
   subject?: string
   text?: string
   isRead?: boolean
+  status?: string
+  readAt?: Date | string | null
   createdAt: Date
   timestamp?: Date
   action?: {
@@ -108,10 +112,10 @@ function getNotificationIcon(type: Notification['type'], metadata?: Record<strin
 
   const iconMap: Record<string, string> = {
     'bonus': '🎁',
-    'win': '🎉',
-    'system': '💰',
-    'promotion': '🔥',
-    'achievement': '⭐',
+    'win': '🏆',
+    'system': '🔔',
+    'promotion': '🏷️',
+    'achievement': '🏅',
     'financial': '💰',
     'account': '👤',
     'info': 'ℹ️',
@@ -124,26 +128,37 @@ function getNotificationIcon(type: Notification['type'], metadata?: Record<strin
 
 // Helper function to transform backend notification to frontend notification
 function transformNotification(backendNotif: BackendNotification): Notification {
+  // Temporary logging to debug read status issues
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[Notification Transform] ID: ${backendNotif.id}, Status: ${backendNotif.status}, ReadAt: ${backendNotif.readAt}`)
+  }
+
   const type = mapNotificationType(backendNotif.type)
   const title = backendNotif.subject || backendNotif.text.substring(0, 50) + (backendNotif.text.length > 50 ? '...' : '')
   const message = backendNotif.subject ? backendNotif.text : backendNotif.text.substring(50)
   const icon = getNotificationIcon(type, backendNotif.metadata)
   const link = backendNotif.metadata?.link || backendNotif.metadata?.url
 
+  // Handle timestamp (support both camelCase and snake_case)
+  const createdAt = backendNotif.createdAt || backendNotif.created_at || new Date()
+  
+  // Robust read check: check status AND readAt
+  const isRead = backendNotif.status === 'read' || !!backendNotif.readAt
+
   return {
     id: backendNotif.id,
     type,
     title,
     message,
-    timestamp: new Date(backendNotif.created_at),
-    read: backendNotif.status === 'read' || backendNotif.readAt !== null,
+    timestamp: new Date(createdAt),
+    read: isRead,
     link,
     icon,
     playerId: backendNotif.playerId,
     channel: backendNotif.channel,
     status: backendNotif.status,
     readAt: backendNotif.readAt ? new Date(backendNotif.readAt) : null,
-    created_at: new Date(backendNotif.created_at),
+    created_at: new Date(createdAt),
     metadata: backendNotif.metadata,
   }
 }
@@ -166,20 +181,24 @@ function transformWebSocketNotification(wsNotif: WebSocketNotification): Notific
     message = subject ? text : text.substring(50)
   }
 
+  // Robust read check for WebSocket data
+  // Check isRead boolean, OR status string, OR readAt presence
+  const isRead = wsNotif.isRead || wsNotif.status === 'read' || !!wsNotif.readAt
+
   return {
     id: wsNotif.id,
     type,
     title: title || '',
     message: message || '',
     timestamp: new Date(wsNotif.createdAt || wsNotif.timestamp || new Date()),
-    read: wsNotif.isRead || false,
+    read: isRead,
     link: wsNotif.action?.url,
     icon,
   }
 }
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
-  const { user, isAuthenticated } = useAuth()
+  const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth()
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -190,6 +209,10 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 
   // Fetch notifications from API
   const fetchNotifications = useCallback(async (isLoadMore: boolean = false) => {
+    // Determine if we should fetch based on loading state
+    // If auth is still loading, we shouldn't make decisions yet
+    if (isAuthLoading) return
+
     if (!isAuthenticated) {
       setNotifications([])
       return
@@ -224,10 +247,13 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false)
     }
-  }, [isAuthenticated, offset, limit])
+  }, [isAuthenticated, isAuthLoading, offset, limit])
 
-  // Load notifications when user logs in
+  // Load notifications when user logs in or auth state resolves
   useEffect(() => {
+    // Wait for auth to finish loading before deciding what to do
+    if (isAuthLoading) return
+
     if (isAuthenticated) {
       setOffset(0)
       setHasMore(true)
@@ -237,7 +263,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
       setOffset(0)
       setHasMore(true)
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, isAuthLoading])
 
   const openNotifications = () => setIsOpen(true)
   const closeNotifications = () => setIsOpen(false)
